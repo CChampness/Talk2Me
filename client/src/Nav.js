@@ -4,11 +4,12 @@ import React, { useState } from 'react';
 // We assign them to their own variable names
 function Nav({ currentPage, handlePageChange }) {
   return (
-    <nav> 
+    <nav>
+      <a onClick={() => handlePageChange('Resume')}>Home</a>
+      <a onClick={() => handlePageChange('SignupForm')}>Signup</a>
+      <a onClick={() => handlePageChange('LoginForm')}>Login</a>
+      <a onClick={() => handlePageChange('Blog')}>Blog</a>
       <a onClick={() => handlePageChange('About')}>About</a>
-      <a onClick={() => handlePageChange('Projects')}>Resources</a>
-      <a onClick={() => handlePageChange('Contact')}>Contact</a>
-      <a onClick={() => handlePageChange('Resume')}>Professor Miriam</a>
 
       <a href='' className="noshow" onClick={() => handlePageChange('Mt')}></a>
       <a href='' className="noshow" onClick={() => handlePageChange('Dp')}></a>

@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
-// import About from './pages/About';
+import About from './pages/About';
+import Resume from './pages/Resume';
+import Blog from './pages/Blog';
+import SignupForm from './components/SignupForm';
+import LoginForm from './components/LoginForm';
 // import Projects from './pages/Projects';
 // import Contact from './pages/Contact';
-import Resume from './pages/Resume';
 // import Mt from './pages/Mt';
 // import Cq from './pages/Cq';
 // import Fsb from './pages/Fsb';
@@ -10,7 +13,7 @@ import Resume from './pages/Resume';
 // import Tpg from './pages/Tpg';
 // import Wa from './pages/Wa';
 // import Dp from './pages/Dp';
-
+import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
 
 function Main({ currentPage, setCurrentPage}) {
 
@@ -18,8 +21,16 @@ function Main({ currentPage, setCurrentPage}) {
 
   const renderPage = () => {
     switch (currentPage) {
-      // case 'About':
-      // return <About />;
+      case 'Home':
+        return 'Resume';
+      case 'About':
+        return <About />;
+      case 'Blog':
+        return <Blog />;
+      case 'SignupForm':
+        return <SignupForm />;
+      case 'LoginForm':
+        return <LoginForm />;
       // case 'Projects':
       //   return (
       //     <section className="row justify-center">

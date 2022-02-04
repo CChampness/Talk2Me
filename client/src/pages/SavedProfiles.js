@@ -8,7 +8,7 @@ import { removeBookId } from '../utils/localStorage';
 import { GET_ME } from '../utils/queries';
 import { REMOVE_BOOK } from '../utils/mutations';
 
-const SavedBooks = () => {
+const SavedProfiles = () => {
   const [ refresh, setRefresh ] = useState();
   const {loading, data } = useQuery(GET_ME);
   console.log("data: ",data);
@@ -52,12 +52,12 @@ window.location.reload(false);
       </Jumbotron>
       <Container>
         <h2>
-          {userData.savedBooks.length
-            ? `Viewing ${userData.savedBooks.length} saved ${userData.savedBooks.length === 1 ? 'book' : 'books'}:`
+          {userData.savedProfiles.length
+            ? `Viewing ${userData.savedProfiles.length} saved ${userData.savedProfiles.length === 1 ? 'book' : 'books'}:`
             : 'You have no saved books!'}
         </h2>
         <CardColumns>
-          {userData.savedBooks.map((book) => {
+          {userData.savedProfiles.map((book) => {
             return (
               <Card key={book.bookId} border='dark'>
                 {book.image ? <Card.Img src={book.image} alt={`The cover for ${book.title}`} variant='top' /> : null}
@@ -78,4 +78,4 @@ window.location.reload(false);
   );
 };
 
-export default SavedBooks;
+export default SavedProfiles;

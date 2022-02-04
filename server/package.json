@@ -1,7 +1,7 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "Server for TitleTracker",
+  "description": "Server for talk2me",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

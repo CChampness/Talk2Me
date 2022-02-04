@@ -109,3 +109,5 @@ Language practice site for linguaphiles to find one another, practice, and share
 ###### Service worker
 ###### Installable
 
+## [Deployment](https://lit-shelf-69294.herokuapp.com/)
+

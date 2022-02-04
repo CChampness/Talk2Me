@@ -1,7 +1,7 @@
 {
-  "name": "book-title-tracker",
+  "name": "talk2me-network",
   "version": "1.0.0",
-  "description": "Track interesting book titles",
+  "description": "Connect with linguaphiles",
   "main": "server/server.js",
   "scripts": {
     "start": "node server/server.js",

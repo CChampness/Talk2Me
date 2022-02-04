@@ -45,7 +45,7 @@ const resolvers = {
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { savedBooks: bookData } },
+          { $addToSet: { savedProfiles: bookData } },
           {new: true}
         );
 
@@ -61,9 +61,8 @@ const resolvers = {
 
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $pull: { savedBooks: {bookId} } }
+          { $pull: { savedProfiles: {bookId} } }
         );
-console.log("removeBook updatedUser: ",updatedUser);
         return updatedUser;
       }
       throw new AuthenticationError('You need to be logged in!');
