@@ -78,8 +78,73 @@ Language practice site for linguaphiles to find one another, practice, and share
  - Contact info
 ```
 
+## Mongodb Database
+```
+const typeDefs = gql`
+  type User {
+    _id: ID
+    username: String
+    email: String
+    myProfile: [Profile]
+    savedBuddies: [User]
+  }
+
+  type Profile {
+    profileId: ID
+    interests: [String]
+    languages: [String]
+    readingLevel: String
+    writingLevel: String
+    grammarLevel: String
+    pronunciation: String
+    sex: String
+    age: String
+    countryOfOrigin: String
+    countryOfCurrentResidence: String
+    photoLink: String
+    contactInfo: String
+    visibility: Boolean
+  }
+
+  input ProfileInput {
+    profileId: ID
+    interests: [String]
+    languages: [String]
+    readingLevel: String
+    writingLevel: String
+    grammarLevel: String
+    pronunciation: String
+    sex: String
+    age: String
+    countryOfOrigin: String
+    countryOfCurrentResidence: String
+    photoLink: String
+    contactInfo: String
+    visibility: Boolean
+  }
+
+  type Auth {
+    token: ID!
+    user: User
+  }
+
+  type Query {
+    me: User
+  }
+
+  type Mutation {
+    addUser(username: String!, email: String!, password: String!): Auth
+    loginUser(email: String!, password: String!): Auth
+    createProfile(profileData: ProfileInput!): User
+    saveBuddylist(profileData: ProfileInput!): User
+    removeBuddylist(profileId: ID!): User
+  }
+```
+
+
+
 ## Main menu dropdown options:
-* Friends ("Language buddies")
+* Language buddies
 * Resources
 * Meetup groups
 * Text chat

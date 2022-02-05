@@ -23,8 +23,8 @@ const userSchema = new Schema(
       required: true,
       minlength: 5
     },
-    // set savedProfiles to be an array of data that adheres to the profileSchema
-    savedProfiles: [Book]
+    // set savedBuddies to be an array of data that adheres to the profileSchema
+    savedBuddies: [Book]
   },
   // set this to use virtual below
   {
@@ -52,7 +52,7 @@ userSchema.methods.isCorrectPassword = async function (password) {
 // when we query a user, we'll also get another field called `profileCount`
 // with the number of saved profiles we have
 userSchema.virtual('bookCount').get(function () {
-  return this.savedProfiles.length;
+  return this.savedBuddies.length;
 });
 
 const User = model('User', userSchema);

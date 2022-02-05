@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import SearchProfiles from '../pages/SearchProfiles';
-import SavedProfiles from '../pages/SavedProfiles';
+import SearchBuddies from '../pages/SearchBuddies';
+import SavedBuddies from '../pages/SavedBuddies';
 import Navbar from '../components/Navbar';
 
 import { useMutation } from '@apollo/client';
@@ -14,8 +14,8 @@ const Buddies = () => {
       <Navbar />
 
     <Switch>
-      <Route exact path='/' component={SearchProfiles} />
-      <Route exact path='/saved' component={SavedProfiles} />
+      <Route exact path='/' component={SearchBuddies} />
+      <Route exact path='/saved' component={SavedBuddies} />
       <Route render={() => <h1 className='display-2'>Wrong page!</h1>} />
     </Switch>
     </>
