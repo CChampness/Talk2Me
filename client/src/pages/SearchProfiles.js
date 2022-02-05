@@ -23,7 +23,7 @@ const SearchProfiles = () => {
     return () => saveBookIds(savedBookIds);
   });
 
-  // create method to search for books and set state on form submit
+  // create method to search for Language Buddies and set state on form submit
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
@@ -92,7 +92,7 @@ const SearchProfiles = () => {
     <>
       <Jumbotron fluid className='text-light bg-dark'>
         <Container>
-          <h1>Search for Books!</h1>
+          <h1>Search for Language Buddies!</h1>
           <Form onSubmit={handleFormSubmit}>
             <Form.Row>
               <Col xs={12} md={8}>
@@ -102,7 +102,7 @@ const SearchProfiles = () => {
                   onChange={(e) => setSearchInput(e.target.value)}
                   type='text'
                   size='lg'
-                  placeholder='Search for a book'
+                  placeholder='Search for a language buddy'
                 />
               </Col>
               <Col xs={12} md={4}>
@@ -119,7 +119,7 @@ const SearchProfiles = () => {
         <h2>
           {searchedBooks.length
             ? `Viewing ${searchedBooks.length} results:`
-            : 'Search for a book to begin'}
+            : 'Search for a language buddy to begin'}
         </h2>
         <CardColumns>
           {searchedBooks.map((book) => {

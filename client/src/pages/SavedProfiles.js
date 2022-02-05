@@ -47,14 +47,14 @@ window.location.reload(false);
     <>
       <Jumbotron fluid className='text-light bg-dark'>
         <Container>
-          <h1>Viewing saved books!</h1>
+          <h1>Viewing saved profiles!</h1>
         </Container>
       </Jumbotron>
       <Container>
         <h2>
           {userData.savedProfiles.length
             ? `Viewing ${userData.savedProfiles.length} saved ${userData.savedProfiles.length === 1 ? 'book' : 'books'}:`
-            : 'You have no saved books!'}
+            : 'You have no saved profiles!'}
         </h2>
         <CardColumns>
           {userData.savedProfiles.map((book) => {

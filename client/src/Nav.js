@@ -11,6 +11,8 @@ function Nav({ currentPage, handlePageChange }) {
       <a onClick={() => handlePageChange('Blog')}>Blog</a>
       <a onClick={() => handlePageChange('About')}>About</a>
 
+      <a onClick={() => handlePageChange('Buddies')}>Language Buddies</a>
+
       <a href='' className="noshow" onClick={() => handlePageChange('Mt')}></a>
       <a href='' className="noshow" onClick={() => handlePageChange('Dp')}></a>
       <a href='' className="noshow" onClick={() => handlePageChange('Cq')}></a>

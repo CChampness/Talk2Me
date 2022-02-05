@@ -109,5 +109,7 @@ Language practice site for linguaphiles to find one another, practice, and share
 ###### Service worker
 ###### Installable
 
+## ![Photo](./client/public/MHC.jpg)
+
 ## [Deployment](https://lit-shelf-69294.herokuapp.com/)
 

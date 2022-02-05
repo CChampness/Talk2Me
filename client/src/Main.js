@@ -4,6 +4,7 @@ import Resume from './pages/Resume';
 import Blog from './pages/Blog';
 import SignupForm from './components/SignupForm';
 import LoginForm from './components/LoginForm';
+import Buddies from './components/Buddies';
 // import Projects from './pages/Projects';
 // import Contact from './pages/Contact';
 // import Mt from './pages/Mt';
@@ -31,6 +32,8 @@ function Main({ currentPage, setCurrentPage}) {
         return <SignupForm />;
       case 'LoginForm':
         return <LoginForm />;
+      case 'Buddies':
+        return <Buddies />;
       // case 'Projects':
       //   return (
       //     <section className="row justify-center">

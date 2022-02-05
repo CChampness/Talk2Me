@@ -6,7 +6,7 @@ function Resume() {
       <h3>Professor Miriam</h3>
       <article>
         <h4>Summary</h4>
-        <img className="textwrap-img" src="../../public/MHC.png" alt="Profile photo" />
+        <img className="textwrap-img" src="../../public/MHC.jpg" alt="Profile photo" />
         <p>
         Miriam Champness is a language coach with 25 years of experience helping language
         lovers to refine their English skills.  She is especially good with helping
