@@ -5,26 +5,37 @@ const typeDefs = gql`
     _id: ID
     username: String
     email: String
-    savedBuddies: [Book]!
+    profile: Profile!
   }
 
-  type Book {
-    bookId: ID
-    authors: [String]!
-    description: String
-    title: String
-    image: String
-    link: String
+  type Profile {
+    name: String
+    interests: String
+    language: String
+    readingLevel: String
+    writingLevel: String
+    grammarLevel: String
+    pronunciationLevel: String
+    sex: String
+    age: String
+    countryFrom: String
+    countryNow: String
+    contactInfo: String
   }
 
-  input BookInput {
-    bookId: String
-    authors: [String]!
-    description: String
-    title: String
-    image: String
-    link: String
-  
+  input ProfileInput {
+    name: String
+    interests: String
+    language: String
+    readingLevel: String
+    writingLevel: String
+    grammarLevel: String
+    pronunciationLevel: String
+    sex: String
+    age: String
+    countryFrom: String
+    countryNow: String
+    contactInfo: String
   }
 
   type Auth {
@@ -39,8 +50,7 @@ const typeDefs = gql`
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     loginUser(email: String!, password: String!): Auth
-    saveBook(bookData: BookInput!): User
-    removeBook(bookId: ID!): User
+    saveProfile(profileData: ProfileInput!): User
   }
 `;
 

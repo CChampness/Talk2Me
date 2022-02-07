@@ -4,7 +4,7 @@ import Resume from './pages/Resume';
 import Blog from './pages/Blog';
 import SignupForm from './components/SignupForm';
 import LoginForm from './components/LoginForm';
-import Buddies from './components/Buddies';
+// import Buddies from './components/Buddies';
 import CreateProfile from './pages/CreateProfile';
 // import Projects from './pages/Projects';
 // import Contact from './pages/Contact';
@@ -15,7 +15,7 @@ import CreateProfile from './pages/CreateProfile';
 // import Tpg from './pages/Tpg';
 // import Wa from './pages/Wa';
 // import Dp from './pages/Dp';
-import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
+// import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
 
 function Main({ currentPage, setCurrentPage}) {
 
@@ -33,8 +33,8 @@ function Main({ currentPage, setCurrentPage}) {
         return <SignupForm />;
       case 'LoginForm':
         return <LoginForm />;
-      case 'Buddies':
-        return <Buddies />;
+      // case 'Buddies':
+      //   return <Buddies />;
       case 'CreateProfile':
         return <CreateProfile />;
         // case 'Projects':

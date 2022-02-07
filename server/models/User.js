@@ -2,7 +2,8 @@ const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 
 // import schema from Book.js
-const Book = require('./Book');
+// const Book = require('./Book');
+const Profile = require('./Profile');
 
 const userSchema = new Schema(
   {
@@ -23,8 +24,9 @@ const userSchema = new Schema(
       required: true,
       minlength: 5
     },
+    profile: Profile,
     // set savedBuddies to be an array of data that adheres to the profileSchema
-    savedBuddies: [Book]
+    // savedBuddies: [Profile]
   },
   // set this to use virtual below
   {
@@ -51,9 +53,9 @@ userSchema.methods.isCorrectPassword = async function (password) {
 
 // when we query a user, we'll also get another field called `profileCount`
 // with the number of saved profiles we have
-userSchema.virtual('bookCount').get(function () {
-  return this.savedBuddies.length;
-});
+// userSchema.virtual('bookCount').get(function () {
+//   return this.savedBuddies.length;
+// });
 
 const User = model('User', userSchema);
 

@@ -28,8 +28,6 @@ const SavedBuddies = () => {
       const {returned_data} = await removeBook({
         variables: {bookId}
       });
-console.log("bookId: ",bookId);
-console.log("userData: ",userData);
 window.location.reload(false);
       // upon success, remove book's id from localStorage
       removeBookId(bookId);
