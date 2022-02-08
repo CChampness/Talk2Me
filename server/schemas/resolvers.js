@@ -4,25 +4,25 @@ const { signToken } = require('../utils/auth');
 
 const resolvers = {
   Query: {
-    // me: async (parent, args, context) => {
-    //   if (context.user) {
-    //     const userData = await User.findOne({ _id: context.user._id });
-    //     return userData;
-    //   }
-    //   throw new AuthenticationError('You need to be logged in!');
-    // },
-
-    user: async () => {
-      return await User.find();
+    me: async (parent, args, context) => {
+      if (context.user) {
+        const userData = await User.findOne({ _id: context.user._id });
+        return userData;
+      }
+      throw new AuthenticationError('You need to be logged in!');
     },
-    // getUsers: async (parent, args, context) => {
-    //   console.log("resolvers Query getUsers context.user: ", context.user);
-    //   if (context.user) {
-    //     const userData = await User.find({ _id: context.user._id });
-    //     return userData;
-    //   }
-    //   throw new AuthenticationError('You need to be logged in!');
+
+    // getUsers: async () => {
+    //   return await User.find();
     // },
+    users: async (parent, args, context) => {
+      console.log("resolvers Query getUsers context: ", context);
+      if (context.user) {
+        const userData = await User.find();
+        return userData;
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
   },
 
   Mutation: {

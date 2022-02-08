@@ -7,17 +7,18 @@ import { GET_ME } from '../utils/queries';
   // The state gets changed in the Nav component
   function FindBuddies ({ currentPage, handleChange }) {
     const {loading, error, data } = useQuery(GET_USERS);
-    if (loading) return 'Loading...';
-    if (error) return `Error! ${error.message}`;
 
-    const token = Auth.loggedIn() ? Auth.getToken() : null;
+    // const token = Auth.loggedIn() ? Auth.getToken() : null;
 
-    if (!token) {
-      return false;
-    }
+    // if (!token) {
+    //   return false;
+    // }
 
     console.log("data: ",data);
     const userData = data?.user || {};
+
+    if (loading) return <h4>Loading...</h4>;
+    if (error) return <h4>Error! ${error.message}</h4>;
   
     return (
       <h1>user data</h1>

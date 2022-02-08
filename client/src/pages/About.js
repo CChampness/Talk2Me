@@ -3,16 +3,15 @@ import React from 'react';
 function About() {
   return (
     <div className="Aboutdiv">
-      <section id="about-section">
-        <h3>About Talk2Me</h3>
-        <article id="about" className="imageArticle">
-          <img className="textwrap-img" src="./MHC.jpg" alt="Profile photo" />
-          <div>
-            Talk2Me is a language practice site for linguaphiles to find one another,
-            practice conversation, and share resources.
-          </div>
-        </article>
-      </section>
+      <h3>About Talk2Me</h3>
+      <article id="about" className="imageArticle">
+        <h4>Welcome to Talk2Me</h4>
+        <img className="textwrap-img" src="./MHC.jpg" alt="Profile photo" />
+        <p>
+          Talk2Me is a language practice site for linguaphiles to find one another,
+          practice conversation, and share resources.
+        </p>
+      </article>
     </div>
   );
 }
