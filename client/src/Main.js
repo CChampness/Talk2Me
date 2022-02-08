@@ -4,7 +4,7 @@ import Resume from './pages/Resume';
 import Blog from './pages/Blog';
 import SignupForm from './components/SignupForm';
 import LoginForm from './components/LoginForm';
-// import Buddies from './components/Buddies';
+import FindBuddies from './pages/FindBuddies';
 import CreateProfile from './pages/CreateProfile';
 // import Projects from './pages/Projects';
 // import Contact from './pages/Contact';
@@ -33,8 +33,8 @@ function Main({ currentPage, setCurrentPage}) {
         return <SignupForm />;
       case 'LoginForm':
         return <LoginForm />;
-      // case 'Buddies':
-      //   return <Buddies />;
+      case 'FindBuddies':
+        return <FindBuddies />;
       case 'CreateProfile':
         return <CreateProfile />;
         // case 'Projects':

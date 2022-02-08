@@ -24,23 +24,19 @@ export const ADD_USER = gql`
   }
 `;
 
-// export const SAVE_BOOK = gql`
-//   mutation saveBook($bookData: BookInput!) {
-//     saveBook(bookData: $bookData) {
-//       _id
-//       username
-//       email
-//       savedBuddies {
-//         bookId
-//         description
-//         authors
-//         image
-//         link
-//         title
-//       }
-//     }
-//   }
-// `;
+export const SAVE_BUDDY = gql`
+  mutation saveBuddy($buddyData: BuddyInput!) {
+    saveBuddy(buddyData: $buddyData) {
+      _id
+      username
+      email
+      savedBuddies {
+        _id
+        name
+      }
+    }
+  }
+`;
 
 export const SAVE_PROFILE = gql`
   mutation saveProfile($profileData: ProfileInput!) {
@@ -66,10 +62,10 @@ export const SAVE_PROFILE = gql`
   }
 `;
 
-// export const REMOVE_BOOK = gql`
-//   mutation removeBook($bookId: ID!) {
-//     removeBook(bookId: $bookId) {
-//       _id
-//     }
-//   }
-// `;
+export const REMOVE_BUDDY = gql`
+  mutation removeBuddy($buddyId: ID!) {
+    removeBook(buddyId: $buddyId) {
+      _id
+    }
+  }
+`;

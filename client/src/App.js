@@ -9,7 +9,7 @@ import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 // import SearchBuddies from './pages/SearchBuddies';
 // import SavedBuddies from './pages/SavedBuddies';
-import Navbar from './components/Navbar';
+// import Navbar from './components/Navbar';
 
 import Header from './Header';
 import Main from './Main';

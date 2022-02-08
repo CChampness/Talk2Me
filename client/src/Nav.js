@@ -9,6 +9,7 @@ function Nav({ currentPage, handlePageChange }) {
       <a onClick={() => handlePageChange('SignupForm')}>Signup</a>
       <a onClick={() => handlePageChange('LoginForm')}>Login</a>
       <a onClick={() => handlePageChange('CreateProfile')}>Profile</a>
+      <a onClick={() => handlePageChange('FindBuddies')}>Buddies</a>
       <a onClick={() => handlePageChange('Blog')}>Blog</a>
       <a onClick={() => handlePageChange('About')}>About</a>
       {/* <a onClick={() => handlePageChange('Buddies')}>Language Buddies</a> */}

@@ -4,7 +4,7 @@ function Resume() {
   return (
     <div className="Resumediv">
       <h3>Professor Miriam</h3>
-      <article>
+      <article className="imageArticle">
         <h4>Summary</h4>
         <img className="textwrap-img" src="./MHC.jpg" alt="Profile photo" />
         <p>

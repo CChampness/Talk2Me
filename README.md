@@ -60,7 +60,7 @@ Language practice site for linguaphiles to find one another, practice, and share
  - Each user's name is shown on a display card with whatever info they have
    made visible.
  - Each user's display card has a button to click so the logged-in current
-   user want to invite them to be a "Language Buddy" if desired.
+   user can invite them to be a "Language Buddy" if desired.
  -- Select type of communication:
  --- onboard text
  --- onboard live chat (TBD)

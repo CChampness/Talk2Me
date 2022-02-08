@@ -4,20 +4,32 @@ const { signToken } = require('../utils/auth');
 
 const resolvers = {
   Query: {
-    me: async (parent, args, context) => {
-      if (context.user) {
-        const userData = await User.findOne({ _id: context.user._id });
-        return userData;
-      }
-      throw new AuthenticationError('You need to be logged in!');
+    // me: async (parent, args, context) => {
+    //   if (context.user) {
+    //     const userData = await User.findOne({ _id: context.user._id });
+    //     return userData;
+    //   }
+    //   throw new AuthenticationError('You need to be logged in!');
+    // },
+
+    user: async () => {
+      return await User.find();
     },
+    // getUsers: async (parent, args, context) => {
+    //   console.log("resolvers Query getUsers context.user: ", context.user);
+    //   if (context.user) {
+    //     const userData = await User.find({ _id: context.user._id });
+    //     return userData;
+    //   }
+    //   throw new AuthenticationError('You need to be logged in!');
+    // },
   },
 
   Mutation: {
     addUser: async (parent, { username, email, password }) => {
       const user = await User.create({ username, email, password });
       const token = signToken(user);
-      console.log("addUser Mutation, token, user: ", token,",",user);
+      console.log("User is sirned up and logged in: ", user.username);
       return { token, user };
     },
     loginUser: async (parent, { email, password }) => {
@@ -35,26 +47,26 @@ const resolvers = {
       }
 
       const token = signToken(user);
-      console.log("Mutation, signToken: ", token);
+      console.log("User logged in: ", user.username);
 
       return { token, user };
     },
 
-    // saveBook: async (parent, { bookData }, context) => {
-    //   console.log("saveBook for user: ", context.user);
-    //   if (context.user) {
-    //     const updatedUser = await User.findOneAndUpdate(
-    //       { _id: context.user._id },
-    //       { $addToSet: { savedBuddies: bookData } },
-    //       {new: true}
-    //     );
+    saveBuddy: async (parent, { buddyData }, context) => {
+      console.log("saveBuddy for user: ", context.user);
+      if (context.user) {
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { savedBuddies: buddyData } },
+          {new: true}
+        );
 
-    //     console.log("saveBook updatedUser: ", updatedUser);
+        console.log("saveBuddy updatedUser: ", updatedUser);
 
-    //     return updatedUser;
-    //   }
-    //   throw new AuthenticationError('You need to be logged in!');
-    // },
+        return updatedUser;
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
     
     saveProfile: async (parent, { profileData }, context) => {
       console.log("saveProfile Mutation for user: ", profileData);
@@ -72,17 +84,17 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
     
-    // removeBook: async (parent, { bookId }, context) => {
-    //   if (context.user) {
+    removeBuddy: async (parent, { buddyId }, context) => {
+      if (context.user) {
 
-    //     const updatedUser = await User.findOneAndUpdate(
-    //       { _id: context.user._id },
-    //       { $pull: { savedBuddies: {bookId} } }
-    //     );
-    //     return updatedUser;
-    //   }
-    //   throw new AuthenticationError('You need to be logged in!');
-    // },
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { savedBuddies: {buddyId} } }
+        );
+        return updatedUser;
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
   },
 };
 

@@ -5,7 +5,7 @@ function About() {
     <div className="Aboutdiv">
       <section id="about-section">
         <h3>About Talk2Me</h3>
-        <article id="about">
+        <article id="about" className="imageArticle">
           <img className="textwrap-img" src="./MHC.jpg" alt="Profile photo" />
           <div>
             Talk2Me is a language practice site for linguaphiles to find one another,

@@ -6,6 +6,15 @@ const typeDefs = gql`
     username: String
     email: String
     profile: Profile!
+    savedBuddies: [Buddy]!
+  }
+
+  type Buddy {
+    buddyId: String
+  }
+
+  input BuddyInput {
+    buddyId: String
   }
 
   type Profile {
@@ -44,13 +53,15 @@ const typeDefs = gql`
   }
 
   type Query {
-    me: User
+    user: User
   }
 
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     loginUser(email: String!, password: String!): Auth
     saveProfile(profileData: ProfileInput!): User
+    saveBuddy(buddyData: BuddyInput!): User
+    removeBuddy(buddyId: String!): User
   }
 `;
 

@@ -52,8 +52,9 @@ const CreateProfile = () => {
         variables: { profileData: profileToSave },
       });
 
-      // if book successfully saves to user's account, save book id to state
-      // setSavedBookIds([...savedBookIds, bookToSave.bookId]);
+      // if buddy successfully saves to user's account, save buddy id
+      // to state
+      // setSavedBuddyIds([...savedBuddyIds, buddyToSave.buddyId]);
     } catch (err) {
       console.error(err);
     }

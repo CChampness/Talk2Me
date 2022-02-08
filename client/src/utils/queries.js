@@ -25,3 +25,13 @@ export const GET_ME = gql`
     }
   }
 `;
+
+export const GET_USERS = gql`
+{
+  user {
+      _id
+      username
+      email
+    }
+  }
+`;
