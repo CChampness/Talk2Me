@@ -20,6 +20,20 @@ export const GET_USERS = gql`
       _id
       username
       email
+      profile {
+        name
+        interests
+        language
+        readingLevel
+        writingLevel
+        grammarLevel
+        pronunciationLevel
+        sex
+        age
+        countryFrom
+        countryNow
+        contactInfo
+      }
     }
   }
 `;

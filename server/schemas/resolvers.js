@@ -16,7 +16,7 @@ const resolvers = {
     //   return await User.find();
     // },
     users: async (parent, args, context) => {
-      console.log("resolvers Query getUsers context: ", context);
+      console.log("resolvers Query getUsers");
       if (context.user) {
         const userData = await User.find();
         return userData;
