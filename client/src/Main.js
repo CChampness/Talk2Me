@@ -34,7 +34,11 @@ function Main({ currentPage, setCurrentPage}) {
       case 'LoginForm':
         return <LoginForm />;
       case 'FindBuddies':
-        return <FindBuddies />;
+        return (
+          <section className="row justify-center">
+            <FindBuddies />;
+          </section>
+        );
       case 'CreateProfile':
         return <CreateProfile />;
         // case 'Projects':
