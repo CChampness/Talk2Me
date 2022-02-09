@@ -27,12 +27,10 @@ export const ADD_USER = gql`
 export const SAVE_BUDDY = gql`
   mutation saveBuddy($buddyData: BuddyInput!) {
     saveBuddy(buddyData: $buddyData) {
-      _id
       username
       email
       savedBuddies {
-        _id
-        name
+        buddyId
       }
     }
   }

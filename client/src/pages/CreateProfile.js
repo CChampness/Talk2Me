@@ -61,151 +61,149 @@ const CreateProfile = () => {
   };
 
   return (
-    <>
-        <Container>
-          <h2>Create your profile</h2>
-          <Form onSubmit={handleSaveProfile}>
-            <Form.Row>
-              <Col xs={12} md={8}>
-                <Form.Control
-                  name='name'
-                  value={nameInp}
-                  onChange={(e) => setNameInp(e.target.value)}
-                  type='text'
-                  size='lg'
-                  placeholder='What is your name?'
-                />
-              </Col>
-              <Col xs={12} md={8}>
-                <Form.Control
-                  name='interests'
-                  value={interestsInp}
-                  onChange={(e) => setInterestsInp(e.target.value)}
-                  type='text'
-                  size='lg'
-                  placeholder='What are your main interests?'
-                />
-              </Col>
+    <Container>
+      <h2>Create your profile</h2>
+      <Form onSubmit={handleSaveProfile}>
+        <Form.Row>
+          <Col xs={12} md={8}>
+            <Form.Control
+              name='name'
+              value={nameInp}
+              onChange={(e) => setNameInp(e.target.value)}
+              type='text'
+              size='lg'
+              placeholder='What is your name?'
+            />
+          </Col>
+          <Col xs={12} md={8}>
+            <Form.Control
+              name='interests'
+              value={interestsInp}
+              onChange={(e) => setInterestsInp(e.target.value)}
+              type='text'
+              size='lg'
+              placeholder='What are your main interests?'
+            />
+          </Col>
 
-              <Col xs={12} md={8}>
-                <Form.Control
-                  name='language'
-                  value={languageInp}
-                  onChange={(e) => setLanguageInp(e.target.value)}
-                  type='text'
-                  size='lg'
-                  placeholder='What langage are you practicing?'
-                />
-              </Col>
+          <Col xs={12} md={8}>
+            <Form.Control
+              name='language'
+              value={languageInp}
+              onChange={(e) => setLanguageInp(e.target.value)}
+              type='text'
+              size='lg'
+              placeholder='What langage are you practicing?'
+            />
+          </Col>
 
-              <Col xs={12} md={8}>
-                <Form.Control
-                  name='readingLevel'
-                  value={readingLevelInp}
-                  onChange={(e) => setReadingLevelInp(e.target.value)}
-                  type='text'
-                  size='lg'
-                  placeholder='What is your reading level?'
-                />
-              </Col>
+          <Col xs={12} md={8}>
+            <Form.Control
+              name='readingLevel'
+              value={readingLevelInp}
+              onChange={(e) => setReadingLevelInp(e.target.value)}
+              type='text'
+              size='lg'
+              placeholder='What is your reading level?'
+            />
+          </Col>
 
-              <Col xs={12} md={8}>
-                <Form.Control
-                  name='writingLevel'
-                  value={writingLevelInp}
-                  onChange={(e) => setWritingLevelInp(e.target.value)}
-                  type='text'
-                  size='lg'
-                  placeholder='What is your writing level?'
-                />
-              </Col>
+          <Col xs={12} md={8}>
+            <Form.Control
+              name='writingLevel'
+              value={writingLevelInp}
+              onChange={(e) => setWritingLevelInp(e.target.value)}
+              type='text'
+              size='lg'
+              placeholder='What is your writing level?'
+            />
+          </Col>
 
-              <Col xs={12} md={8}>
-                <Form.Control
-                  name='grammarLevel'
-                  value={grammarLevelInp}
-                  onChange={(e) => setGrammarLevelInp(e.target.value)}
-                  type='text'
-                  size='lg'
-                  placeholder='What is your grammar level?'
-                />
-              </Col>
+          <Col xs={12} md={8}>
+            <Form.Control
+              name='grammarLevel'
+              value={grammarLevelInp}
+              onChange={(e) => setGrammarLevelInp(e.target.value)}
+              type='text'
+              size='lg'
+              placeholder='What is your grammar level?'
+            />
+          </Col>
 
-              <Col xs={12} md={8}>
-                <Form.Control
-                  name='pronunciationLevel'
-                  value={pronunciationLevelInp}
-                  onChange={(e) => setPronunciationLevelInp(e.target.value)}
-                  type='text'
-                  size='lg'
-                  placeholder='What is your pronunciation level?'
-                />
-              </Col>
+          <Col xs={12} md={8}>
+            <Form.Control
+              name='pronunciationLevel'
+              value={pronunciationLevelInp}
+              onChange={(e) => setPronunciationLevelInp(e.target.value)}
+              type='text'
+              size='lg'
+              placeholder='What is your pronunciation level?'
+            />
+          </Col>
 
-              <Col xs={12} md={8}>
-                <Form.Control
-                  name='sex'
-                  value={sexInp}
-                  onChange={(e) => setSexInp(e.target.value)}
-                  type='text'
-                  size='lg'
-                  placeholder='What is your sex?'
-                />
-              </Col>
+          <Col xs={12} md={8}>
+            <Form.Control
+              name='sex'
+              value={sexInp}
+              onChange={(e) => setSexInp(e.target.value)}
+              type='text'
+              size='lg'
+              placeholder='What is your sex?'
+            />
+          </Col>
 
-              <Col xs={12} md={8}>
-                <Form.Control
-                  name='age'
-                  value={ageInp}
-                  onChange={(e) => setAgeInp(e.target.value)}
-                  type='text'
-                  size='lg'
-                  placeholder='What is your age?'
-                />
-              </Col>
+          <Col xs={12} md={8}>
+            <Form.Control
+              name='age'
+              value={ageInp}
+              onChange={(e) => setAgeInp(e.target.value)}
+              type='text'
+              size='lg'
+              placeholder='What is your age?'
+            />
+          </Col>
 
-              <Col xs={12} md={8}>
-                <Form.Control
-                  name='countryFrom'
-                  value={countryFromInp}
-                  onChange={(e) => setCountryFromInp(e.target.value)}
-                  type='text'
-                  size='lg'
-                  placeholder='What country are you from?'
-                />
-              </Col>
+          <Col xs={12} md={8}>
+            <Form.Control
+              name='countryFrom'
+              value={countryFromInp}
+              onChange={(e) => setCountryFromInp(e.target.value)}
+              type='text'
+              size='lg'
+              placeholder='What country are you from?'
+            />
+          </Col>
 
-              <Col xs={12} md={8}>
-                <Form.Control
-                  name='countryNow'
-                  value={countryNowInp}
-                  onChange={(e) => setCountryNowInp(e.target.value)}
-                  type='text'
-                  size='lg'
-                  placeholder='What country are you in now?'
-                />
-              </Col>
+          <Col xs={12} md={8}>
+            <Form.Control
+              name='countryNow'
+              value={countryNowInp}
+              onChange={(e) => setCountryNowInp(e.target.value)}
+              type='text'
+              size='lg'
+              placeholder='What country are you in now?'
+            />
+          </Col>
 
-              <Col xs={12} md={8}>
-                <Form.Control
-                  name='contactInfo'
-                  value={contactInfoInp}
-                  onChange={(e) => setContactInfoInp(e.target.value)}
-                  type='text'
-                  size='lg'
-                  placeholder='What is your contact information?'
-                />
-              </Col>
+          <Col xs={12} md={8}>
+            <Form.Control
+              name='contactInfo'
+              value={contactInfoInp}
+              onChange={(e) => setContactInfoInp(e.target.value)}
+              type='text'
+              size='lg'
+              placeholder='What is your contact information?'
+            />
+          </Col>
 
-              <Col xs={12} md={4}>
-                <Button type='submit' variant='success' size='lg'>
-                  Create Profile
-                </Button>
-              </Col>
-            </Form.Row>
-          </Form>
-        </Container>
-    </>
+          <Col xs={12} md={4}>
+            <Button type='submit' variant='success' size='lg'>
+              Create Profile
+            </Button>
+          </Col>
+        </Form.Row>
+      </Form>
+    </Container>
   );
 };
 

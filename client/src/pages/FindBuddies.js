@@ -3,15 +3,35 @@ import { useQuery, useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
 import { GET_USERS } from '../utils/queries';
 import { GET_ME } from '../utils/queries';
+import { SAVE_BUDDY } from '../utils/mutations';
 
-  // The state gets changed in the Nav component
-  function FindBuddies ({ currentPage, handleChange }) {
-    const {loading, error, data } = useQuery(GET_USERS);
+// The state gets changed in the Nav component
+function FindBuddies ({ currentPage, handleChange }) {
+  const {loading, error, data } = useQuery(GET_USERS);
+  const [saveBuddy] = useMutation(SAVE_BUDDY);
 
-    // This function saves selected buddies to the current user's buddy list
-    const handleClick = (username) => {
-      console.log("username: ", username);
+  // This function saves selected buddies to the current user's buddy list
+  const handleSaveBuddy = async (username) => {
+    console.log("username: ", username);
+
+    try {
+      const buddyToSave = {
+        buddyId: username
+      };
+
+      console.log("In handleSaveBuddy, buddyToSave: ",buddyToSave);
+      const {result} = await saveBuddy({
+        variables: { buddyData: buddyToSave },
+      });
+
+      // if buddy successfully saves to user's account, save buddy id
+      // to state
+      // setSavedBuddyIds([...savedBuddyIds, buddyToSave.buddyId]);
+    } catch (err) {
+      console.error(err);
     }
+
+  }
     
     // const userData = data?.users || {};
     if (loading) return <h4>Loading...</h4>;
@@ -24,44 +44,44 @@ import { GET_ME } from '../utils/queries';
         <div key={ndx} className={"card-column"}>
           <figure className="proj-card">
             <span data-descr>
-              <a onClick={() => handleClick(user.username)}>
+              <a onClick={() => handleSaveBuddy(user.username)}>
                 <h4 className="card-title">{user.profile?user.profile.name:user.username}</h4>
                 <table><tbody>
                   <tr>
                 <td>Interests</td><td><nbsp className="nbsp"/></td><td>{user.profile?user.profile.interests:""}</td>
                   </tr>
                   <tr>
-                <td>Language</td><td><nbsp  className="nbsp"/></td><td>{user.profile?user.profile.language:""}</td>
+                <td>Language</td><td><nbsp className="nbsp"/></td><td>{user.profile?user.profile.language:""}</td>
                 </tr>
                   <tr>
-                <td>Reading Level</td><td><nbsp  className="nbsp"/></td><td>{user.profile?user.profile.readingLevel:""}</td>
+                <td>Reading Level</td><td><nbsp className="nbsp"/></td><td>{user.profile?user.profile.readingLevel:""}</td>
                 </tr>
                   <tr>
-                <td>Writing Level</td><td><nbsp  className="nbsp"/></td><td>{user.profile?user.profile.writingLevel:""}</td>
+                <td>Writing Level</td><td><nbsp className="nbsp"/></td><td>{user.profile?user.profile.writingLevel:""}</td>
                 </tr>
                   <tr>
-                <td>Grammar Level</td><td><nbsp  className="nbsp"/></td><td>{user.profile?user.profile.grammarLevel:""}</td>
+                <td>Grammar Level</td><td><nbsp className="nbsp"/></td><td>{user.profile?user.profile.grammarLevel:""}</td>
                 </tr>
                   <tr>
-                <td>Pronunciation</td><td><nbsp  className="nbsp"/></td><td>{user.profile?user.profile.pronunciationLevel:""}</td>
+                <td>Pronunciation</td><td><nbsp className="nbsp"/></td><td>{user.profile?user.profile.pronunciationLevel:""}</td>
                 </tr>
                   <tr>
-                <td>Sex</td><td><nbsp  className="nbsp"/></td><td>{user.profile?user.profile.sex:""}</td>
+                <td>Sex</td><td><nbsp className="nbsp"/></td><td>{user.profile?user.profile.sex:""}</td>
                 </tr>
                   <tr>
-                <td>Age</td><td><nbsp  className="nbsp"/></td><td>{user.profile?user.profile.age:""}</td>
+                <td>Age</td><td><nbsp className="nbsp"/></td><td>{user.profile?user.profile.age:""}</td>
                 </tr>
                   <tr>
-                <td>Country From</td><td><nbsp  className="nbsp"/></td><td>{user.profile?user.profile.countryFrom:""}</td>
+                <td>Country From</td><td><nbsp className="nbsp"/></td><td>{user.profile?user.profile.countryFrom:""}</td>
                 </tr>
                   <tr>
-                <td>Country Now</td><td><nbsp  className="nbsp"/></td><td>{user.profile?user.profile.countryNow:""}</td>
+                <td>Country Now</td><td><nbsp className="nbsp"/></td><td>{user.profile?user.profile.countryNow:""}</td>
                 </tr>
                   <tr>
-                <td>Contact Info</td><td><nbsp  className="nbsp"/></td><td>{user.profile?user.profile.contactInfo:""}</td>
+                <td>Contact Info</td><td><nbsp className="nbsp"/></td><td>{user.profile?user.profile.contactInfo:""}</td>
                 </tr>
                   <tr>
-                <td>email</td><td><nbsp  className="nbsp"/></td><td>{user.profile?user.email:""}</td>
+                <td>email</td><td><nbsp className="nbsp"/></td><td>{user.profile?user.email:""}</td>
                 </tr>
                 </tbody></table>
               </a>
