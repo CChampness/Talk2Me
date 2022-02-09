@@ -6,15 +6,6 @@ import SignupForm from './components/SignupForm';
 import LoginForm from './components/LoginForm';
 import FindBuddies from './pages/FindBuddies';
 import CreateProfile from './pages/CreateProfile';
-// import Projects from './pages/Projects';
-// import Contact from './pages/Contact';
-// import Mt from './pages/Mt';
-// import Cq from './pages/Cq';
-// import Fsb from './pages/Fsb';
-// import Tan from './pages/Tan';
-// import Tpg from './pages/Tpg';
-// import Wa from './pages/Wa';
-// import Dp from './pages/Dp';
 // import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
 
 function Main({ currentPage, setCurrentPage}) {
@@ -24,7 +15,7 @@ function Main({ currentPage, setCurrentPage}) {
   const renderPage = () => {
     switch (currentPage) {
       case 'Home':
-        return 'Resume';
+        return <Resume />;
       case 'About':
         return <About />;
       case 'Blog':
@@ -36,34 +27,18 @@ function Main({ currentPage, setCurrentPage}) {
       case 'FindBuddies':
         return (
           <section className="row justify-center">
-            <FindBuddies />;
+            <FindBuddies />
           </section>
         );
       case 'CreateProfile':
         return <CreateProfile />;
-        // case 'Projects':
+      // case 'Projects':
       //   return (
       //     <section className="row justify-center">
       //       <h3>Portfolio</h3>
       //       <Projects  currentPage={currentPage} handleChange={handleChange}/>
       //     </section>
       //   );
-      // case 'Contact':
-      //   return <Contact />;
-      // case 'Mt':
-      //   return <Mt />;
-      // case 'Cq':
-      //   return <Cq />;
-      // case 'Dp':
-      //   return <Dp />;
-      // case 'Fsb':
-      //   return <Fsb />;
-      // case 'Tan':
-      //   return <Tan />;
-      // case 'Tpg':
-      //   return <Tpg />;
-      // case 'Wa':
-      //   return <Wa />;
       default:
         return <Resume />
     }

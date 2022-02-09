@@ -34,6 +34,9 @@ export const GET_USERS = gql`
         countryNow
         contactInfo
       }
+      savedBuddies {
+        buddyId
+      }
     }
   }
 `;

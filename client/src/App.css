@@ -159,6 +159,7 @@ main {
   flex-direction: row;
   margin-left: -0.5rem;
   margin-right: -0.5rem;
+  margin-top: 1rem;
 }
 
 .justify-center {
@@ -314,6 +315,13 @@ footer h4:hover {
   border-radius: 5px;
 }
 
+.boxHighlight {
+  background-color: rgba(255,165,0,0.4);
+  box-shadow: 0px 0px 20px 0px rgba(255,165,0,0.9);
+  border-radius: 10px;
+  z-index: -1;
+}
+
 /* Tooltip must have its position relative to its container */
 span[data-descr] {
   position: relative;
@@ -324,7 +332,7 @@ span[data-descr] {
 span[data-descr]:hover::after,
 span[data-descr]:focus::after {
   margin: auto;
-  content: "\1F448 Click to select";
+  content: "Click to select";
   position: absolute;
   left: 120px;
   top: 1px;
@@ -332,10 +340,37 @@ span[data-descr]:focus::after {
   height: 10px;
   border: 1px #aaaaaa solid;
   background-color: var(--dark-blue-green);
-  padding: 12px;
+  padding: 15px;
   color: white;
   z-index: 1;
 }
+
+/* Tooltip container */
+/* .tooltip {
+  position: relative;
+  display: inline-block; */
+  /* border-bottom: 1px dotted black; If you want dots under the hoverable text */
+/* } */
+
+/* Tooltip text */
+/* .tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px; */
+ 
+  /* Position the tooltip text - see examples below! */
+  /* position: absolute;
+  z-index: 1;
+} */
+
+/* Show the tooltip text when you mouse over the tooltip container */
+/* .tooltip:hover .tooltiptext {
+  visibility: visible;
+} */
 
 /* media query for large screens */
 @media screen and (min-width: 992px) {
