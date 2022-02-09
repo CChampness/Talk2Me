@@ -4,62 +4,64 @@ import Auth from '../utils/auth';
 import { GET_USERS } from '../utils/queries';
 import { GET_ME } from '../utils/queries';
 
-const handleClick = (username) => {
-  console.log("username: ", username);
-}
-
   // The state gets changed in the Nav component
   function FindBuddies ({ currentPage, handleChange }) {
     const {loading, error, data } = useQuery(GET_USERS);
 
-    const userData = data?.users || {};
+    // This function saves selected buddies to the current user's buddy list
+    const handleClick = (username) => {
+      console.log("username: ", username);
+    }
+    
+    // const userData = data?.users || {};
     if (loading) return <h4>Loading...</h4>;
     if (error) return <h4>Error! {error.message}</h4>;
     console.log("data: ",data, loading);
-  
+
+    
     return (
       data.users.map((user, ndx) =>
         <div key={ndx} className={"card-column"}>
           <figure className="proj-card">
             <span data-descr>
               <a onClick={() => handleClick(user.username)}>
-                <h4 className="card-title">{user.profile.name}</h4>
+                <h4 className="card-title">{user.profile?user.profile.name:user.username}</h4>
                 <table><tbody>
                   <tr>
-                <td>Interests</td><td><nbsp className="nbsp"/></td><td>{user.profile.interests}</td>
+                <td>Interests</td><td><nbsp className="nbsp"/></td><td>{user.profile?user.profile.interests:""}</td>
                   </tr>
                   <tr>
-                <td>Language</td><td><nbsp  className="nbsp"/></td><td>{user.profile.language}</td>
+                <td>Language</td><td><nbsp  className="nbsp"/></td><td>{user.profile?user.profile.language:""}</td>
                 </tr>
                   <tr>
-                <td>Reading Level</td><td><nbsp  className="nbsp"/></td><td>{user.profile.readingLevel}</td>
+                <td>Reading Level</td><td><nbsp  className="nbsp"/></td><td>{user.profile?user.profile.readingLevel:""}</td>
                 </tr>
                   <tr>
-                <td>Writing Level</td><td><nbsp  className="nbsp"/></td><td>{user.profile.writingLevel}</td>
+                <td>Writing Level</td><td><nbsp  className="nbsp"/></td><td>{user.profile?user.profile.writingLevel:""}</td>
                 </tr>
                   <tr>
-                <td>Grammar Level</td><td><nbsp  className="nbsp"/></td><td>{user.profile.grammarLevel}</td>
+                <td>Grammar Level</td><td><nbsp  className="nbsp"/></td><td>{user.profile?user.profile.grammarLevel:""}</td>
                 </tr>
                   <tr>
-                <td>Pronunciation</td><td><nbsp  className="nbsp"/></td><td>{user.profile.pronunciationLevel}</td>
+                <td>Pronunciation</td><td><nbsp  className="nbsp"/></td><td>{user.profile?user.profile.pronunciationLevel:""}</td>
                 </tr>
                   <tr>
-                <td>Sex</td><td><nbsp  className="nbsp"/></td><td>{user.profile.sex}</td>
+                <td>Sex</td><td><nbsp  className="nbsp"/></td><td>{user.profile?user.profile.sex:""}</td>
                 </tr>
                   <tr>
-                <td>Age</td><td><nbsp  className="nbsp"/></td><td>{user.profile.age}</td>
+                <td>Age</td><td><nbsp  className="nbsp"/></td><td>{user.profile?user.profile.age:""}</td>
                 </tr>
                   <tr>
-                <td>Country From</td><td><nbsp  className="nbsp"/></td><td>{user.profile.countryFrom}</td>
+                <td>Country From</td><td><nbsp  className="nbsp"/></td><td>{user.profile?user.profile.countryFrom:""}</td>
                 </tr>
                   <tr>
-                <td>Country Now</td><td><nbsp  className="nbsp"/></td><td>{user.profile.countryNow}</td>
+                <td>Country Now</td><td><nbsp  className="nbsp"/></td><td>{user.profile?user.profile.countryNow:""}</td>
                 </tr>
                   <tr>
-                <td>Contact Info</td><td><nbsp  className="nbsp"/></td><td>{user.profile.contactInfo}</td>
+                <td>Contact Info</td><td><nbsp  className="nbsp"/></td><td>{user.profile?user.profile.contactInfo:""}</td>
                 </tr>
                   <tr>
-                <td>email</td><td><nbsp  className="nbsp"/></td><td>{user.email}</td>
+                <td>email</td><td><nbsp  className="nbsp"/></td><td>{user.profile?user.email:""}</td>
                 </tr>
                 </tbody></table>
               </a>

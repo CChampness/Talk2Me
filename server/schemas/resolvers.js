@@ -12,9 +12,6 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
 
-    // getUsers: async () => {
-    //   return await User.find();
-    // },
     users: async (parent, args, context) => {
       console.log("resolvers Query getUsers");
       if (context.user) {
@@ -32,6 +29,7 @@ const resolvers = {
       console.log("User is sirned up and logged in: ", user.username);
       return { token, user };
     },
+
     loginUser: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
       console.log("loginUser Mutation, user: ", user);
