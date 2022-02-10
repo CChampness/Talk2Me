@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import { Form, Button, Alert } from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_USERS } from '../utils/queries';
 import { SAVE_BUDDY } from '../utils/mutations';
@@ -9,13 +10,15 @@ const highLightSelected = (cardId) => {
   console.log("element: ",element);
   element.classList.add("boxHighlight");
   // TBD: Add a button for leaving a message (starting a chat)
+  // <a >Check this out</a>
 }
 
 // The state gets changed in the Nav component
 function FindBuddies ({ currentPage, handleChange }) {
+  const pageChange = (page) => handleChange(page);
   const {loading, error, data } = useQuery(GET_USERS);
   const [saveBuddy] = useMutation(SAVE_BUDDY);
-  const [re, setRe] = useState();
+  const [re, setRe] = useState(false);
 
   // Step through the list of users and see which ones are in the current user's buddy list.
   useEffect(() => { if (data)
@@ -28,7 +31,6 @@ function FindBuddies ({ currentPage, handleChange }) {
     console.log("isAlreadyBuddy? user.username: ",user.username);
     console.log("currentUser: ",currentUser);
     const found = currentUser.savedBuddies.find(element => element.buddyId === user.username);
-    setRe(found);
     console.log("found: ", found);
     return found;
   }
@@ -48,7 +50,8 @@ function FindBuddies ({ currentPage, handleChange }) {
       });
 
       highLightSelected(username);
-    
+      setRe(true);
+
     } catch (err) {
       console.error(err);
     }
@@ -111,6 +114,13 @@ function FindBuddies ({ currentPage, handleChange }) {
               </tbody></table>
             </a>
           </span>
+          <Button
+            // disabled={!(re)}
+            type='submit'
+            variant='success'
+              onClick={() => pageChange('Message')}>
+            LEAVE MESSAGE FOR {user.profile?user.profile.name:user.username}
+          </Button>
         </figure>
       </div>
     )
@@ -118,3 +128,10 @@ function FindBuddies ({ currentPage, handleChange }) {
 }
 
 export default FindBuddies
+
+{/* <Button
+disabled={!(userFormData.username && userFormData.email && userFormData.password)}
+type='submit'
+variant='success'>
+NEW BUTTON
+</Button> */}

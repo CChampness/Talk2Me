@@ -5,6 +5,7 @@ import Blog from './pages/Blog';
 import SignupForm from './components/SignupForm';
 import LoginForm from './components/LoginForm';
 import FindBuddies from './pages/FindBuddies';
+import Message from './pages/Message';
 import CreateProfile from './pages/CreateProfile';
 // import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
 
@@ -23,15 +24,17 @@ function Main({ currentPage, setCurrentPage}) {
       case 'SignupForm':
         return <SignupForm />;
       case 'LoginForm':
-        return <LoginForm />;
+        return <LoginForm currentPage={currentPage} handleChange={handleChange} />;
       case 'FindBuddies':
         return (
           <section className="row justify-center">
-            <FindBuddies />
+            <FindBuddies currentPage={currentPage} handleChange={handleChange}/>
           </section>
         );
       case 'CreateProfile':
         return <CreateProfile />;
+      case 'Message':
+        return <Message />;
       // case 'Projects':
       //   return (
       //     <section className="row justify-center">
