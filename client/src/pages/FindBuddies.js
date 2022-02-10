@@ -1,37 +1,40 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_USERS } from '../utils/queries';
 import { SAVE_BUDDY } from '../utils/mutations';
 
-const highLightSelected = (ndx) => {
-  console.log("highLightSelected, ndx: ", ndx);
-  let element = document.getElementById(ndx);
+const highLightSelected = (cardId) => {
+  console.log("highLightSelected, cardId: ", cardId);
+  let element = document.getElementById(cardId);
   console.log("element: ",element);
   element.classList.add("boxHighlight");
-  // Add a button for leaving a message (starting a chat)
+  // TBD: Add a button for leaving a message (starting a chat)
 }
 
 // The state gets changed in the Nav component
 function FindBuddies ({ currentPage, handleChange }) {
   const {loading, error, data } = useQuery(GET_USERS);
   const [saveBuddy] = useMutation(SAVE_BUDDY);
+  const [re, setRe] = useState();
+
   // Step through the list of users and see which ones are in the current user's buddy list.
   useEffect(() => { if (data)
-    data.users.map((user, ndx) => isAlreadyBuddy(currentUser, user) ? highLightSelected(ndx):null);
-  }, [data]);
+    data.users.map((user) => isAlreadyBuddy(currentUser, user) ? highLightSelected(user.username):null);
+  },[re]);
     
   const currentUserName = localStorage.getItem("id_name");
 
   const isAlreadyBuddy = (currentUser, user) => {
     console.log("isAlreadyBuddy? user.username: ",user.username);
-    console.log("currentUser.savedBuddies: ",currentUser.savedBuddies);
+    console.log("currentUser: ",currentUser);
     const found = currentUser.savedBuddies.find(element => element.buddyId === user.username);
+    setRe(found);
     console.log("found: ", found);
     return found;
   }
   
   // This function saves selected buddies to the current user's buddy list
-  const handleSaveBuddy = async (username, ndx) => {
+  const handleSaveBuddy = async (username) => {
     console.log("username: ", username);
 
     try {
@@ -44,7 +47,7 @@ function FindBuddies ({ currentPage, handleChange }) {
         variables: { buddyData: buddyToSave },
       });
 
-      highLightSelected(ndx);
+      highLightSelected(username);
     
     } catch (err) {
       console.error(err);
@@ -60,13 +63,13 @@ function FindBuddies ({ currentPage, handleChange }) {
   console.log("currentUser: ", currentUser);
 
   return (
-    data.users.map((user, ndx) => (user.username === currentUser)?
+    data.users.map((user, ndx) => (user.username === currentUserName)?
       <div key={ndx}></div>
       : 
-      <div key={ndx} className="card-column" id={ndx}>
+      <div key={ndx} className="card-column" id={user.username}>
         <figure className="proj-card">
           <span data-descr>
-            <a onClick={() => handleSaveBuddy(user.username, ndx)}>
+            <a onClick={() => handleSaveBuddy(user.username)}>
               <h4 className="card-title">{user.profile?user.profile.name:user.username}</h4>
               <table><tbody>
                 <tr>
