@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   ApolloClient,
   InMemoryCache,
@@ -6,6 +6,7 @@ import {
   createHttpLink,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
+import { MessengerProvider } from './utils/GlobalState';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 // import SearchBuddies from './pages/SearchBuddies';
 // import SavedBuddies from './pages/SavedBuddies';
@@ -46,11 +47,15 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
+        {/* <div>
+        <MessengerProvider> */}
         <React.Fragment>
           <Header currentPage={currentPage} setCurrentPage={setCurrentPage} />
           <Main currentPage={currentPage} setCurrentPage={setCurrentPage} />
           <Footer />
         </React.Fragment>
+        {/* </MessengerProvider>
+        </div> */}
       </Router>
     </ApolloProvider>
   );

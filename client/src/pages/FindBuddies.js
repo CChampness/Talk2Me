@@ -3,6 +3,7 @@ import { Form, Button, Alert } from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_USERS } from '../utils/queries';
 import { SAVE_BUDDY } from '../utils/mutations';
+import { MessengerProvider } from '../utils/GlobalState';
 
 const highLightSelected = (cardId) => {
   console.log("highLightSelected, cardId: ", cardId);
@@ -118,7 +119,10 @@ function FindBuddies ({ currentPage, handleChange }) {
             // disabled={!(re)}
             type='submit'
             variant='success'
-              onClick={() => pageChange('Message')}>
+              onClick={() => {
+                  pageChange('Message');
+                  MessengerProvider(user.profile?user.profile.name:user.username)
+                }}>
             LEAVE MESSAGE FOR {user.profile?user.profile.name:user.username}
           </Button>
         </figure>
