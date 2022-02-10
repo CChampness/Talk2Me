@@ -36,6 +36,18 @@ export const SAVE_BUDDY = gql`
   }
 `;
 
+export const SAVE_MESSAGE = gql`
+  mutation saveMessage($messageData: MessageInput!) {
+    saveMessage(messageData: $messageData) {
+      username
+      email
+      savedMessages {
+        messageText
+      }
+    }
+  }
+`;
+
 export const SAVE_PROFILE = gql`
   mutation saveProfile($profileData: ProfileInput!) {
     saveProfile(profileData: $profileData) {

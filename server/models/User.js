@@ -2,6 +2,7 @@ const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const Buddy = require('./Buddy');
+const Message = require('./Message');
 const Profile = require('./Profile');
 
 const userSchema = new Schema(
@@ -25,7 +26,8 @@ const userSchema = new Schema(
     },
     profile: Profile,
     // set savedBuddies to be an array of data that adheres to the profileSchema
-    savedBuddies: [Buddy]
+    savedBuddies: [Buddy],
+    savedMessages: [Message]
   },
   // set this to use virtual below
   {

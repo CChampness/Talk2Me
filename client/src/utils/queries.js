@@ -10,6 +10,9 @@ export const GET_ME = gql`
       savedBuddies {
         buddyId
       }
+      savedMessages {
+        messageText
+      }
     }
   }
 `;
@@ -36,6 +39,9 @@ export const GET_USERS = gql`
       }
       savedBuddies {
         buddyId
+      }
+      savedMessages {
+        messageText
       }
     }
   }

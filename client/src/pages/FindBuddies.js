@@ -120,7 +120,7 @@ function FindBuddies ({ currentPage, handleChange }) {
             type='submit'
             variant='success'
               onClick={() => {
-                  pageChange('Message');
+                  pageChange('SaveMessage');
                   MessengerProvider(user.profile?user.profile.name:user.username)
                 }}>
             LEAVE MESSAGE FOR {user.profile?user.profile.name:user.username}

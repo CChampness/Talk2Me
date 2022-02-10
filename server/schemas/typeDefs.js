@@ -7,6 +7,17 @@ const typeDefs = gql`
     email: String
     profile: Profile
     savedBuddies: [Buddy]!
+    savedMessages: [Message]!
+  }
+
+  type Message {
+    messageUser: String
+    messageText: String
+  }
+
+  input MessageInput {
+    messageUser: String
+    messageText: String
   }
 
   type Buddy {
@@ -16,6 +27,7 @@ const typeDefs = gql`
   input BuddyInput {
     buddyId: String
   }
+
 
   type Profile {
     name: String
@@ -62,6 +74,7 @@ const typeDefs = gql`
     loginUser(email: String!, password: String!): Auth
     saveProfile(profileData: ProfileInput!): User
     saveBuddy(buddyData: BuddyInput!): User
+    saveMessage(messageData: MessageInput!): User
     removeBuddy(buddyId: String!): User
   }
 `;

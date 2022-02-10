@@ -5,7 +5,7 @@ import Blog from './pages/Blog';
 import SignupForm from './components/SignupForm';
 import LoginForm from './components/LoginForm';
 import FindBuddies from './pages/FindBuddies';
-import Message from './pages/Message';
+import SaveMessage from './pages/SaveMessage';
 import CreateProfile from './pages/CreateProfile';
 // import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
 
@@ -33,8 +33,8 @@ function Main({ currentPage, setCurrentPage}) {
         );
       case 'CreateProfile':
         return <CreateProfile />;
-      case 'Message':
-        return <Message />;
+      case 'SaveMessage':
+        return <SaveMessage />;
       // case 'Projects':
       //   return (
       //     <section className="row justify-center">

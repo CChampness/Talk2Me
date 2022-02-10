@@ -52,6 +52,7 @@ const resolvers = {
 
     saveBuddy: async (parent, { buddyData }, context) => {
       console.log("saveBuddy for user: ", context.user);
+      console.log("buddyData: ", buddyData);
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
@@ -60,6 +61,23 @@ const resolvers = {
         );
 
         console.log("saveBuddy updatedUser: ", updatedUser);
+
+        return updatedUser;
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    
+    saveMessage: async (parent, { messageData }, context) => {
+      console.log("saveMessage for user: ", context.user);
+      console.log("messageData: ", messageData);
+      if (context.user) {
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $push: { savedMessages: messageData } },
+          {new: true}
+        );
+
+        console.log("saveMessage updatedUser: ", updatedUser);
 
         return updatedUser;
       }
