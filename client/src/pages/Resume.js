@@ -35,7 +35,7 @@ function Resume() {
       <article>
         <h4>Education and Training</h4>
         <ul>
-          <li>University of Alabama M.A. TESOL 1993</li>
+          <li>University of Alabama M.A. TESOL</li>
         </ul>
       </article>
     </div>

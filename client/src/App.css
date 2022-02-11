@@ -140,7 +140,7 @@ article {
 }
 
 .imageArticle {
-  height: 158px;
+  min-height: 158px;
 }
 
 article div {

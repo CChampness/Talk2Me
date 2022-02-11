@@ -11,20 +11,18 @@ function Header({ currentPage, setCurrentPage }) {
     setCurrentPage(page)
   };
 
-  let message = "Welcome, ";
-
   // if (loading) return <h4>Loading...</h4>;
   // if (error) return <h4>Error! {error.message}</h4>;
-  // console.log("in Header, data: ", data);
-  const user = localStorage.getItem("id_name");
-  if (user) {
-    message += user;
-  }
+
+  // const user = localStorage.getItem("id_name");
+  // if (user) {
+  //   message += user;
+  // }
      
   return (
     <header>
       <h1>Talk 2 Me</h1>
-      <h3 id="headerMsg">{message}</h3>
+      <h4 id="headerMsg"></h4>
       <div className="NavTabs div">
         {/* Pass the currentPage from state and the function to update it */}
         <Nav currentPage={currentPage} handlePageChange={handlePageChange} />
