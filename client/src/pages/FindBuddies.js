@@ -9,7 +9,7 @@ const highLightSelected = (cardId) => {
   console.log("highLightSelected, cardId: ", cardId);
   let element = document.getElementById(cardId);
   console.log("element: ",element);
-  element.classList.add("boxHighlight");
+  element.childNodes[0].childNodes[0].classList.add("boxHighlight");
   // TBD: Add a button for leaving a message (starting a chat)
   // <a >Check this out</a>
 }

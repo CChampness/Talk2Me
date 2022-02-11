@@ -12,6 +12,12 @@ function About() {
           practice conversation, and share resources.
         </p>
       </article>
+      <article>
+        <h4>What is a language coach?</h4>
+        <p>
+          A language coach is ...
+        </p>
+      </article>
     </div>
   );
 }
