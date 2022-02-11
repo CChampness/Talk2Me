@@ -42,6 +42,7 @@ export const SAVE_MESSAGE = gql`
       username
       email
       savedMessages {
+        messageFrom
         messageText
       }
     }

@@ -5,6 +5,7 @@ const { signToken } = require('../utils/auth');
 const resolvers = {
   Query: {
     me: async (parent, args, context) => {
+      console.log("resolvers Query getMe");
       if (context.user) {
         const userData = await User.findOne({ _id: context.user._id });
         return userData;
@@ -70,18 +71,18 @@ const resolvers = {
     saveMessage: async (parent, { messageData }, context) => {
       console.log("saveMessage for user: ", context.user);
       console.log("messageData: ", messageData);
-      if (context.user) {
-        const updatedUser = await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $push: { savedMessages: messageData } },
-          {new: true}
-        );
+      // if (context.user) {
+      //   const updatedUser = await User.findOneAndUpdate(
+      //     { _id: messageData._id },
+      //     { $push: { savedMessages: messageData.messsageText } },
+      //     {new: true}
+      //   );
 
-        console.log("saveMessage updatedUser: ", updatedUser);
+      //   console.log("saveMessage updatedUser: ", updatedUser);
 
-        return updatedUser;
-      }
-      throw new AuthenticationError('You need to be logged in!');
+      //   return updatedUser;
+      // }
+      // throw new AuthenticationError('You need to be logged in!');
     },
     
     saveProfile: async (parent, { profileData }, context) => {

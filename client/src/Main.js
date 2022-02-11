@@ -35,13 +35,6 @@ function Main({ currentPage, setCurrentPage}) {
         return <CreateProfile />;
       case 'SaveMessage':
         return <SaveMessage />;
-      // case 'Projects':
-      //   return (
-      //     <section className="row justify-center">
-      //       <h3>Portfolio</h3>
-      //       <Projects  currentPage={currentPage} handleChange={handleChange}/>
-      //     </section>
-      //   );
       default:
         return <Resume />
     }

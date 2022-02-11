@@ -9,8 +9,8 @@ function Resume() {
         <img className="textwrap-img" src="./MHC.jpg" alt="Profile photo" />
         <p>
         Miriam Champness is a language coach with 25 years of experience helping language
-        lovers to refine their English skills.  She is especially good with helping
-        advanced second-language students of English.
+        lovers to refine their English skills.  She is especially good with coaching
+        advanced students of English.
         </p>
       </article>
       <article>

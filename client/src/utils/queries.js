@@ -6,7 +6,20 @@ export const GET_ME = gql`
       _id
       username
       email
-      profile
+      profile {
+        name
+        interests
+        language
+        readingLevel
+        writingLevel
+        grammarLevel
+        pronunciationLevel
+        sex
+        age
+        countryFrom
+        countryNow
+        contactInfo
+      }
       savedBuddies {
         buddyId
       }

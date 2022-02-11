@@ -1,18 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { useMutation } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { Jumbotron, Container, Col, Form, Button, Card, CardColumns } from 'react-bootstrap';
 import { SAVE_MESSAGE } from '../utils/mutations';
 import Auth from '../utils/auth';
 import { useMessengerContext } from '../utils/GlobalState';
+import { GET_USERS } from '../utils/queries';
 
 const SaveMessage = () => {
 
   const [messageInp, setMessageInp] = useState('');
 
   const [saveMessage] = useMutation(SAVE_MESSAGE);
+  const {loading, error, data } = useQuery(GET_USERS);
+  console.log("data: ",data);
+  const userData = data?.me || {};
   const msgUsr = useMessengerContext();
-
-  // create function to handle saving the profile to the database
+  const currentUserName = localStorage.getItem("id_name");
+  let currentUser;
+  let sendToUser;
+    // create function to handle saving the profile to the database
   const handleSaveMessage = async () => {
 
     // get token
@@ -24,7 +30,8 @@ const SaveMessage = () => {
 
     try {
       const messageToSave = {
-        // messageUser: msgUsr,
+        messageTo: sendToUser,
+        messageFrom: userData.username,
         messageText: messageInp
       };
 
@@ -39,9 +46,20 @@ const SaveMessage = () => {
     }
   };
 
+  if (loading) return <h4>Loading...</h4>;
+  if (error) return <h4>Error! {error.message}</h4>;
+  // data.users is the array of all users in the database
+  console.log("data: ",data, loading);
+
+  currentUser = data.users.find(element => element.username === currentUserName);
+  console.log("currentUser: ", currentUser);
+
+  sendToUser = data.users.find(element => element.username === msgUsr);
+
+
   return (
     <Container>
-      <h2>Leave your message for {useMessengerContext()}</h2>
+      <h2>Leave your message for {msgUsr}</h2>
       <Form onSubmit={handleSaveMessage}>
         <Form.Row>
           <Col xs={12} md={8}>
@@ -53,7 +71,7 @@ const SaveMessage = () => {
           </Col>
           <Col xs={12} md={4}>
             <Button type='submit' variant='success' size='lg'>
-              Save message for {useMessengerContext()}
+              Save message for {msgUsr}
             </Button>
           </Col>
         </Form.Row>
