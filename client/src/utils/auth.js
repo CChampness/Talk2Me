@@ -36,12 +36,17 @@ class AuthService {
     // Saves user token to localStorage
     localStorage.setItem('id_token', idToken);
     localStorage.setItem('id_name', username);
+    const doc = document.getElementById("headerMsg");
+    console.log("doc: ", doc);
+
+    doc.textContent="Welcome "+username;
     window.location.assign('/');
   }
 
   logout() {
     // Clear user token and profile data from localStorage
     localStorage.removeItem('id_token');
+    localStorage.removeItem('id_name');
     // this will reload the page and reset the state of the application
     window.location.assign('/');
   }

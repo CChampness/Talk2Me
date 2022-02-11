@@ -8,14 +8,16 @@ function About() {
         <h4>Welcome to Talk2Me</h4>
         <img className="textwrap-img" src="./MHC.jpg" alt="Profile photo" />
         <p>
+          Welcome to your language-learning quest!
+        </p><p>
           Talk2Me is a language practice site for linguaphiles to find one another,
           practice conversation, and share resources.
         </p>
       </article>
       <article>
-        <h4>What is a language coach?</h4>
+        <h4>What is a language-learning coach?</h4>
         <p>
-          A language coach is ...
+          A language-learning coach is ...
         </p>
       </article>
     </div>

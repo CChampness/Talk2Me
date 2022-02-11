@@ -9,7 +9,9 @@ const highLightSelected = (cardId) => {
   console.log("highLightSelected, cardId: ", cardId);
   let element = document.getElementById(cardId);
   console.log("element: ",element);
-  element.childNodes[0].childNodes[0].classList.add("boxHighlight");
+  if (element) {
+    element.childNodes[0].childNodes[0].classList.add("boxHighlight");
+  }
   // TBD: Add a button for leaving a message (starting a chat)
   // <a >Check this out</a>
 }
@@ -65,11 +67,12 @@ function FindBuddies ({ currentPage, handleChange }) {
 
   const currentUser = data.users.find(element => element.username === currentUserName);
   console.log("currentUser: ", currentUser);
+  data.users.map((user) => isAlreadyBuddy(currentUser, user) ? highLightSelected(user.username):null);
 
   return (
     data.users.map((user, ndx) => (user.username === currentUserName)?
       <div key={ndx}></div>
-      : 
+      :
       <div key={ndx} className="card-column" id={user.username}>
         <figure className="proj-card">
           <span data-descr>

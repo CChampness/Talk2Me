@@ -6,8 +6,8 @@ import SignupForm from './components/SignupForm';
 import LoginForm from './components/LoginForm';
 import FindBuddies from './pages/FindBuddies';
 import SaveMessage from './pages/SaveMessage';
+import GetMessages from './pages/GetMessages';
 import CreateProfile from './pages/CreateProfile';
-// import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
 
 function Main({ currentPage, setCurrentPage}) {
 
@@ -35,7 +35,9 @@ function Main({ currentPage, setCurrentPage}) {
         return <CreateProfile />;
       case 'SaveMessage':
         return <SaveMessage />;
-      default:
+      case 'GetMessages':
+        return <GetMessages />;
+        default:
         return <Resume />
     }
   };

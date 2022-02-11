@@ -11,12 +11,10 @@ const typeDefs = gql`
   }
 
   type Message {
-    messageUser: String
     messageText: String
   }
 
   input MessageInput {
-    messageUser: String
     messageText: String
   }
 
@@ -75,6 +73,7 @@ const typeDefs = gql`
     saveProfile(profileData: ProfileInput!): User
     saveBuddy(buddyData: BuddyInput!): User
     saveMessage(messageData: MessageInput!): User
+    deleteMessage(msgDelData: MessageInput!): User
     removeBuddy(buddyId: String!): User
   }
 `;

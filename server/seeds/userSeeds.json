@@ -2,46 +2,11 @@
   {
     "username": "Brian",
     "email": "Brian@tf.dev",
-    "password": "pass01"
+    "password": "Brian00"
   },
   {
-    "username": "Max",
-    "email": "max@tf.dev",
-    "password": "pass02"
-  },
-  {
-    "username": "Kent",
-    "email": "Kent@tf.dev",
-    "password": "pass03"
-  },
-  {
-    "username": "Ed",
-    "email": "Ed@tf.dev",
-    "password": "pass04"
-  },
-  {
-    "username": "Alan",
-    "email": "Alan@tf.dev",
-    "password": "pass05"
-  },
-  {
-    "username": "Hoare",
-    "email": "Hoare@tf.dev",
-    "password": "pass06"
-  },
-  {
-    "username": "Thomas",
-    "email": "Thomas@tf.dev",
-    "password": "pass07"
-  },
-  {
-    "username": "Knuth",
-    "email": "Knuth@tf.dev",
-    "password": "pass08"
-  },
-  {
-    "username": "Lernantino",
-    "email": "Lernantino@tf.dev",
-    "password": "pass9"
+    "username": "Maxi",
+    "email": "Maxi@tf.dev",
+    "password": "Maxi00"
   }
 ]

@@ -8,9 +8,9 @@ function Resume() {
         <h4>Summary</h4>
         <img className="textwrap-img" src="./MHC.jpg" alt="Profile photo" />
         <p>
-        Miriam Champness is a language coach with 25 years of experience helping language
-        lovers to refine their English skills.  She is especially good with coaching
-        advanced students of English.
+        Miriam Champness is a language-learning coach with 25 years of experience helping 
+        language lovers to deepen and refine their English-learning process.  She is especially good
+        with coaching advanced students of English.
         </p>
       </article>
       <article>

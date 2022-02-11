@@ -69,20 +69,33 @@ const resolvers = {
     },
     
     saveMessage: async (parent, { messageData }, context) => {
-      console.log("saveMessage for user: ", context.user);
-      console.log("messageData: ", messageData);
-      // if (context.user) {
-      //   const updatedUser = await User.findOneAndUpdate(
-      //     { _id: messageData._id },
-      //     { $push: { savedMessages: messageData.messsageText } },
-      //     {new: true}
-      //   );
+      console.log("saveMessage from user: ", context.user);
+      console.log("messageTo: ", messageData.messageTo);
+      console.log("messageFrom: ", messageData.messageFrom);
+      console.log("messageText: ", messageData.messageText);
+      if (context.user) {
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $push: { savedMessages: messageData }},
+          {new: true}
+        );
 
-      //   console.log("saveMessage updatedUser: ", updatedUser);
+        console.log("saveMessage updatedUser: ", updatedUser);
 
-      //   return updatedUser;
-      // }
-      // throw new AuthenticationError('You need to be logged in!');
+        return updatedUser;
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+
+    deleteMessage: async (parent, { delMsgData }, context) => {
+      if (context.user) {
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { savedMessages: {delMsgData} } }
+        );
+        return updatedUser;
+      }
+      throw new AuthenticationError('You need to be logged in!');
     },
     
     saveProfile: async (parent, { profileData }, context) => {

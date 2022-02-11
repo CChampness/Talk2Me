@@ -42,9 +42,16 @@ export const SAVE_MESSAGE = gql`
       username
       email
       savedMessages {
-        messageFrom
         messageText
       }
+    }
+  }
+`;
+
+export const DELETE_MESSAGE = gql`
+  mutation deleteMessage($msgDelData: MsgInput!) {
+    deleteMessage(msgDelData: $msgDelData) {
+      _id
     }
   }
 `;
@@ -75,7 +82,7 @@ export const SAVE_PROFILE = gql`
 
 export const REMOVE_BUDDY = gql`
   mutation removeBuddy($buddyId: ID!) {
-    removeBook(buddyId: $buddyId) {
+    removeBuddy(buddyId: $buddyId) {
       _id
     }
   }

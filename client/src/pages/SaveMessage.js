@@ -30,13 +30,11 @@ const SaveMessage = () => {
 
     try {
       const messageToSave = {
-        messageTo: sendToUser,
-        messageFrom: userData.username,
         messageText: messageInp
       };
 
       console.log("In handleSaveMessage, messageToSave: ",messageToSave);
-      localStorage.setItem("talk2meMsg", messageInp);
+      localStorage.setItem("talk2meMsg", messageToSave.messageText); //messageInp);
       const {result} = await saveMessage({
         variables: { messageData: messageToSave },
       });
@@ -54,8 +52,9 @@ const SaveMessage = () => {
   currentUser = data.users.find(element => element.username === currentUserName);
   console.log("currentUser: ", currentUser);
 
-  sendToUser = data.users.find(element => element.username === msgUsr);
-
+  sendToUser = data.users.find(element => element.username === msgUsr)._id;
+  console.log("sendToUser: ", sendToUser);
+  localStorage.setItem("sendToUser", sendToUser);
 
   return (
     <Container>
