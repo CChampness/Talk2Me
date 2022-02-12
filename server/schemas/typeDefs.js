@@ -1,5 +1,15 @@
 const { gql } = require('apollo-server-express');
 
+// type Message {
+//   messageTo: String
+//   messageText: String
+// }
+
+// input MessageInput {
+//   messageTo: String
+//   messageText: String
+// }
+
 const typeDefs = gql`
   type User {
     _id: ID
@@ -11,10 +21,12 @@ const typeDefs = gql`
   }
 
   type Message {
+    messageTo: String
     messageText: String
   }
 
   input MessageInput {
+    messageTo: String
     messageText: String
   }
 

@@ -29,14 +29,15 @@ const SaveMessage = () => {
     }
 
     try {
-      const messageToSave = {
+      const messageToSend = {
+        messageTo: msgUsr,
         messageText: messageInp
       };
 
-      console.log("In handleSaveMessage, messageToSave: ",messageToSave);
-      localStorage.setItem("talk2meMsg", messageToSave.messageText); //messageInp);
+      console.log("In handleSaveMessage, messageToSend: ",messageToSend);
+      localStorage.setItem("talk2meMsg", messageToSend.messageText); //messageInp);
       const {result} = await saveMessage({
-        variables: { messageData: messageToSave },
+        variables: { messageData: messageToSend },
       });
 
     } catch (err) {

@@ -36,8 +36,12 @@ function Main({ currentPage, setCurrentPage}) {
       case 'SaveMessage':
         return <SaveMessage />;
       case 'GetMessages':
-        return <GetMessages />;
-        default:
+        return (
+          <section className="row justify-center">
+            <GetMessages />;
+          </section>
+        );
+      default:
         return <Resume />
     }
   };

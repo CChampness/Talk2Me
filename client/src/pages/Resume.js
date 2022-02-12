@@ -26,16 +26,17 @@ function Resume() {
       </article>
       <article>
         <h4>Experience</h4>
-        <dl>
-          <dt>ELS</dt>
-          <dt>LSI</dt>
-          <dt>Cambly</dt>
-        </dl>
+        <ul>
+          <li>ELS</li>
+          <li>LSI</li>
+          <li>Cambly</li>
+        </ul>
       </article>
       <article>
         <h4>Education and Training</h4>
         <ul>
           <li>University of Alabama M.A. TESOL</li>
+          <li>Boston University B.A. Psychology</li>
         </ul>
       </article>
     </div>
