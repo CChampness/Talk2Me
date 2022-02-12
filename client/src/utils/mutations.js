@@ -49,8 +49,8 @@ export const SAVE_MESSAGE = gql`
 `;
 
 export const DELETE_MESSAGE = gql`
-  mutation deleteMessage($msgDelData: MsgInput!) {
-    deleteMessage(msgDelData: $msgDelData) {
+  mutation deleteMessage($messageData: MessageInput!) {
+    deleteMessage(messageData: $messageData) {
       _id
     }
   }

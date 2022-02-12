@@ -9,6 +9,9 @@ const messageSchema = new Schema({
   },
   messageText: {
     type: String,
+  },
+  messageFrom: {
+    type: String,
   }
 });
 

@@ -10,25 +10,20 @@ function GetMessages ({ currentPage, handleChange }) {
   const pageChange = (page) => handleChange(page);
   const {loading, error, data } = useQuery(GET_ME);
   const [deleteMessage] = useMutation(DELETE_MESSAGE);
-  const [re, setRe] = useState(false);
-
-  const currentUserName = localStorage.getItem("id_name");
 
   // This function deletes the selected message from the current user's message list
-  const handleDeleteMessage = async (messageId) => {
-    console.log("messageId: ", messageId);
+  const handleDeleteMessage = async (message) => {
+    console.log("message._id: ", message._id);
 
     try {
       const messageToDelete = {
-        _id: messageId
+        _id: message._id
       };
 
       console.log("In handleDeleteMessage, messageToDelete: ",messageToDelete);
       const {result} = await deleteMessage({
-        variables: { msgDelData: messageToDelete },
+        variables: { messageData: messageToDelete },
       });
-
-      setRe(true);
 
     } catch (err) {
       console.error(err);
@@ -45,11 +40,11 @@ function GetMessages ({ currentPage, handleChange }) {
       <div key={ndx} className="card-column">
         <figure className="proj-card">
           <p>{msg.messageText}</p>
-          <p>{msg._id}</p>
+          <p>Message _id: [{msg._id}]</p>
           <Button
             type='submit'
             variant='success'
-            onClick={() => handleDeleteMessage(msg._id)}>
+            onClick={() => handleDeleteMessage(msg)}>
             DELETE MESSAGE
           </Button>
         </figure>

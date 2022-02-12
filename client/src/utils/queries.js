@@ -24,11 +24,16 @@ export const GET_ME = gql`
         buddyId
       }
       savedMessages {
+        _id
         messageText
       }
     }
   }
 `;
+
+// savedMessages {
+//   messageText
+// }
 
 export const GET_USERS = gql`
 {

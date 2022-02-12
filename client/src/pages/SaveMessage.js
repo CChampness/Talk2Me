@@ -30,8 +30,9 @@ const SaveMessage = () => {
 
     try {
       const messageToSend = {
-        messageTo: msgUsr,
-        messageText: messageInp
+        messageFrom: currentUserName,
+        messageText: messageInp,
+        messageTo: msgUsr
       };
 
       console.log("In handleSaveMessage, messageToSend: ",messageToSend);

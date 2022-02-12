@@ -3,12 +3,15 @@ const { gql } = require('apollo-server-express');
 // type Message {
 //   messageTo: String
 //   messageText: String
+//   messageFrom: String
 // }
 
 // input MessageInput {
 //   messageTo: String
 //   messageText: String
+//   messageFrom: String
 // }
+
 
 const typeDefs = gql`
   type User {
@@ -21,13 +24,17 @@ const typeDefs = gql`
   }
 
   type Message {
+    _id: ID
     messageTo: String
     messageText: String
+    messageFrom: String
   }
 
   input MessageInput {
+    _id: ID
     messageTo: String
     messageText: String
+    messageFrom: String
   }
 
   type Buddy {
@@ -85,7 +92,7 @@ const typeDefs = gql`
     saveProfile(profileData: ProfileInput!): User
     saveBuddy(buddyData: BuddyInput!): User
     saveMessage(messageData: MessageInput!): User
-    deleteMessage(msgDelData: MessageInput!): User
+    deleteMessage(messageData: MessageInput!): User
     removeBuddy(buddyId: String!): User
   }
 `;

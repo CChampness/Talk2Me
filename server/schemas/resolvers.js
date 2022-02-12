@@ -69,13 +69,14 @@ const resolvers = {
     },
     
     saveMessage: async (parent, { messageData }, context) => {
-      console.log("saveMessage from user: ", context.user);
+      console.log("send Message from user: ", context.user);
       console.log("messageTo: ", messageData.messageTo);
-      console.log("messageFrom: ", messageData.messageFrom);
       console.log("messageText: ", messageData.messageText);
+      console.log("messageFrom: ", messageData.messageFrom);
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
-          { _id: context.user._id },
+          // { _id: context.user._id },
+          { username: messageData.messageTo },
           { $push: { savedMessages: messageData }},
           {new: true}
         );
@@ -87,11 +88,17 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
 
-    deleteMessage: async (parent, { delMsgData }, context) => {
+    deleteMessage: async (parent, { messageData }, context) => {
+      console.log("resolver deleteMessage: ", messageData)
+      console.log("delete Message from user: ", context.user);
+      // console.log("message _id: ", messageData._id);
+      // console.log("messageTo: ", messageData.messageTo);
+      // console.log("messageText: ", messageData.messageText);
+      // console.log("messageFrom: ", messageData.messageFrom);
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $pull: { savedMessages: {delMsgData} } }
+          { $pull: { savedMessages: messageData } }
         );
         return updatedUser;
       }

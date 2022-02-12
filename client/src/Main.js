@@ -38,7 +38,7 @@ function Main({ currentPage, setCurrentPage}) {
       case 'GetMessages':
         return (
           <section className="row justify-center">
-            <GetMessages />;
+            <GetMessages />
           </section>
         );
       default:
