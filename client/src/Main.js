@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import About from './pages/About';
 import Resume from './pages/Resume';
-import Blog from './pages/Blog';
+// import Blog from './pages/Blog';
 import SignupForm from './components/SignupForm';
 import LoginForm from './components/LoginForm';
 import FindBuddies from './pages/FindBuddies';
@@ -15,12 +15,12 @@ function Main({ currentPage, setCurrentPage}) {
 
   const renderPage = () => {
     switch (currentPage) {
-      case 'Home':
-        return <Resume />;
       case 'About':
-        return <About />;
-      case 'Blog':
-        return <Blog />;
+        return <About currentPage={currentPage} handleChange={handleChange} />;
+      // case 'About':
+      //   return <About />;
+      // case 'Blog':
+      //   return <Blog />;
       case 'SignupForm':
         return <SignupForm />;
       case 'LoginForm':
@@ -42,7 +42,7 @@ function Main({ currentPage, setCurrentPage}) {
           </section>
         );
       default:
-        return <Resume />
+        return <About />
     }
   };
 

@@ -1,16 +1,15 @@
-import React, { createContext, useContext } from "react";
+import React, { createContext, useContext, useState} from "react";
 
 const MessengerContext = createContext();
 const { Provider } = MessengerContext;
 
-const MessengerProvider = (messageUser) => {
-  console.log("messageUser: ",messageUser);
-  localStorage.setItem("messageUser", messageUser);
-  return <Provider value={messageUser} />;
+const MessengerProvider = () => {
+  const [messageUser, setMessageUser] = useState('');
+  return <Provider value={{messageUser, setMessageUser}} />;
 };
 
 const useMessengerContext = () => {
-  return localStorage.getItem("messageUser"); //useContext(MessengerContext);
+  return useContext(MessengerContext);
 };
 
 export { MessengerProvider, useMessengerContext };

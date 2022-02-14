@@ -78,6 +78,11 @@ nav a:hover {
   padding: 0rem 1rem 0rem 2rem;
 }
 
+.logDiv {
+  max-width: 200px;
+  margin: 100px
+}
+
 /* #about-section {
   margin: 1rem 0 0 1rem;
 } */

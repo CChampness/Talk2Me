@@ -42,21 +42,21 @@ const client = new ApolloClient({
 });
 
 function App() {
-  const [currentPage, setCurrentPage] = useState('Resume');
+  const [currentPage, setCurrentPage] = useState('About');
   const [loggedIn, setLoggedIn] = useState(false);
   
   return (
     <ApolloProvider client={client}>
       <Router>
-        {/* <div>
-        <MessengerProvider> */}
+        <div>
+        {/* <MessengerProvider> */}
         <React.Fragment>
           <Header currentPage={currentPage} setCurrentPage={setCurrentPage} />
           <Main currentPage={currentPage} setCurrentPage={setCurrentPage} />
           <Footer />
         </React.Fragment>
-        {/* </MessengerProvider>
-        </div> */}
+        {/* </MessengerProvider> */}
+        </div>
       </Router>
     </ApolloProvider>
   );

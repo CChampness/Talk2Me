@@ -1,12 +1,13 @@
 import React from 'react';
 
-function About() {
+function About({ currentPage, handleChange }) {
+  // const pageChange = (page) => handleChange(page);
   return (
     <div className="Aboutdiv">
       <h3>About Talk2Me</h3>
       <article id="about" className="imageArticle">
         <h4>Welcome to Talk2Me</h4>
-        <img className="textwrap-img" src="./MHC.jpg" alt="Profile photo" />
+        {/* <img className="textwrap-img" src="./MHC.jpg" alt="Profile photo" /> */}
         <p>
           Welcome to your language-learning quest!
         </p><p>
@@ -19,6 +20,7 @@ function About() {
         <p>
           A language-learning coach is ...
         </p>
+        {/* <a href={pageChange('Resume')}><h4>About Coach Miriam</h4></a> */}
       </article>
     </div>
   );

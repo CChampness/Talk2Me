@@ -14,11 +14,6 @@ function Header({ currentPage, setCurrentPage }) {
   // if (loading) return <h4>Loading...</h4>;
   // if (error) return <h4>Error! {error.message}</h4>;
 
-  // const user = localStorage.getItem("id_name");
-  // if (user) {
-  //   message += user;
-  // }
-     
   return (
     <header>
       <h1>Talk 2 Me</h1>

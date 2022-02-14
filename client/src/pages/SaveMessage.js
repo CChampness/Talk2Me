@@ -12,9 +12,9 @@ const SaveMessage = () => {
 
   const [saveMessage] = useMutation(SAVE_MESSAGE);
   const {loading, error, data } = useQuery(GET_USERS);
-  // console.log("data: ",data);
+  
   const userData = data?.me || {};
-  const msgUsr = useMessengerContext();
+  const msgUsr = useMessengerContext.userMessage;
   const currentUserName = localStorage.getItem("id_name");
   let currentUser;
   let sendToUser;
@@ -36,7 +36,6 @@ const SaveMessage = () => {
       };
 
       console.log("In handleSaveMessage, messageToSend: ",messageToSend);
-      // localStorage.setItem("talk2meMsg", messageToSend.messageText); //messageInp);
       const {result} = await saveMessage({
         variables: { messageData: messageToSend },
       });
@@ -80,40 +79,3 @@ const SaveMessage = () => {
 
 export default SaveMessage;
 
-
-{/* <Form.Group className="mb-3" controlId="testForm.ControlTextarea">
-<Form.Control as="textarea" rows={10}
-  name='name'
-  value={messageInp}
-  onChange={(e) => setMessageInp(e.target.value)}
-/>
-</Form.Group>
-
-<Button type='submit' variant='success' size='lg'>
-Save message
-</Button> */}
-
-// return (
-//   <Container>
-//     <h2>Leave your message for {useMessengerContext()}</h2>
-//     <Form onSubmit={handleSaveMessage}>
-//       <Form.Row>
-//         <Col xs={12} md={8}>
-//           <Form.Control
-//             name='message'
-//             value={messageInp}
-//             onChange={(e) => setMessageInp(e.target.value)}
-//             type='text'
-//             size='lg'
-//             placeholder='Please type your message here...'
-//           />
-//         </Col>
-//         <Col xs={12} md={4}>
-//           <Button type='submit' variant='success' size='lg'>
-//             Save message for {useMessengerContext()}
-//           </Button>
-//         </Col>
-//       </Form.Row>
-//     </Form>
-//   </Container>
-// );
