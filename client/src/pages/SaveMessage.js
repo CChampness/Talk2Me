@@ -12,7 +12,7 @@ const SaveMessage = () => {
 
   const [saveMessage] = useMutation(SAVE_MESSAGE);
   const {loading, error, data } = useQuery(GET_USERS);
-  console.log("data: ",data);
+  // console.log("data: ",data);
   const userData = data?.me || {};
   const msgUsr = useMessengerContext();
   const currentUserName = localStorage.getItem("id_name");
@@ -36,7 +36,7 @@ const SaveMessage = () => {
       };
 
       console.log("In handleSaveMessage, messageToSend: ",messageToSend);
-      localStorage.setItem("talk2meMsg", messageToSend.messageText); //messageInp);
+      // localStorage.setItem("talk2meMsg", messageToSend.messageText); //messageInp);
       const {result} = await saveMessage({
         variables: { messageData: messageToSend },
       });
@@ -49,14 +49,11 @@ const SaveMessage = () => {
   if (loading) return <h4>Loading...</h4>;
   if (error) return <h4>Error! {error.message}</h4>;
   // data.users is the array of all users in the database
-  console.log("data: ",data, loading);
 
   currentUser = data.users.find(element => element.username === currentUserName);
-  console.log("currentUser: ", currentUser);
+  // console.log("currentUser: ", currentUser);
 
   sendToUser = data.users.find(element => element.username === msgUsr)._id;
-  console.log("sendToUser: ", sendToUser);
-  localStorage.setItem("sendToUser", sendToUser);
 
   return (
     <Container>

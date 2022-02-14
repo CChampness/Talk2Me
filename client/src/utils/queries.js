@@ -26,6 +26,8 @@ export const GET_ME = gql`
       savedMessages {
         _id
         messageText
+        messageFrom
+        createdAt
       }
     }
   }

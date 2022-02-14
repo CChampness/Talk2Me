@@ -12,7 +12,13 @@ const messageSchema = new Schema({
   },
   messageFrom: {
     type: String,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+    immutable: true
   }
 });
 
 module.exports = messageSchema;
+

@@ -3,7 +3,7 @@ import { Form, Button, Alert } from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
 import { DELETE_MESSAGE } from '../utils/mutations';
-import { MessengerProvider } from '../utils/GlobalState';
+// import { MessengerProvider } from '../utils/GlobalState';
 
 // The state gets changed in the Nav component
 function GetMessages ({ currentPage, handleChange }) {
@@ -39,8 +39,10 @@ function GetMessages ({ currentPage, handleChange }) {
     data.me.savedMessages.map((msg, ndx) =>
       <div key={ndx} className="card-column">
         <figure className="proj-card">
+          <p>Message from: {msg.messageFrom}</p>
+          <p>Date sent: {msg.createdAt}</p>
+          {/* <p>{msg.createdAt.toLocaleString}</p> */}
           <p>{msg.messageText}</p>
-          <p>Message _id: [{msg._id}]</p>
           <Button
             type='submit'
             variant='success'

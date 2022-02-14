@@ -43,7 +43,8 @@ const client = new ApolloClient({
 
 function App() {
   const [currentPage, setCurrentPage] = useState('Resume');
-
+  const [loggedIn, setLoggedIn] = useState(false);
+  
   return (
     <ApolloProvider client={client}>
       <Router>
