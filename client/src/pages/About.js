@@ -8,8 +8,7 @@ function About({ currentPage, handleChange }) {
     <div className="Aboutdiv">
       <h3>About Talk2Me</h3>
       <article id="about" className="imageArticle">
-        <h4>Welcome to Talk2Me,  {Auth.loggedIn() ? Auth.getProfile().data.username: "please Login or Signup"}</h4>
-        {/* <img className="textwrap-img" src="./MHC.jpg" alt="Profile photo" /> */}
+        <h4>Welcome to Talk2Me,  {Auth.loggedIn() ? Auth.getProfile().data.username: "please join us ... Login or Signup"}</h4>
         <p>
           Welcome to your language-learning quest!
         </p><p>

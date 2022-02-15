@@ -18,13 +18,13 @@ function FindBuddies ({ currentPage, handleChange }) {
   const pageChange = (page) => handleChange(page);
   const {loading, error, data } = useQuery(GET_USERS);
   const [saveBuddy] = useMutation(SAVE_BUDDY);
-  const [re, setRe] = useState(false);
+  const [currentUserName, setCurrentUserName] = useState('');
   const { setMessageUser } = useGlobalContext();
 
   // Step through the list of users and see which ones are in the current user's buddy list.
   useEffect(() => { if (data)
     data.users.map((user) => isAlreadyBuddy(currentUser, user) ? highLightSelected(user.username):null);
-  },[re]);
+  },[currentUserName]);
     
   const isAlreadyBuddy = (currentUser, user) => {
     const found = currentUser.savedBuddies.find(element => element.buddyId === user.username);
@@ -43,7 +43,6 @@ function FindBuddies ({ currentPage, handleChange }) {
       });
 
       highLightSelected(username);
-      setRe(true);
 
     } catch (err) {
       console.error(err);
@@ -53,10 +52,14 @@ function FindBuddies ({ currentPage, handleChange }) {
   if (loading) return <h4>Loading...</h4>;
   if (error) return <h4>Error! {error.message}</h4>;
   // data.users is the array of all users in the database
-  const currentUserName = Auth.getProfile().data.username;
 
-  const currentUser = data.users.find(element => element.username === currentUserName);
-  data.users.map((user) => isAlreadyBuddy(currentUser, user) ? highLightSelected(user.username):null);
+  let currentUser;
+  if (currentUserName) {
+    currentUser = data.users.find(element => element.username === currentUserName);
+    data.users.map((user) => isAlreadyBuddy(currentUser, user) ? highLightSelected(user.username):null);
+  } else {
+    setCurrentUserName(Auth.getProfile().data.username);
+  }
 
   return (
     data.users.map((user, ndx) => (user.username === currentUserName)?

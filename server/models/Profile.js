@@ -39,6 +39,9 @@ const profileSchema = new Schema({
   },
   contactInfo: {
     type: String,
+  },
+  resources: {
+    type: String,
   }
 });
 

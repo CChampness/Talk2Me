@@ -18,13 +18,11 @@ const addDateSuffix = (date) => {
 };
 
 // function to format a timestamp, accepts the timestamp and an `options` object as parameters
-
-const dateTime = (timestamp) => {
-  console.log("in dateTime: ", timestamp);
-
+module.exports = (
+  timestamp,
+  { monthLength = 'short', dateSuffix = true } = {}
+) => {
   // create month object
-  const monthLength = 'short';
-  const dateSuffix = true;
   const months = {
     0: monthLength === 'short' ? 'Jan' : 'January',
     1: monthLength === 'short' ? 'Feb' : 'February',
@@ -41,7 +39,6 @@ const dateTime = (timestamp) => {
   };
 
   const dateObj = new Date(timestamp);
-console.log("dateObj: ",dateObj);
   const formattedMonth = months[dateObj.getMonth()];
 
   const dayOfMonth = dateSuffix
@@ -68,5 +65,3 @@ console.log("dateObj: ",dateObj);
 
   return formattedTimeStamp;
 };
-
-module.exports = dateTime

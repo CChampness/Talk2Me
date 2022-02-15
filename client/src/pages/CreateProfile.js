@@ -7,7 +7,7 @@ import Auth from '../utils/auth';
 
 const CreateProfile = () => {
   // create state for holding our search field data
-  const [nameInp, setNameInp] = useState('');
+  // const [nameInp, setNameInp] = useState('');
   const [interestsInp, setInterestsInp] = useState('');
   const [languageInp, setLanguageInp] = useState('');
   const [readingLevelInp, setReadingLevelInp] = useState('');
@@ -18,6 +18,7 @@ const CreateProfile = () => {
   const [ageInp, setAgeInp] = useState('');
   const [countryFromInp, setCountryFromInp] = useState('');
   const [countryNowInp, setCountryNowInp] = useState('');
+  const [resourcesInp, setResourcesInp] = useState('');
   const [contactInfoInp, setContactInfoInp] = useState('');
   const {loading, error, data } = useQuery(GET_ME);
 
@@ -35,7 +36,7 @@ const CreateProfile = () => {
 
     try {
       const profileToSave = {
-        name: nameInp,
+        // name: nameInp,
         interests: interestsInp,
         language: languageInp,
         readingLevel: readingLevelInp,
@@ -46,6 +47,7 @@ const CreateProfile = () => {
         age: ageInp,
         countryFrom: countryFromInp,
         countryNow: countryNowInp,
+        resources: resourcesInp,
         contactInfo: contactInfoInp
       };
 
@@ -65,7 +67,7 @@ const CreateProfile = () => {
   // set the placeholders to be the values from the query (if any)
   const prof = data.me.profile;
     
-  const namePlaceholder = (prof&&prof.name)?prof.name:'What is your name?'
+  // const namePlaceholder = (prof&&prof.name)?prof.name:'What is your name?'
   const interestsPlaceholder = (prof&&prof.interests)?prof.interests:'What are your main interests?'
   const languagePlaceholder = (prof&&prof.language)?prof.language:'What langage are you practicing?'
   const readingLevelPlaceholder = (prof&&prof.readingLevel)?prof.readingLevel:'What is your reading level?'
@@ -75,7 +77,8 @@ const CreateProfile = () => {
   const sexPlaceholder = (prof&&prof.sex)?prof.sex:'What is your sex?'
   const agePlaceholder = (prof&&prof.age)?prof.age:'What is your age?'
   const countryFromPlaceholder = (prof&&prof.countryFrom)?prof.countryFrom:'What country are you from?'
-  const countryNowPlaceholder = (prof&&prof.countryNow)?prof.countryNow:'What country are you in now?'
+  const countryNowPlaceholder = (prof&&prof.countryNow)?prof.countryNow:'What country do you live in now?'
+  const resourcesPlaceholder = (prof&&prof.resources)?prof.resources:'Do you have some links or resources that you would like to share?'
   const contactInfoPlaceholder = (prof&&prof.contactInfo)?prof.contactInfo:'What is your contact information?'
 
   return (
@@ -83,7 +86,7 @@ const CreateProfile = () => {
       <h2>Profile for {Auth.getProfile().data.username}</h2>
       <Form onSubmit={handleSaveProfile}>
         <Form.Row>
-          <Col xs={12} md={8}>
+          {/* <Col xs={12} md={8}>
             <Form.Control
               name='name'
               id='name'
@@ -93,7 +96,7 @@ const CreateProfile = () => {
               size='lg'
               placeholder={Auth.getProfile().data.username}
             />
-          </Col>
+          </Col> */}
           <Col xs={12} md={8}>
             <Form.Control
               name='interests'
@@ -211,6 +214,18 @@ const CreateProfile = () => {
               type='text'
               size='lg'
               placeholder={countryNowPlaceholder}
+            />
+          </Col>
+
+          <Col xs={12} md={8}>
+            <Form.Control
+              name='resources'
+              id='resources'
+              value={resourcesInp}
+              onChange={(e) => setResourcesInp(e.target.value)}
+              type='text'
+              size='lg'
+              placeholder={resourcesPlaceholder}
             />
           </Col>
 

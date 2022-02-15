@@ -34,7 +34,6 @@ const typeDefs = gql`
     buddyId: String
   }
 
-
   type Profile {
     name: String
     interests: String
@@ -48,6 +47,7 @@ const typeDefs = gql`
     countryFrom: String
     countryNow: String
     contactInfo: String
+    resources: String
   }
 
   input ProfileInput {
@@ -63,6 +63,7 @@ const typeDefs = gql`
     countryFrom: String
     countryNow: String
     contactInfo: String
+    resources: String
   }
 
   type Auth {
