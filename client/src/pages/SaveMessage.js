@@ -3,18 +3,16 @@ import { useMutation, useQuery } from '@apollo/client';
 import { Jumbotron, Container, Col, Form, Button, Card, CardColumns } from 'react-bootstrap';
 import { SAVE_MESSAGE } from '../utils/mutations';
 import Auth from '../utils/auth';
-import { useMessengerContext } from '../utils/GlobalState';
+import { useMessengerContext } from '../utils/MessengerContext';
 import { GET_USERS } from '../utils/queries';
 
 const SaveMessage = () => {
-
   const [messageInp, setMessageInp] = useState('');
-
   const [saveMessage] = useMutation(SAVE_MESSAGE);
   const {loading, error, data } = useQuery(GET_USERS);
+  const { messageUser } = useMessengerContext();
   
-  const userData = data?.me || {};
-  const msgUsr = useMessengerContext.userMessage;
+
   const currentUserName = localStorage.getItem("id_name");
   let currentUser;
   let sendToUser;
@@ -32,7 +30,7 @@ const SaveMessage = () => {
       const messageToSend = {
         messageFrom: currentUserName,
         messageText: messageInp,
-        messageTo: msgUsr
+        messageTo: messageUser
       };
 
       console.log("In handleSaveMessage, messageToSend: ",messageToSend);
@@ -52,11 +50,11 @@ const SaveMessage = () => {
   currentUser = data.users.find(element => element.username === currentUserName);
   // console.log("currentUser: ", currentUser);
 
-  sendToUser = data.users.find(element => element.username === msgUsr)._id;
+  sendToUser = data.users.find(element => element.username === messageUser)._id;
 
   return (
     <Container>
-      <h2>Leave your message for {msgUsr}</h2>
+      <h2>Leave your message for {messageUser}</h2>
       <Form onSubmit={handleSaveMessage}>
         <Form.Row>
           <Col xs={12} md={8}>
@@ -68,7 +66,7 @@ const SaveMessage = () => {
           </Col>
           <Col xs={12} md={4}>
             <Button type='submit' variant='success' size='lg'>
-              Save message for {msgUsr}
+              Save message for {messageUser}
             </Button>
           </Col>
         </Form.Row>

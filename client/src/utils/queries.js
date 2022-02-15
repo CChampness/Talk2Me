@@ -33,10 +33,6 @@ export const GET_ME = gql`
   }
 `;
 
-// savedMessages {
-//   messageText
-// }
-
 export const GET_USERS = gql`
 {
   users {

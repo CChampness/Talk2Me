@@ -47,6 +47,9 @@ function GetMessages ({ currentPage, handleChange }) {
   // console.log("dateTime: ", utils.dateTime('1644850436776'));
 
   return (
+    !userData.length ?
+    <h3>No messages!</h3>
+    :
     userData.map((msg, ndx) =>
       <div key={ndx} className="card-column">
         <figure className="proj-card">

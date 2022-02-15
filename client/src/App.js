@@ -6,11 +6,7 @@ import {
   createHttpLink,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import { MessengerProvider } from './utils/GlobalState';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-// import SearchBuddies from './pages/SearchBuddies';
-// import SavedBuddies from './pages/SavedBuddies';
-// import Navbar from './components/Navbar';
 
 import Header from './Header';
 import Main from './Main';
@@ -43,20 +39,15 @@ const client = new ApolloClient({
 
 function App() {
   const [currentPage, setCurrentPage] = useState('About');
-  const [loggedIn, setLoggedIn] = useState(false);
   
   return (
     <ApolloProvider client={client}>
       <Router>
-        <div>
-        {/* <MessengerProvider> */}
         <React.Fragment>
           <Header currentPage={currentPage} setCurrentPage={setCurrentPage} />
           <Main currentPage={currentPage} setCurrentPage={setCurrentPage} />
           <Footer />
         </React.Fragment>
-        {/* </MessengerProvider> */}
-        </div>
       </Router>
     </ApolloProvider>
   );

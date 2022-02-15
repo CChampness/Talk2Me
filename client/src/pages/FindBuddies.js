@@ -3,7 +3,7 @@ import { Form, Button, Alert } from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_USERS } from '../utils/queries';
 import { SAVE_BUDDY } from '../utils/mutations';
-import { MessengerProvider } from '../utils/GlobalState';
+import { useMessengerContext } from '../utils/MessengerContext';
 
 const highLightSelected = (cardId) => {
   console.log("highLightSelected, cardId: ", cardId);
@@ -22,6 +22,7 @@ function FindBuddies ({ currentPage, handleChange }) {
   const {loading, error, data } = useQuery(GET_USERS);
   const [saveBuddy] = useMutation(SAVE_BUDDY);
   const [re, setRe] = useState(false);
+  const { messageUser, setMessageUser } = useMessengerContext();
 
   // Step through the list of users and see which ones are in the current user's buddy list.
   useEffect(() => { if (data)
@@ -119,12 +120,12 @@ function FindBuddies ({ currentPage, handleChange }) {
             </a>
           </span>
           <Button
-            // disabled={!(re)}
             type='submit'
             variant='success'
               onClick={() => {
+                console.log("messageUser: ",messageUser);
+                  setMessageUser(user.profile?user.profile.name:user.username)
                   pageChange('SaveMessage');
-                  MessengerProvider(user.profile?user.profile.name:user.username)
                 }}>
             LEAVE MESSAGE FOR {user.profile?user.profile.name:user.username}
           </Button>
@@ -135,10 +136,3 @@ function FindBuddies ({ currentPage, handleChange }) {
 }
 
 export default FindBuddies
-
-{/* <Button
-disabled={!(userFormData.username && userFormData.email && userFormData.password)}
-type='submit'
-variant='success'>
-NEW BUTTON
-</Button> */}
