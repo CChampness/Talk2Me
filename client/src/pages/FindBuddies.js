@@ -3,7 +3,7 @@ import { Form, Button, Alert } from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_USERS } from '../utils/queries';
 import { SAVE_BUDDY } from '../utils/mutations';
-import { useMessengerContext } from '../utils/MessengerContext';
+import { useGlobalContext } from '../utils/GlobalContext';
 
 const highLightSelected = (cardId) => {
   console.log("highLightSelected, cardId: ", cardId);
@@ -22,7 +22,7 @@ function FindBuddies ({ currentPage, handleChange }) {
   const {loading, error, data } = useQuery(GET_USERS);
   const [saveBuddy] = useMutation(SAVE_BUDDY);
   const [re, setRe] = useState(false);
-  const { messageUser, setMessageUser } = useMessengerContext();
+  const { messageUser, setMessageUser, loggedInUser } = useGlobalContext();
 
   // Step through the list of users and see which ones are in the current user's buddy list.
   useEffect(() => { if (data)
@@ -30,7 +30,7 @@ function FindBuddies ({ currentPage, handleChange }) {
   },[re]);
     
   const currentUserName = localStorage.getItem("id_name");
-
+  
   const isAlreadyBuddy = (currentUser, user) => {
     console.log("isAlreadyBuddy? user.username: ",user.username);
     console.log("currentUser: ",currentUser);
@@ -65,6 +65,7 @@ function FindBuddies ({ currentPage, handleChange }) {
   if (error) return <h4>Error! {error.message}</h4>;
   // data.users is the array of all users in the database
   console.log("data: ",data, loading);
+  console.log("currentUserName: ",currentUserName);
 
   const currentUser = data.users.find(element => element.username === currentUserName);
   console.log("currentUser: ", currentUser);

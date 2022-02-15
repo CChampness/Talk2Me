@@ -4,7 +4,6 @@ import { useQuery, useMutation } from '@apollo/client';
 import { utils } from '../utils/dateFormat';
 import { GET_ME } from '../utils/queries';
 import { DELETE_MESSAGE } from '../utils/mutations';
-// import { MessengerProvider } from '../utils/GlobalState';
 
 // The state gets changed in the Nav component
 function GetMessages ({ currentPage, handleChange }) {

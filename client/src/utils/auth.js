@@ -26,16 +26,18 @@ class AuthService {
       return false;
     }
   }
-
+  
   getToken() {
     // Retrieves the user token from localStorage
     return localStorage.getItem('id_token');
   }
-
+  
   login(idToken, username) {
     // Saves user token to localStorage
     localStorage.setItem('id_token', idToken);
     localStorage.setItem('id_name', username);
+    console.log("login username: ", username);
+    
     const doc = document.getElementById("headerMsg");
     console.log("doc: ", doc);
 

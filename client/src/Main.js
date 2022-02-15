@@ -7,7 +7,7 @@ import FindBuddies from './pages/FindBuddies';
 import SaveMessage from './pages/SaveMessage';
 import GetMessages from './pages/GetMessages';
 import CreateProfile from './pages/CreateProfile';
-import { MessengerProvider } from './utils/MessengerContext';
+import { GlobalProvider } from './utils/GlobalContext';
 
 
 function Main({ currentPage, setCurrentPage}) {
@@ -46,9 +46,9 @@ function Main({ currentPage, setCurrentPage}) {
     <main>
       <>
         <hr/>
-        <MessengerProvider>
+        <GlobalProvider>
           {renderPage()}
-        </MessengerProvider>
+        </GlobalProvider>
       </>
     </main>
   );

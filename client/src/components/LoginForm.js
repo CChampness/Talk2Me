@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
 import { Form, Button, Alert } from 'react-bootstrap';
+import { useGlobalContext } from '../utils/GlobalContext';
+
 
 import Auth from '../utils/auth';
 
@@ -11,6 +13,8 @@ const LoginForm = () => {
   const [validated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [loginUser, { error, data }] = useMutation(LOGIN_USER);
+  const { loggedInUser, setLoggedInUser } = useGlobalContext();
+
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -36,6 +40,8 @@ const LoginForm = () => {
       console.error(err);
       setShowAlert(true);
     }
+
+    setLoggedInUser(data.loginUser.user.username);
 
     setUserFormData({
       email: '',

@@ -21,11 +21,24 @@ function Nav({ currentPage, handlePageChange }) {
         <a onClick={() => handlePageChange('CreateProfile')}>Profile</a>
         <a onClick={() => handlePageChange('FindBuddies')}>Buddies</a>
         <a onClick={() => handlePageChange('GetMessages')}>Messages</a>
-        <a onClick={() => handlePageChange('SignupForm')}>Signup</a>
-        <a onClick={() => handlePageChange('LoginForm')}>Login</a>
+
+        <div>
+          {Auth.loggedIn() ? (
+          <>
+              {Auth.getProfile().data.username}'s profile
+              <a onClick={() => Auth.logout()}>Logout</a>
+          </>
+          ) : (
+          <>
+            <a onClick={() => handlePageChange('LoginForm')}>Login</a>
+            <a onClick={() => handlePageChange('SignupForm')}>Signup</a>
+          </>
+          )}
+        </div>
       </nav>
     )
   // }
 }
 
 export default Nav;
+

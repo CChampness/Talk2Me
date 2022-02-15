@@ -3,17 +3,18 @@ import { useMutation, useQuery } from '@apollo/client';
 import { Jumbotron, Container, Col, Form, Button, Card, CardColumns } from 'react-bootstrap';
 import { SAVE_MESSAGE } from '../utils/mutations';
 import Auth from '../utils/auth';
-import { useMessengerContext } from '../utils/MessengerContext';
+import { useGlobalContext } from '../utils/GlobalContext';
 import { GET_USERS } from '../utils/queries';
 
 const SaveMessage = () => {
   const [messageInp, setMessageInp] = useState('');
   const [saveMessage] = useMutation(SAVE_MESSAGE);
   const {loading, error, data } = useQuery(GET_USERS);
-  const { messageUser } = useMessengerContext();
+  const { messageUser, loggedInUser } = useGlobalContext();
   
 
   const currentUserName = localStorage.getItem("id_name");
+  console.log("currentUserName: ",currentUserName);
   let currentUser;
   let sendToUser;
     // create function to handle saving the profile to the database
