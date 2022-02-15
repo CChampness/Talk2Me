@@ -35,7 +35,7 @@ class AuthService {
   login(idToken, username) {
     // Saves user token to localStorage
     localStorage.setItem('id_token', idToken);
-    localStorage.setItem('id_name', username);
+    // localStorage.setItem('id_name', username);
     console.log("login username: ", username);
     
     const doc = document.getElementById("headerMsg");
@@ -48,7 +48,7 @@ class AuthService {
   logout() {
     // Clear user token and profile data from localStorage
     localStorage.removeItem('id_token');
-    localStorage.removeItem('id_name');
+    // localStorage.removeItem('id_name');
     // this will reload the page and reset the state of the application
     window.location.assign('/');
   }

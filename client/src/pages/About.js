@@ -1,4 +1,5 @@
 import React from 'react';
+import Auth from '../utils/auth';
 
 function About({ currentPage, handleChange }) {
   // const pageChange = (page) => handleChange(page);
@@ -6,7 +7,7 @@ function About({ currentPage, handleChange }) {
     <div className="Aboutdiv">
       <h3>About Talk2Me</h3>
       <article id="about" className="imageArticle">
-        <h4>Welcome to Talk2Me</h4>
+        <h4>Welcome to Talk2Me,  {Auth.getProfile().data.username}</h4>
         {/* <img className="textwrap-img" src="./MHC.jpg" alt="Profile photo" /> */}
         <p>
           Welcome to your language-learning quest!

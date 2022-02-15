@@ -13,8 +13,7 @@ const SaveMessage = () => {
   const { messageUser, loggedInUser } = useGlobalContext();
   
 
-  const currentUserName = localStorage.getItem("id_name");
-  console.log("currentUserName: ",currentUserName);
+  let currentUserName;
   let currentUser;
   let sendToUser;
     // create function to handle saving the profile to the database
@@ -47,6 +46,8 @@ const SaveMessage = () => {
   if (loading) return <h4>Loading...</h4>;
   if (error) return <h4>Error! {error.message}</h4>;
   // data.users is the array of all users in the database
+  currentUserName = Auth.getProfile().data.username;
+
 
   currentUser = data.users.find(element => element.username === currentUserName);
   // console.log("currentUser: ", currentUser);

@@ -3,6 +3,7 @@ import { Form, Button, Alert } from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_USERS } from '../utils/queries';
 import { SAVE_BUDDY } from '../utils/mutations';
+import Auth from '../utils/auth';
 import { useGlobalContext } from '../utils/GlobalContext';
 
 const highLightSelected = (cardId) => {
@@ -12,8 +13,6 @@ const highLightSelected = (cardId) => {
   if (element) {
     element.childNodes[0].childNodes[0].classList.add("boxHighlight");
   }
-  // TBD: Add a button for leaving a message (starting a chat)
-  // <a >Check this out</a>
 }
 
 // The state gets changed in the Nav component
@@ -22,15 +21,13 @@ function FindBuddies ({ currentPage, handleChange }) {
   const {loading, error, data } = useQuery(GET_USERS);
   const [saveBuddy] = useMutation(SAVE_BUDDY);
   const [re, setRe] = useState(false);
-  const { messageUser, setMessageUser, loggedInUser } = useGlobalContext();
+  const { setMessageUser } = useGlobalContext();
 
   // Step through the list of users and see which ones are in the current user's buddy list.
   useEffect(() => { if (data)
     data.users.map((user) => isAlreadyBuddy(currentUser, user) ? highLightSelected(user.username):null);
   },[re]);
     
-  const currentUserName = localStorage.getItem("id_name");
-  
   const isAlreadyBuddy = (currentUser, user) => {
     console.log("isAlreadyBuddy? user.username: ",user.username);
     console.log("currentUser: ",currentUser);
@@ -41,8 +38,6 @@ function FindBuddies ({ currentPage, handleChange }) {
   
   // This function saves selected buddies to the current user's buddy list
   const handleSaveBuddy = async (username) => {
-    console.log("username: ", username);
-
     try {
       const buddyToSave = {
         buddyId: username
@@ -64,6 +59,7 @@ function FindBuddies ({ currentPage, handleChange }) {
   if (loading) return <h4>Loading...</h4>;
   if (error) return <h4>Error! {error.message}</h4>;
   // data.users is the array of all users in the database
+  const currentUserName = Auth.getProfile().data.username;
   console.log("data: ",data, loading);
   console.log("currentUserName: ",currentUserName);
 
@@ -124,7 +120,6 @@ function FindBuddies ({ currentPage, handleChange }) {
             type='submit'
             variant='success'
               onClick={() => {
-                console.log("messageUser: ",messageUser);
                   setMessageUser(user.profile?user.profile.name:user.username)
                   pageChange('SaveMessage');
                 }}>

@@ -21,9 +21,6 @@ const CreateProfile = () => {
   const [contactInfoInp, setContactInfoInp] = useState('');
   const {loading, error, data } = useQuery(GET_ME);
 
-  console.log("data: ",data);
-  const userData = data?.me || {};
-
   const [saveProfile] = useMutation(SAVE_PROFILE);
 
   // create function to handle saving the profile to the database
@@ -57,9 +54,6 @@ const CreateProfile = () => {
         variables: { profileData: profileToSave },
       });
 
-      // if buddy successfully saves to user's account, save buddy id
-      // to state
-      // setSavedBuddyIds([...savedBuddyIds, buddyToSave.buddyId]);
     } catch (err) {
       console.error(err);
     }
@@ -69,7 +63,6 @@ const CreateProfile = () => {
   if (error) return <h4>Error! {error.message}</h4>;
 
   // set the placeholders to be the values from the query (if any)
-  console.log("userData: ",userData);
   const prof = data.me.profile;
     
   const namePlaceholder = (prof&&prof.name)?prof.name:'What is your name?'
@@ -85,34 +78,20 @@ const CreateProfile = () => {
   const countryNowPlaceholder = (prof&&prof.countryNow)?prof.countryNow:'What country are you in now?'
   const contactInfoPlaceholder = (prof&&prof.contactInfo)?prof.contactInfo:'What is your contact information?'
 
-  // let nameAttr;
-  // if (prof.name) {nameAttr = prof.name} else {nameAttr = nameInp};
-  // if (prof.interests) setInterestsInp(prof.interests);
-  // if (prof.language) setNameInp(prof.name); languageInp,
-  // if (prof.readingLevel) setNameInp(prof.name); readingLevelInp,
-  // if (prof.writingLevel) setNameInp(prof.name); writingLevelInp,
-  // if (prof.grammarLevel) setNameInp(prof.name); grammarLevelInp,
-  // if (prof.pronunciationLevel) setNameInp(prof.name); pronunciationLevelInp,
-  // if (prof.sex) setNameInp(prof.name); sexInp,
-  // if (prof.age) setNameInp(prof.name); ageInp,
-  // if (prof.countryFrom) setNameInp(prof.name); countryFromInp,
-  // if (prof.countryNow) setNameInp(prof.name); countryNowInp,
-  // if (prof.contactInfo) setNameInp(prof.name); contactInfoInp
-
   return (
     <Container>
-      <h2>My profile</h2>
+      <h2>Profile for {Auth.getProfile().data.username}</h2>
       <Form onSubmit={handleSaveProfile}>
         <Form.Row>
           <Col xs={12} md={8}>
             <Form.Control
               name='name'
               id='name'
-              value={nameInp}
+              value={Auth.getProfile().data.username}
               onChange={(e) => setNameInp(e.target.value)}
               type='text'
               size='lg'
-              placeholder={namePlaceholder}
+              placeholder={Auth.getProfile().data.username}
             />
           </Col>
           <Col xs={12} md={8}>
