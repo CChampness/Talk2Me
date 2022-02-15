@@ -5,7 +5,6 @@ const { signToken } = require('../utils/auth');
 const resolvers = {
   Query: {
     me: async (parent, args, context) => {
-      console.log("resolvers Query getMe");
       if (context.user) {
         const userData = await User.findOne({ _id: context.user._id });
         return userData;
@@ -14,7 +13,6 @@ const resolvers = {
     },
 
     users: async (parent, args, context) => {
-      console.log("resolvers Query getUsers");
       if (context.user) {
         const userData = await User.find();
         return userData;
@@ -27,13 +25,11 @@ const resolvers = {
     addUser: async (parent, { username, email, password }) => {
       const user = await User.create({ username, email, password });
       const token = signToken(user);
-      console.log("User is sirned up and logged in: ", user.username);
       return { token, user };
     },
 
     loginUser: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
-      console.log("loginUser Mutation, user: ", user);
 
       if (!user) {
         throw new AuthenticationError('No user found with this email address');
@@ -46,14 +42,11 @@ const resolvers = {
       }
 
       const token = signToken(user);
-      console.log("User logged in: ", user.username);
 
       return { token, user };
     },
 
     saveBuddy: async (parent, { buddyData }, context) => {
-      console.log("saveBuddy for user: ", context.user);
-      console.log("buddyData: ", buddyData);
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
@@ -61,18 +54,12 @@ const resolvers = {
           {new: true}
         );
 
-        console.log("saveBuddy updatedUser: ", updatedUser);
-
         return updatedUser;
       }
       throw new AuthenticationError('You need to be logged in!');
     },
     
     saveMessage: async (parent, { messageData }, context) => {
-      console.log("send Message from user: ", context.user);
-      console.log("messageTo: ", messageData.messageTo);
-      console.log("messageText: ", messageData.messageText);
-      console.log("messageFrom: ", messageData.messageFrom);
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
           // { _id: context.user._id },
@@ -81,20 +68,12 @@ const resolvers = {
           {new: true}
         );
 
-        console.log("saveMessage updatedUser: ", updatedUser);
-
         return updatedUser;
       }
       throw new AuthenticationError('You need to be logged in!');
     },
 
     deleteMessage: async (parent, { messageData }, context) => {
-      console.log("resolver deleteMessage: ", messageData)
-      console.log("delete Message from user: ", context.user);
-      // console.log("message _id: ", messageData._id);
-      // console.log("messageTo: ", messageData.messageTo);
-      // console.log("messageText: ", messageData.messageText);
-      // console.log("messageFrom: ", messageData.messageFrom);
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
@@ -106,15 +85,12 @@ const resolvers = {
     },
     
     saveProfile: async (parent, { profileData }, context) => {
-      console.log("saveProfile Mutation for user: ", profileData);
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
           { profile: profileData },
           {new: true}
         );
-
-        console.log("saveProfile updatedUser: ", updatedUser);
 
         return updatedUser;
       }

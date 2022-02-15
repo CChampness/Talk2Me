@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
-import { Jumbotron, Container, Col, Form, Button, Card, CardColumns } from 'react-bootstrap';
+import { Container, Col, Form, Button } from 'react-bootstrap';
 import { SAVE_MESSAGE } from '../utils/mutations';
 import Auth from '../utils/auth';
 import { useGlobalContext } from '../utils/GlobalContext';
@@ -10,12 +10,12 @@ const SaveMessage = () => {
   const [messageInp, setMessageInp] = useState('');
   const [saveMessage] = useMutation(SAVE_MESSAGE);
   const {loading, error, data } = useQuery(GET_USERS);
-  const { messageUser, loggedInUser } = useGlobalContext();
+  const { messageUser } = useGlobalContext();
   
 
   let currentUserName;
-  let currentUser;
-  let sendToUser;
+  // let currentUser;
+  // let sendToUser;
     // create function to handle saving the profile to the database
   const handleSaveMessage = async () => {
 
@@ -49,10 +49,10 @@ const SaveMessage = () => {
   currentUserName = Auth.getProfile().data.username;
 
 
-  currentUser = data.users.find(element => element.username === currentUserName);
-  // console.log("currentUser: ", currentUser);
+  // currentUser = data.users.find(element => element.username === currentUserName);
+  // // console.log("currentUser: ", currentUser);
 
-  sendToUser = data.users.find(element => element.username === messageUser)._id;
+  // sendToUser = data.users.find(element => element.username === messageUser)._id;
 
   return (
     <Container>
