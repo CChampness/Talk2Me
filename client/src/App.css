@@ -344,15 +344,15 @@ span[data-descr] {
 span[data-descr]:hover::after,
 span[data-descr]:focus::after {
   margin: auto;
-  content: "Click to select";
+  content: "Click to select as a new conversation buddy!";
   position: absolute;
   left: 120px;
   top: 1px;
   min-width: 50px;
-  height: 10px;
+  min-height: 25px;
   border: 1px #aaaaaa solid;
   background-color: var(--dark-blue-green);
-  padding: 15px;
+  padding: 1px;
   color: white;
   z-index: 1;
 }

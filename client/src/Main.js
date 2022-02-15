@@ -48,6 +48,7 @@ function Main({ currentPage, setCurrentPage}) {
     <main>
       <>
         <hr/>
+        <br/>
         <GlobalProvider>
           {renderPage()}
         </GlobalProvider>
