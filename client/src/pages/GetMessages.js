@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { Form, Button, Alert } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
 import { utils } from '../utils/dateFormat';
 import { GET_ME } from '../utils/queries';
@@ -42,7 +42,6 @@ function GetMessages ({ currentPage, handleChange }) {
   if (loading) return <h4>Loading...</h4>;
   if (error) return <h4>Error! {error.message}</h4>;
   // data.users is the array of all users in the database
-  console.log("data: ",data, loading);
   // console.log("dateTime: ", utils.dateTime('1644850436776'));
 
   return (

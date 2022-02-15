@@ -7,9 +7,7 @@ import Auth from '../utils/auth';
 import { useGlobalContext } from '../utils/GlobalContext';
 
 const highLightSelected = (cardId) => {
-  console.log("highLightSelected, cardId: ", cardId);
   let element = document.getElementById(cardId);
-  console.log("element: ",element);
   if (element) {
     element.childNodes[0].childNodes[0].classList.add("boxHighlight");
   }
@@ -29,10 +27,7 @@ function FindBuddies ({ currentPage, handleChange }) {
   },[re]);
     
   const isAlreadyBuddy = (currentUser, user) => {
-    console.log("isAlreadyBuddy? user.username: ",user.username);
-    console.log("currentUser: ",currentUser);
     const found = currentUser.savedBuddies.find(element => element.buddyId === user.username);
-    console.log("found: ", found);
     return found;
   }
   
@@ -43,7 +38,6 @@ function FindBuddies ({ currentPage, handleChange }) {
         buddyId: username
       };
 
-      console.log("In handleSaveBuddy, buddyToSave: ",buddyToSave);
       const {result} = await saveBuddy({
         variables: { buddyData: buddyToSave },
       });
@@ -60,11 +54,8 @@ function FindBuddies ({ currentPage, handleChange }) {
   if (error) return <h4>Error! {error.message}</h4>;
   // data.users is the array of all users in the database
   const currentUserName = Auth.getProfile().data.username;
-  console.log("data: ",data, loading);
-  console.log("currentUserName: ",currentUserName);
 
   const currentUser = data.users.find(element => element.username === currentUserName);
-  console.log("currentUser: ", currentUser);
   data.users.map((user) => isAlreadyBuddy(currentUser, user) ? highLightSelected(user.username):null);
 
   return (

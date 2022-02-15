@@ -37,6 +37,8 @@ function Main({ currentPage, setCurrentPage}) {
             <GetMessages />
           </section>
         );
+      case 'Resume':
+        return <Resume />;
       default:
         return <About />
     }

@@ -1,13 +1,14 @@
 import React from 'react';
+import { Button } from 'react-bootstrap';
 import Auth from '../utils/auth';
 
 function About({ currentPage, handleChange }) {
-  // const pageChange = (page) => handleChange(page);
+  const pageChange = (page) => handleChange(page);
   return (
     <div className="Aboutdiv">
       <h3>About Talk2Me</h3>
       <article id="about" className="imageArticle">
-        <h4>Welcome to Talk2Me,  {Auth.getProfile().data.username}</h4>
+        <h4>Welcome to Talk2Me,  {Auth.loggedIn() ? Auth.getProfile().data.username: "please Login or Signup"}</h4>
         {/* <img className="textwrap-img" src="./MHC.jpg" alt="Profile photo" /> */}
         <p>
           Welcome to your language-learning quest!
@@ -21,7 +22,14 @@ function About({ currentPage, handleChange }) {
         <p>
           A language-learning coach is ...
         </p>
-        {/* <a href={pageChange('Resume')}><h4>About Coach Miriam</h4></a> */}
+        <Button
+            type='submit'
+            variant='success'
+              onClick={() => {
+                  pageChange('Resume');
+                }}>
+            About Coach Miriam
+          </Button>
       </article>
     </div>
   );
