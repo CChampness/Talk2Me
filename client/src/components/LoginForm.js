@@ -36,17 +36,16 @@ const LoginForm = () => {
       
       console.log("data: ", data);
       Auth.login(data.loginUser.token, data.loginUser.user.username);
+      setLoggedInUser(data.loginUser.user.username);
+
+      setUserFormData({
+        email: '',
+        password: '',
+      });
     } catch (err) {
       console.error(err);
       setShowAlert(true);
     }
-
-    setLoggedInUser(data.loginUser.user.username);
-
-    setUserFormData({
-      email: '',
-      password: '',
-    });
   };
 
   return (

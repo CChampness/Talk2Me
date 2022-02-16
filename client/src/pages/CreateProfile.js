@@ -6,8 +6,7 @@ import { GET_ME } from '../utils/queries';
 import Auth from '../utils/auth';
 
 const CreateProfile = () => {
-  // create state for holding our search field data
-  // const [nameInp, setNameInp] = useState('');
+  // create states for holding our search field data
   const [interestsInp, setInterestsInp] = useState('');
   const [languageInp, setLanguageInp] = useState('');
   const [readingLevelInp, setReadingLevelInp] = useState('');
@@ -36,7 +35,6 @@ const CreateProfile = () => {
 
     try {
       const profileToSave = {
-        // name: nameInp,
         interests: interestsInp,
         language: languageInp,
         readingLevel: readingLevelInp,
@@ -85,17 +83,6 @@ const CreateProfile = () => {
       <h2>Profile for {Auth.getProfile().data.username}</h2>
       <Form onSubmit={handleSaveProfile}>
         <Form.Row>
-          {/* <Col xs={12} md={8}>
-            <Form.Control
-              name='name'
-              id='name'
-              value={Auth.getProfile().data.username}
-              onChange={(e) => setNameInp(e.target.value)}
-              type='text'
-              size='lg'
-              placeholder={Auth.getProfile().data.username}
-            />
-          </Col> */}
           <Col xs={12} md={8}>
             <Form.Control
               name='interests'

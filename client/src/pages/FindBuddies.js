@@ -69,7 +69,6 @@ function FindBuddies ({ currentPage, handleChange }) {
         <figure className="proj-card">
           <span data-descr>
             <a onClick={() => handleSaveBuddy(user.username)}>
-              {/* <h4 className="card-title">{user.profile?user.profile.name:user.username}</h4> */}
               <h4 className="card-title">{user.username}</h4>
               <table><tbody>
                 <tr>
@@ -115,7 +114,6 @@ function FindBuddies ({ currentPage, handleChange }) {
             type='submit'
             variant='success'
               onClick={() => {
-                  // setMessageUser(user.profile?user.profile.name:user.username)
                   setMessageUser(user.username)
                   pageChange('SaveMessage');
                 }}>

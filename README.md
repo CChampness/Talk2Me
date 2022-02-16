@@ -1,126 +1,126 @@
 # Talk2Me
-Language practice site for linguaphiles to find one another, practice, and share resources.
+This is a language practice site to help linguaphiles to find one another, 
+make opportunities for conversation practice, and to share resources.
+
+## User perspective
+```
+At a time when large numbers of smart, ambitious people around the globe are
+entering career fields in science and technology, there is one spoken language
+that serves as the essential common mode of communication for people from all
+countries and cultures.  That language is, of course, English.
+
+To be able to communicate effectively in a language, one must be able to use
+phrases unambiguously, with accurate usage of denotation, connotation, and idiom
+to avoid cross-communication.
+
+The only way to achieve this is by practice.  For most, the trickiest thing
+is finding conversation partners.  On this app, we hope to simpify the search.
+```
+## Motivation
+```
+Many second-language speakers of English have learned the language by studying
+it in classes and textbooks before experiencing everyday conversation in a
+country where English is spoken.
+
+Speaking and understanding spoken language
+uses a different part of the brain from that used in studying,
+reading, and writing.  That part of the brain uses "declarative"
+memory, the "dictionary" part of the brain.  Unfortunately, it
+is not easily available to the speaker during conversation, which accounts for the
+difficulty of transitioning to live conversation after years of studying, reading,
+and writing the language.
+
+The intention for this site is to help language lovers improve their conversational
+fluency by practice with native speakers of English as well as other English learners.
+
+The purpose of conversation is to share ideas and experiences.  Let's focus on that!
+```
+
+## Menu options:
+### Home
+* How to use the site
+### Profile
+* User creates a profile with background, interests, and contact information
+### Buddies
+* User can find language conversation buddies and send text messages
+### Messages
+* User can read messages that have been recieved
+### Signup, Login, Logout
 
 ## Home page appearance (before signup)
-* Nav bar:
-```
- - Signup / Login
- - About
- - Link to The Professor's latest blog post
- ```
-* Main section:
-```
- - Photo of The Professor
- - Bio of The Professor  
-```
-* Footer:
-```
- - Contact info
-```
+![](./Assets/Home-page.png)
 
 ## Signup page
-```
-- Username
-- email
-- password
-- profile details (these are all optional, but to whatever extent
-                   the user wants to participate, some or most are needed)
--- Interests
--- Language(s)
--- Mastery levels
---- Checklist of skills 
----- Reading level
----- Writing level
----- Grammar level
----- Pronunciation
----- etc.
--- Sex
--- Age
--- Country of origin
--- Country of current residence
--- Photo
--- Contact info
--- Visibility (each of the above fields are selected to be either
-               visible or not)
-```
+![](./Assets/Signup-page.png)
 
 ## Home page appearance (while logged in)
-* Nav bar:
-```
- - Link to display all other users' profiles who have selected to be visible
- - Link to The Professor's latest blog post
- - Link to language resources that users are sharing
- - Logout
- - About
- ```
+![](./Assets/LoggedIn-page.png)
 
-* Main section:
+## Mongodb Database under Apollo GraphQL
 ```
- - When selected, display list of users who have made their profiles visible
- - Each user's name is shown on a display card with whatever info they have
-   made visible.
- - Each user's display card has a button to click so the logged-in current
-   user can invite them to be a "Language Buddy" if desired.
- -- Select type of communication:
- --- onboard text
- --- onboard live chat (TBD)
- --- email
- --- phone
- --- skype
- --- zoom
- - Each user's display card has a text entry form so the logged-in current
-   user can send them an on-board text message if desired.
----------------------------------------------------------------------------
- - When selected, display list of language resources that users are sharing
-```
-* Footer:
-```
- - Contact info
-```
-
-## Mongodb Database
-```
-const typeDefs = gql`
   type User {
     _id: ID
     username: String
     email: String
-    myProfile: [Profile]
-    savedBuddies: [User]
+    profile: Profile
+    savedBuddies: [Buddy]!
+    savedMessages: [Message]!
+  }
+
+  type Message {
+    _id: ID
+    messageTo: String
+    messageText: String
+    messageFrom: String
+    createdAt: String
+  }
+
+  input MessageInput {
+    _id: ID
+    messageTo: String
+    messageText: String
+    messageFrom: String
+    createdAt: String
+  }
+
+  type Buddy {
+    buddyId: String
+  }
+
+  input BuddyInput {
+    buddyId: String
   }
 
   type Profile {
-    profileId: ID
-    interests: [String]
-    languages: [String]
+    name: String
+    interests: String
+    language: String
     readingLevel: String
     writingLevel: String
     grammarLevel: String
-    pronunciation: String
+    pronunciationLevel: String
     sex: String
     age: String
-    countryOfOrigin: String
-    countryOfCurrentResidence: String
-    photoLink: String
+    countryFrom: String
+    countryNow: String
     contactInfo: String
-    visibility: Boolean
+    resources: String
   }
 
   input ProfileInput {
-    profileId: ID
-    interests: [String]
-    languages: [String]
+    name: String
+    interests: String
+    language: String
     readingLevel: String
     writingLevel: String
     grammarLevel: String
-    pronunciation: String
+    pronunciationLevel: String
     sex: String
     age: String
-    countryOfOrigin: String
-    countryOfCurrentResidence: String
-    photoLink: String
+    countryFrom: String
+    countryNow: String
     contactInfo: String
-    visibility: Boolean
+    resources: String
   }
 
   type Auth {
@@ -130,34 +130,25 @@ const typeDefs = gql`
 
   type Query {
     me: User
+    users: [User]!
   }
 
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     loginUser(email: String!, password: String!): Auth
-    createProfile(profileData: ProfileInput!): User
-    saveBuddylist(profileData: ProfileInput!): User
-    removeBuddylist(profileId: ID!): User
+    saveProfile(profileData: ProfileInput!): User
+    saveBuddy(buddyData: BuddyInput!): User
+    saveMessage(messageData: MessageInput!): User
+    deleteMessage(messageData: MessageInput!): User
+    removeBuddy(buddyId: String!): User
   }
 ```
-
-
-
-## Main menu dropdown options:
-* Language buddies
-* Resources
-* Meetup groups
-* Text chat
-* Login & logout
-
-## Sketch
-![](Assets/Talk2Me.jpg)
 
 ## Technologies
 * MERN Stack
 * Single-Page
 * React
-* GraphQL
+* Apollo GraphQL
 * Node.js
 * Express.js
 * MongoDB
@@ -168,13 +159,21 @@ const typeDefs = gql`
 * Interactive
 * Authentication (JWT)
 * Protects sensitive API key info
-* Integrate the Stripe payment platform
-* PWA
-###### Web manifest
-###### Service worker
-###### Installable
+* Components from react-bootstrap: Container, Form, and Button
 
-## ![Photo](./client/public/MHC.jpg)
+## Challenges and successes
+* React and GraphQL
+* It appears that it will serve a vital need in the real world
+
+## Future development
+* Page for resources
+* Consider adding a live text chat feature
+* Consider adding a video chat feature
+* Progressive Web App
+
+## [Repository](https://github.com/CChampness/Talk2Me)
 
 ## [Deployment](https://lit-shelf-69294.herokuapp.com/)
+
+## ![Photo](./client/public/MHC.jpg)
 

@@ -19,7 +19,11 @@ function About({ currentPage, handleChange }) {
       <article>
         <h4>What is a language-learning coach?</h4>
         <p>
-          A language-learning coach is ...
+          A language-learning coach is a conversation practice partner who can make interesting suggestions for improving
+          your grasp of everyday English.
+        </p>
+        <p>
+          She is a native speaker you can depend on for useful feedback.
         </p>
         <Button
             type='submit'
