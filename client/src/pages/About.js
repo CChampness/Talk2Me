@@ -11,10 +11,25 @@ function About({ currentPage, handleChange }) {
         <h4>Welcome to Talk2Me,  {Auth.loggedIn() ? Auth.getProfile().data.username: "please join us ... Login or Signup"}</h4>
         <p>
           Welcome to your language-learning quest!
-        </p><p>
-          Talk2Me is a language practice site for linguaphiles to find one another,
-          practice conversation, and share resources.
         </p>
+        <p>
+          Talk2Me is a language practice site for linguaphiles to find one another,
+          practice conversation, and share resources. You can use this site to find other
+          lovers of language learning who will be happy to share conversation practice with you.
+        </p>
+        <p>
+          With the <b>Profile</b> option you can share any interesting information about yourself that will help 
+          others who may have shared interests to find you for conversation practice.
+        </p>
+        <p>
+          With the <b>Buddies</b> option you can find others with whom you may have interests in common.
+          You can select any one as a "buddy" and leave messages for them.  Use this feature to set up
+          meeting times for conversation on your favorite video chat platform, such as Zoom.
+        </p>
+        <p>
+          With the <b>Messages</b> option you can see all of the messages that others have left for you.
+        </p>
+
       </article>
       <article>
         <h4>What is a language-learning coach?</h4>

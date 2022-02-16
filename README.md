@@ -166,6 +166,7 @@ The purpose of conversation is to share ideas and experiences.  Let's focus on t
 * It appears that it will serve a vital need in the real world
 
 ## Future development
+* Filter to select by profile fields
 * Page for resources
 * Consider adding a live text chat feature
 * Consider adding a video chat feature
@@ -174,6 +175,4 @@ The purpose of conversation is to share ideas and experiences.  Let's focus on t
 ## [Repository](https://github.com/CChampness/Talk2Me)
 
 ## [Deployment](https://lit-shelf-69294.herokuapp.com/)
-
-## ![Photo](./client/public/MHC.jpg)
 
