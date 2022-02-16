@@ -67,7 +67,6 @@ const CreateProfile = () => {
   // set the placeholders to be the values from the query (if any)
   const prof = data.me.profile;
     
-  // const namePlaceholder = (prof&&prof.name)?prof.name:'What is your name?'
   const interestsPlaceholder = (prof&&prof.interests)?prof.interests:'What are your main interests?'
   const languagePlaceholder = (prof&&prof.language)?prof.language:'What langage are you practicing?'
   const readingLevelPlaceholder = (prof&&prof.readingLevel)?prof.readingLevel:'What is your reading level?'
