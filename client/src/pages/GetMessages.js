@@ -24,7 +24,9 @@ function GetMessages ({ currentPage, handleChange }) {
         _id: message._id
       };
 
+      // await deleteMessage({
       const {result} = await deleteMessage({
+ 
         variables: { messageData: messageToDelete },
       });
 

@@ -24,6 +24,15 @@ export const ADD_USER = gql`
   }
 `;
 
+export const DELETE_USER = gql`
+  mutation deleteUser($username: String!) {
+    deleteUser(username: $username) {
+      username
+    }
+  }
+`;
+
+
 export const SAVE_BUDDY = gql`
   mutation saveBuddy($buddyData: BuddyInput!) {
     saveBuddy(buddyData: $buddyData) {

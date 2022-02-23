@@ -1,18 +1,11 @@
-import React, { useState } from 'react';
-// import { useMutation, useQuery } from '@apollo/client';
+import React from 'react';
 import Nav from './Nav';
-// import { GET_ME } from './utils/queries';
 
 function Header({ currentPage, setCurrentPage }) {
-  // const {loading, error, data } = useQuery(GET_ME);
-
 
   const handlePageChange = (page) => {
     setCurrentPage(page)
   };
-
-  // if (loading) return <h4>Loading...</h4>;
-  // if (error) return <h4>Error! {error.message}</h4>;
 
   return (
     <header>

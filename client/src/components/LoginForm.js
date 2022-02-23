@@ -4,16 +4,15 @@ import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { useGlobalContext } from '../utils/GlobalContext';
-
-
 import Auth from '../utils/auth';
 
-const LoginForm = () => {
+const LoginForm = ({ currentPage, handleChange }) => {
+  const pageChange = (page) => handleChange(page);
   const [userFormData, setUserFormData] = useState({ email: '', password: '' });
   const [validated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
-  const [loginUser, { error, data }] = useMutation(LOGIN_USER);
-  const { loggedInUser, setLoggedInUser } = useGlobalContext();
+  const [loginUser] = useMutation(LOGIN_USER);
+  const { setLoggedInUser } = useGlobalContext();
 
 
   const handleInputChange = (event) => {
@@ -31,12 +30,14 @@ const LoginForm = () => {
       event.stopPropagation();
     }
 
+    let username;
     try {
       const {data} = await loginUser({variables: {...userFormData}});
       
       console.log("data: ", data);
       Auth.login(data.loginUser.token, data.loginUser.user.username);
       setLoggedInUser(data.loginUser.user.username);
+      username = data.loginUser.user.username;
 
       setUserFormData({
         email: '',
@@ -45,6 +46,11 @@ const LoginForm = () => {
     } catch (err) {
       console.error(err);
       setShowAlert(true);
+    }
+
+    if (username === 'ADMIN') {
+      console.log("ADMIN");
+      pageChange('Admin');
     }
   };
 
@@ -55,6 +61,7 @@ const LoginForm = () => {
           Something went wrong with your login credentials!
         </Alert>
         <Form.Group>
+
           <Form.Label htmlFor='email'>Email</Form.Label>
           <Form.Control
             type='text'

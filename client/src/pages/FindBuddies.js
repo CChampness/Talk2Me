@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { Form, Button, Alert } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_USERS } from '../utils/queries';
 import { SAVE_BUDDY } from '../utils/mutations';
@@ -24,8 +24,10 @@ function FindBuddies ({ currentPage, handleChange }) {
   // Step through the list of users and see which ones are in the current user's buddy list.
   useEffect(() => { if (data)
     data.users.map((user) => isAlreadyBuddy(currentUser, user) ? highLightSelected(user.username):null);
-  },[currentUserName]);
-    
+  },[currentUserName, data]);
+// },[currentUserName]);
+// Line 27:5:   React Hook useEffect has missing dependencies: 'currentUser' and 'data'. Either include them or remove the dependency array
+
   const isAlreadyBuddy = (currentUser, user) => {
     const found = currentUser.savedBuddies.find(element => element.buddyId === user.username);
     return found;
@@ -37,8 +39,10 @@ function FindBuddies ({ currentPage, handleChange }) {
       const buddyToSave = {
         buddyId: username
       };
+      console.log("handleSaveBuddy, buddyToSave: ",buddyToSave);
 
-      const {result} = await saveBuddy({
+      // const {result} = await saveBuddy({
+      await saveBuddy({
         variables: { buddyData: buddyToSave },
       });
 
@@ -114,7 +118,8 @@ function FindBuddies ({ currentPage, handleChange }) {
             type='submit'
             variant='success'
               onClick={() => {
-                  setMessageUser(user.username)
+                  // useGlobalContext
+                  setMessageUser(user.username);
                   pageChange('SaveMessage');
                 }}>
             LEAVE MESSAGE FOR {user.username}

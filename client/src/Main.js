@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import About from './pages/About';
+import Admin from './pages/Admin';
 import Resume from './pages/Resume';
 import SignupForm from './components/SignupForm';
 import LoginForm from './components/LoginForm';
@@ -17,8 +18,10 @@ function Main({ currentPage, setCurrentPage}) {
     switch (currentPage) {
       case 'About':
         return <About currentPage={currentPage} handleChange={handleChange} />;
+      case 'Admin':
+        return <Admin currentPage={currentPage} handleChange={handleChange} />;
       case 'SignupForm':
-        return <SignupForm />;
+        return <SignupForm currentPage={currentPage} handleChange={handleChange} />;
       case 'LoginForm':
         return <LoginForm currentPage={currentPage} handleChange={handleChange} />;
       case 'FindBuddies':

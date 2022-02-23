@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Auth from './utils/auth';
 
 // Here we are using object destructuring assignment to pluck off our variables from the props object

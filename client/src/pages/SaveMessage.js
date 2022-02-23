@@ -14,9 +14,7 @@ const SaveMessage = () => {
   
 
   let currentUserName;
-  // let currentUser;
-  // let sendToUser;
-    // create function to handle saving the profile to the database
+  // create function to handle saving the profile to the database
   const handleSaveMessage = async () => {
 
     // get token
@@ -34,8 +32,9 @@ const SaveMessage = () => {
       };
 
       console.log("In handleSaveMessage, messageToSend: ",messageToSend);
+      // await saveMessage({
       const {result} = await saveMessage({
-        variables: { messageData: messageToSend },
+        variables: { messageData: messageToSend }
       });
 
     } catch (err) {

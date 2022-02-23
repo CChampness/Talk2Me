@@ -30,7 +30,6 @@ const resolvers = {
 
     loginUser: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
-
       if (!user) {
         throw new AuthenticationError('No user found with this email address');
       }
@@ -42,8 +41,20 @@ const resolvers = {
       }
 
       const token = signToken(user);
-
+      if (user.username === 'ADMIN') {
+        user.isAdmin = true;
+      }
       return { token, user };
+    },
+
+    deleteUser: async (parent, { username }, context) => {
+      if (context.user) {
+        console.log("Deleting user: ",username);
+        const user = await User.findOneAndDelete({ username });
+
+        return user;
+      }
+      throw new AuthenticationError('No user found with this email address');
     },
 
     saveBuddy: async (parent, { buddyData }, context) => {
@@ -62,7 +73,6 @@ const resolvers = {
     saveMessage: async (parent, { messageData }, context) => {
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
-          // { _id: context.user._id },
           { username: messageData.messageTo },
           { $push: { savedMessages: messageData }},
           {new: true}

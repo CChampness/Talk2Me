@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
-import { Jumbotron, Container, Col, Form, Button, Card, CardColumns } from 'react-bootstrap';
+import { Container, Col, Form, Button } from 'react-bootstrap';
 import { SAVE_PROFILE } from '../utils/mutations';
 import { GET_ME } from '../utils/queries';
 import Auth from '../utils/auth';
@@ -50,7 +50,8 @@ const CreateProfile = () => {
       };
 
       console.log("In handleSaveProfile, profileToSave: ",profileToSave);
-      const {result} = await saveProfile({
+      // await saveProfile({
+        const {result} = await saveProfile({
         variables: { profileData: profileToSave },
       });
 

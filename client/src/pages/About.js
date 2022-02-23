@@ -8,9 +8,9 @@ function About({ currentPage, handleChange }) {
     <div className="Aboutdiv">
       <h3>About Talk2Me</h3>
       <article id="about" className="imageArticle">
-        <h4>Welcome to Talk2Me,  {Auth.loggedIn() ? Auth.getProfile().data.username: "please join us ... Login or Signup"}</h4>
+        <h4>Welcome to Talk2Me,  {Auth.loggedIn() ? Auth.getProfile().data.username : "please join us ... Login or Signup"}</h4>
         <p>
-          Welcome to your language-learning quest!
+          Welcome to a new horizon in your language-learning quest!
         </p>
         <p>
           Talk2Me is a language practice site for linguaphiles to find one another,
