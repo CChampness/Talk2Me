@@ -63,3 +63,16 @@ export const GET_USERS = gql`
     }
   }
 `;
+
+export const GET_GROUPS = gql`
+{
+  groups {
+      _id
+      groupName
+      ownerName
+      conversationBuddies {
+        buddyId
+      }
+    }
+  }
+`;

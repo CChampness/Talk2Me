@@ -32,6 +32,14 @@ export const DELETE_USER = gql`
   }
 `;
 
+export const CREATE_GROUP = gql`
+  mutation createGroup($groupName: String!, $ownerName: String!) {
+    createGroup(groupName: $groupName, ownerName: $ownerName) {
+      groupName
+      ownerName
+    }
+  }
+`;
 
 export const SAVE_BUDDY = gql`
   mutation saveBuddy($buddyData: BuddyInput!) {

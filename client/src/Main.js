@@ -5,6 +5,7 @@ import Resume from './pages/Resume';
 import SignupForm from './components/SignupForm';
 import LoginForm from './components/LoginForm';
 import FindBuddies from './pages/FindBuddies';
+import BuildGroup from './pages/BuildGroup';
 import SaveMessage from './pages/SaveMessage';
 import GetMessages from './pages/GetMessages';
 import CreateProfile from './pages/CreateProfile';
@@ -28,6 +29,12 @@ function Main({ currentPage, setCurrentPage}) {
         return (
           <section className="row justify-center">
             <FindBuddies currentPage={currentPage} handleChange={handleChange}/>
+          </section>
+        );
+      case 'BuildGroup':
+        return (
+          <section className="row justify-center">
+            <BuildGroup currentPage={currentPage} handleChange={handleChange}/>
           </section>
         );
       case 'CreateProfile':

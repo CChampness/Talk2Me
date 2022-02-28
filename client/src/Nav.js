@@ -9,6 +9,7 @@ function Nav({ currentPage, handlePageChange }) {
       <a onClick={() => handlePageChange('About')}>Home</a>
       <a onClick={() => handlePageChange('CreateProfile')}>Profile</a>
       <a onClick={() => handlePageChange('FindBuddies')}>Buddies</a>
+      <a onClick={() => handlePageChange('BuildGroup')}>Groups</a>
       <a onClick={() => handlePageChange('GetMessages')}>Messages</a>
       <div>
         {Auth.loggedIn() ? (

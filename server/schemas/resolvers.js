@@ -1,5 +1,6 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { User } = require('../models');
+const { ConversationGroup } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -17,6 +18,12 @@ const resolvers = {
         const userData = await User.find();
         return userData;
       }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    groups: async (parent, args, context) => {
+      const groupsData = await ConversationGroup.find();
+      console.log("groupsData:",groupsData)
+      return groupsData;
       throw new AuthenticationError('You need to be logged in!');
     },
   },
@@ -55,6 +62,13 @@ const resolvers = {
         return user;
       }
       throw new AuthenticationError('No user found with this email address');
+    },
+
+    createGroup: async (parent, {groupName, ownerName}) => {
+      console.log("createGroup with",groupName,"for",ownerName);
+      const group = await ConversationGroup.create({ groupName, ownerName });
+      console.log("group:",group);
+      return { group };
     },
 
     saveBuddy: async (parent, { buddyData }, context) => {

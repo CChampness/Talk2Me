@@ -13,6 +13,9 @@ const highLightSelected = (cardId) => {
   }
 }
 
+// When the current user selects a Buddy, it means that that Buddy can
+// now invite the current user into a group that the Buddy has started.
+
 // The state gets changed in the Nav component
 function FindBuddies ({ currentPage, handleChange }) {
   const pageChange = (page) => handleChange(page);
@@ -66,7 +69,7 @@ function FindBuddies ({ currentPage, handleChange }) {
   }
 
   return (
-    data.users.map((user, ndx) => (user.username === currentUserName)?
+    data.users.map((user, ndx) => (user.username === currentUserName || user.username === 'ADMIN')?
       <div key={ndx}></div>
       :
       <div key={ndx} className="card-column" id={user.username}>

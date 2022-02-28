@@ -47,12 +47,6 @@ const SaveMessage = () => {
   // data.users is the array of all users in the database
   currentUserName = Auth.getProfile().data.username;
 
-
-  // currentUser = data.users.find(element => element.username === currentUserName);
-  // // console.log("currentUser: ", currentUser);
-
-  // sendToUser = data.users.find(element => element.username === messageUser)._id;
-
   return (
     <Container>
       <h2>Leave your message for {messageUser}</h2>

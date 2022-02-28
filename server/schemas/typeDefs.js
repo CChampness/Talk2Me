@@ -11,6 +11,20 @@ const typeDefs = gql`
     savedMessages: [Message]!
   }
 
+  type ConversationGroup {
+    _id: ID
+    groupName: String!
+    ownerName: String!
+    conversationBuddies: [Buddy]!
+  }
+
+  input ConversationGroupInput {
+    _id: ID
+    groupName: String!
+    ownerName: String!
+    conversationBuddies: [BuddyInput]!
+  }
+
   type Message {
     _id: ID
     messageTo: String
@@ -75,6 +89,7 @@ const typeDefs = gql`
   type Query {
     me: User
     users: [User]!
+    groups: [ConversationGroup]
   }
 
   type Mutation {
@@ -83,6 +98,7 @@ const typeDefs = gql`
     deleteUser(username: String!): User
     saveProfile(profileData: ProfileInput!): User
     saveBuddy(buddyData: BuddyInput!): User
+    createGroup(groupName: String!, ownerName: String!): ConversationGroup
     saveMessage(messageData: MessageInput!): User
     deleteMessage(messageData: MessageInput!): User
     removeBuddy(buddyId: String!): User
