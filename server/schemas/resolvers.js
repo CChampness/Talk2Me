@@ -21,10 +21,13 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
+
     groups: async (parent, args, context) => {
-      const groupsData = await ConversationGroup.find();
-      console.log("groupsData:",groupsData)
-      return groupsData;
+      if (context.user) {
+        const groupsData = await ConversationGroup.find({ ownerName: context.user.username });
+        console.log("groupsData:",groupsData);
+        return groupsData;
+      }
       throw new AuthenticationError('You need to be logged in!');
     },
   },

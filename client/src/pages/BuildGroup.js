@@ -24,7 +24,8 @@ import React, {useEffect, useState} from 'react';
 import { Container, Col, Form, Button } from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
-import { GET_GROUPS } from '../utils/queries';
+// import { GET_GROUPS } from '../utils/queries';
+import { GET_MY_GROUPS } from '../utils/queries';
 import { ADD_BUDDY } from '../utils/mutations';
 import { CREATE_GROUP } from '../utils/mutations';
 import Auth from '../utils/auth';
@@ -34,7 +35,8 @@ import { useGlobalContext } from '../utils/GlobalContext';
 function BuildGroup ({ currentPage, handleChange }) {
   const pageChange = (page) => handleChange(page);
   const meData = useQuery(GET_ME);
-  const groupData = useQuery(GET_GROUPS);
+  // const groupData = useQuery(GET_GROUPS);
+  const myGroupData = useQuery(GET_MY_GROUPS);
   const [createGroup] = useMutation(CREATE_GROUP);
   const [addBuddy] = useMutation(ADD_BUDDY);
   const [currentUserName, setCurrentUserName] = useState('');
@@ -119,10 +121,13 @@ function BuildGroup ({ currentPage, handleChange }) {
     }));
   };
 
-  if (meData.loading || groupData.loading) return <h4>Loading...</h4>;
-  // if (loading) return <h4>Loading...</h4>;
+  if (meData.loading || myGroupData.loading) {
+    return <h4>Loading...</h4>;
+  }
+
   if (meData.error) return <h4>Error! {meData.error.message}</h4>;
-  if (groupData.error) return <h4>Error! {groupData.error.message}</h4>;
+  // if (groupData.error) return <h4>Error! {groupData.error.message}</h4>;
+  if (myGroupData.error) return <h4>Error! {myGroupData.error.message}</h4>;
 
   if (!currentUserName) {
     setCurrentUserName(Auth.getProfile().data.username);
@@ -145,15 +150,18 @@ function BuildGroup ({ currentPage, handleChange }) {
     // alert(`${selectedGroup}`)
   }
 
-  console.log("groupData.groups:",groupData.data.groups);
+  console.log("myGroupData.groups:",myGroupData.data.groups);
   console.log("meData:",meData.data);
 
   return (
     <Container>
       <h3>Select your conversation group</h3>
+      {!myGroupData.data.groups.length ?
+        <h4>(You have not yet created any groups)</h4>
+        :
       <Form onSubmit={handleSelectGroupSubmit}>
         <Form.Group controlId="selectedGroup">
-          {groupData.data.groups.map((group, ndx) => (
+          {myGroupData.data.groups.map((group, ndx) => (
             <div key={ndx} className="mb-3">
               <Form.Check
                 value={group.groupName}
@@ -170,6 +178,7 @@ function BuildGroup ({ currentPage, handleChange }) {
             Submit selected group
           </Button> */}
         </Form>
+      }
       <br/>
       <h3>or start a new conversation group</h3>
       <Form onSubmit={handleCreateGroup}>

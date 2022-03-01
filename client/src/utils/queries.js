@@ -71,3 +71,11 @@ export const GET_GROUPS = gql`
     }
   }
 `;
+
+export const GET_MY_GROUPS = gql`
+{
+  groups {
+      groupName
+    }
+  }
+`;
