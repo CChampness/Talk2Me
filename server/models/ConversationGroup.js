@@ -13,7 +13,8 @@ const groupSchema = new Schema(
       type: String,
       required: true
     },
-    conversationBuddies: [Buddy],
+    // conversationBuddies: [Buddy],
+    conversationBuddies: { type: Array },
   },
   // set this to use virtual below
   {

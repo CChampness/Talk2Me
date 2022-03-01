@@ -25,6 +25,7 @@ import { Container, Col, Form, Button } from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
 import { GET_GROUPS } from '../utils/queries';
+import { ADD_BUDDY } from '../utils/mutations';
 import { CREATE_GROUP } from '../utils/mutations';
 import Auth from '../utils/auth';
 import { useGlobalContext } from '../utils/GlobalContext';
@@ -35,12 +36,15 @@ function BuildGroup ({ currentPage, handleChange }) {
   const meData = useQuery(GET_ME);
   const groupData = useQuery(GET_GROUPS);
   const [createGroup] = useMutation(CREATE_GROUP);
+  const [addBuddy] = useMutation(ADD_BUDDY);
   const [currentUserName, setCurrentUserName] = useState('');
   const { setMessageUser } = useGlobalContext();
   const [groupNameInp, setGroupNameInp] = useState('');
   const [ownerNameInp, setOwnerNameInp] = useState('');
   const [groupItem, setGroupItem] = useState({ selectedGroup: ""});
+  const [buddyItem, setBuddyItem] = useState({ selectedBuddy: ""});
 
+  const { selectedBuddy } = buddyItem;
   const { selectedGroup } = groupItem;
     // set initial form state
     const [groupInfo, setGroupInfo] = useState({
@@ -84,10 +88,36 @@ function BuildGroup ({ currentPage, handleChange }) {
     };
   }
 
-  const handleAddBuddy = async (e) => {
+  const handleAddBuddies = async (e) => {
     e.preventDefault();
-    alert(e.target.value)
+    console.log("selectedBuddy:",selectedBuddy)
+
+    try {
+      const buddyToAdd = {
+        groupName: selectedGroup,
+        buddyName: selectedBuddy
+      };
+  
+      console.log("In handleAddBuddies, buddyToAdd: ",buddyToAdd);
+      const {result} = await addBuddy({
+        variables: {buddyData: buddyToAdd}
+      });
+      console.log("handleAddBuddies result:",result);
+  
+    } catch (err) {
+      console.error(err);
+    };
   }
+
+  const handleBuddyChange = e => {
+    e.persist();
+    console.log("e.target.value:",e.target.value);
+
+    setBuddyItem(prevState => ({
+      ...prevState,
+      selectedBuddy: e.target.value
+    }));
+  };
 
   if (meData.loading || groupData.loading) return <h4>Loading...</h4>;
   // if (loading) return <h4>Loading...</h4>;
@@ -123,7 +153,6 @@ function BuildGroup ({ currentPage, handleChange }) {
       <h3>Select your conversation group</h3>
       <Form onSubmit={handleSelectGroupSubmit}>
         <Form.Group controlId="selectedGroup">
-        {/* {['Group1', 'Group2', 'Group3'].map((group, ndx) => ( */}
           {groupData.data.groups.map((group, ndx) => (
             <div key={ndx} className="mb-3">
               <Form.Check
@@ -169,13 +198,16 @@ function BuildGroup ({ currentPage, handleChange }) {
         {!meData.data.me.savedBuddies.length ?
           <h3>No conversaion buddies chosen yet!</h3>
         :
-        <Form onSubmit={handleAddBuddy}>
+        <Form onSubmit={handleAddBuddies}>
           {meData.data.me.savedBuddies.map((buddy, ndx) => (
             <div key={ndx} className="mb-3">
               <Form.Check 
                 type='checkbox'
                 id={buddy.buddyId}
                 label={buddy.buddyId}
+                value={buddy.buddyId}
+                onChange = {handleBuddyChange}
+                checked={selectedBuddy === buddy.buddyId}
               />
             </div>
           ))}

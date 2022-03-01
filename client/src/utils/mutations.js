@@ -53,6 +53,15 @@ export const SAVE_BUDDY = gql`
   }
 `;
 
+export const ADD_BUDDY = gql`
+  mutation addBuddy($buddyData: ConversationBuddyInput) {
+    addBuddy(buddyData: $buddyData) {
+      groupName
+      buddyName
+    }
+  }
+`;
+
 export const SAVE_MESSAGE = gql`
   mutation saveMessage($messageData: MessageInput!) {
     saveMessage(messageData: $messageData) {

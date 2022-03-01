@@ -1,6 +1,7 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { User } = require('../models');
 const { ConversationGroup } = require('../models');
+const { ConversationBuddy } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -81,6 +82,18 @@ const resolvers = {
 
         return updatedUser;
       }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    
+    addBuddy: async (parent, { buddyData }, context) => {
+      const updatedCGroup = await ConversationGroup.findOneAndUpdate(
+        { groupName: buddyData.groupName },
+        { $push: { conversationBuddies: buddyData.buddyName } },
+        {new: true}
+      );
+console.log("addBuddy:",buddyData);
+console.log("updatedCGroup:",updatedCGroup);
+      return updatedCGroup;
       throw new AuthenticationError('You need to be logged in!');
     },
     

@@ -11,10 +11,19 @@ const typeDefs = gql`
     savedMessages: [Message]!
   }
 
+  type Buddy {
+    buddyId: String!
+  }
+
+  input BuddyInput {
+    buddyId: String
+  }
+
   type ConversationGroup {
     _id: ID
     groupName: String!
     ownerName: String!
+    buddyName: String
     conversationBuddies: [Buddy]!
   }
 
@@ -22,7 +31,18 @@ const typeDefs = gql`
     _id: ID
     groupName: String!
     ownerName: String!
+    buddyName: String
     conversationBuddies: [BuddyInput]!
+  }
+
+  type ConversationBuddy {
+    groupName: String!
+    buddyName: String!
+  }
+
+  input ConversationBuddyInput {
+    groupName: String!
+    buddyName: String!
   }
 
   type Message {
@@ -39,14 +59,6 @@ const typeDefs = gql`
     messageText: String
     messageFrom: String
     createdAt: String
-  }
-
-  type Buddy {
-    buddyId: String!
-  }
-
-  input BuddyInput {
-    buddyId: String
   }
 
   type Profile {
@@ -98,6 +110,7 @@ const typeDefs = gql`
     deleteUser(username: String!): User
     saveProfile(profileData: ProfileInput!): User
     saveBuddy(buddyData: BuddyInput!): User
+    addBuddy(buddyData: ConversationBuddyInput): ConversationGroup
     createGroup(groupName: String!, ownerName: String!): ConversationGroup
     saveMessage(messageData: MessageInput!): User
     deleteMessage(messageData: MessageInput!): User

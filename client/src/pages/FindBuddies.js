@@ -44,7 +44,6 @@ function FindBuddies ({ currentPage, handleChange }) {
       };
       console.log("handleSaveBuddy, buddyToSave: ",buddyToSave);
 
-      // const {result} = await saveBuddy({
       await saveBuddy({
         variables: { buddyData: buddyToSave },
       });
