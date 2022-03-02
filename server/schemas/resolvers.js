@@ -24,7 +24,9 @@ const resolvers = {
 
     groups: async (parent, args, context) => {
       if (context.user) {
-        const groupsData = await ConversationGroup.find({ ownerName: context.user.username });
+        const groupsData = await ConversationGroup.find(
+          { ownerName: context.user.username }
+        );
         console.log("groupsData:",groupsData);
         return groupsData;
       }
