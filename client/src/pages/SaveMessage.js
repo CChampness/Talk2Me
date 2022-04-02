@@ -15,7 +15,8 @@ const SaveMessage = () => {
 
   let currentUserName;
   // create function to handle saving the profile to the database
-  const handleSaveMessage = async () => {
+  const handleSaveMessage = async (e) => {
+    e.preventDefault();
 
     // get token
     const token = Auth.loggedIn() ? Auth.getToken() : null;

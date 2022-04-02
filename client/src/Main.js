@@ -7,7 +7,9 @@ import LoginForm from './components/LoginForm';
 import FindBuddies from './pages/FindBuddies';
 import BuildGroup from './pages/BuildGroup';
 import SaveMessage from './pages/SaveMessage';
-import GetMessages from './pages/GetMessages';
+import Messages from './pages/Messages';
+import BuddyMessages from './pages/BuddyMessages';
+import GroupMessages from './pages/GroupMessages';
 import CreateProfile from './pages/CreateProfile';
 import { GlobalProvider } from './utils/GlobalContext';
 
@@ -41,10 +43,14 @@ function Main({ currentPage, setCurrentPage}) {
         return <CreateProfile />;
       case 'SaveMessage':
         return <SaveMessage />;
-      case 'GetMessages':
+      case 'BuddyMessages':
+        return <BuddyMessages />;
+        case 'GroupMessages':
+          return <GroupMessages />;
+        case 'Messages':
         return (
           <section className="row justify-center">
-            <GetMessages />
+            <Messages currentPage={currentPage} handleChange={handleChange} />
           </section>
         );
       case 'Resume':

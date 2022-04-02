@@ -28,6 +28,7 @@ export const GET_ME = gql`
         _id
         messageText
         messageFrom
+        messageTo
         createdAt
       }
     }
@@ -59,6 +60,9 @@ export const GET_USERS = gql`
       }
       savedMessages {
         messageText
+        messageFrom
+        messageTo
+        createdAt
       }
     }
   }

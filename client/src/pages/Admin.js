@@ -8,7 +8,8 @@ import { GET_USERS } from '../utils/queries';
 function Admin({ currentPage, handleChange }) {
   const pageChange = (page) => handleChange(page);
   const [deleteUser] = useMutation(DELETE_USER);
-  const {loading, error, data } = useQuery(GET_USERS);
+  // const {loading, error, data } = useQuery(GET_USERS);
+  const { loading, error, data, refetch } = useQuery(GET_USERS);
   const [userToDelete, setUserToDelete] = useState('');
 
   // This function deletes users from the database
@@ -18,7 +19,10 @@ function Admin({ currentPage, handleChange }) {
     console.log("userToDelete: ",userToDelete);
     try {
       // await deleteUser({
-      const {result} = await deleteUser({variables: { username }});
+      const {result} = await deleteUser({
+        variables: { username },
+        onCompleted: refetch
+      });
     
     } catch (err) {
       console.error(err);
@@ -49,7 +53,7 @@ function Admin({ currentPage, handleChange }) {
               <tr>
                 <td>Language</td><td><nbsp className="nbsp"/></td><td>{user.profile?user.profile.language:""}</td>
               </tr>
-              <tr>
+              {/* <tr>
                 <td>Reading Level</td><td><nbsp className="nbsp"/></td><td>{user.profile?user.profile.readingLevel:""}</td>
               </tr>
               <tr>
@@ -66,7 +70,7 @@ function Admin({ currentPage, handleChange }) {
               </tr>
               <tr>
                 <td>Age</td><td><nbsp className="nbsp"/></td><td>{user.profile?user.profile.age:""}</td>
-              </tr>
+              </tr> */}
               <tr>
                 <td>Country From</td><td><nbsp className="nbsp"/></td><td>{user.profile?user.profile.countryFrom:""}</td>
               </tr>
@@ -84,8 +88,8 @@ function Admin({ currentPage, handleChange }) {
               type='submit'
               variant='success'
                 onClick={() => {
-                  setUserToDelete(user.username);
                   handleDeleteUser(user.username);
+                  setUserToDelete(user.username);
                 }}>
               DELETE USER {user.username}
             </Button>

@@ -24,6 +24,14 @@ export const ADD_USER = gql`
   }
 `;
 
+// export const DELETE_USER = gql`
+//   mutation deleteUser($userData: UserInput!) {
+//     deleteUser(userData: $userData) {
+//       _id
+//     }
+//   }
+// `;
+
 export const DELETE_USER = gql`
   mutation deleteUser($username: String!) {
     deleteUser(username: $username) {
@@ -68,7 +76,10 @@ export const SAVE_MESSAGE = gql`
       username
       email
       savedMessages {
+        messageTo
         messageText
+        messageFrom
+        createdAt
       }
     }
   }

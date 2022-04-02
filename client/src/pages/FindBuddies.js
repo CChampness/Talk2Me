@@ -8,7 +8,7 @@ import { useGlobalContext } from '../utils/GlobalContext';
 
 const highLightSelected = (cardId) => {
   let element = document.getElementById(cardId);
-  if (element) {
+  if (element && element.childNodes[0]) { // && element.childNodes[0].childNodes[0]) {
     element.childNodes[0].childNodes[0].classList.add("boxHighlight");
   }
 }
@@ -67,9 +67,16 @@ function FindBuddies ({ currentPage, handleChange }) {
     setCurrentUserName(Auth.getProfile().data.username);
   }
 
+  console.log("data.users.length:",data.users.length);
+  console.log("data.users[0].username:",data.users[0].username);
+
   return (
+    (data.users.length <= 1) ?
+      <h3>No buddies selected yet!</h3>
+    :
     data.users.map((user, ndx) => (user.username === currentUserName || user.username === 'ADMIN')?
-      <div key={ndx}></div>
+      <div key={ndx}>
+      </div>
       :
       <div key={ndx} className="card-column" id={user.username}>
         <figure className="proj-card">
@@ -83,7 +90,7 @@ function FindBuddies ({ currentPage, handleChange }) {
                 <tr>
                   <td>Language</td><td><nbsp className="nbsp"/></td><td>{user.profile?user.profile.language:""}</td>
                 </tr>
-                <tr>
+                {/* <tr>
                   <td>Reading Level</td><td><nbsp className="nbsp"/></td><td>{user.profile?user.profile.readingLevel:""}</td>
                 </tr>
                 <tr>
@@ -100,19 +107,19 @@ function FindBuddies ({ currentPage, handleChange }) {
                 </tr>
                 <tr>
                   <td>Age</td><td><nbsp className="nbsp"/></td><td>{user.profile?user.profile.age:""}</td>
-                </tr>
+                </tr> */}
                 <tr>
                   <td>Country From</td><td><nbsp className="nbsp"/></td><td>{user.profile?user.profile.countryFrom:""}</td>
                 </tr>
                 <tr>
                   <td>Country Now</td><td><nbsp className="nbsp"/></td><td>{user.profile?user.profile.countryNow:""}</td>
                 </tr>
-                <tr>
+                {/* <tr>
                   <td>Contact Info</td><td><nbsp className="nbsp"/></td><td>{user.profile?user.profile.contactInfo:""}</td>
                 </tr>
                 <tr>
                   <td>email</td><td><nbsp className="nbsp"/></td><td>{user.profile?user.email:""}</td>
-                </tr>
+                </tr> */}
               </tbody></table>
             </a>
           </span>

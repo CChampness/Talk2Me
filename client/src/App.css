@@ -16,6 +16,10 @@
   display: none
 }
 
+.rads {
+  padding-left: 50px;
+}
+
 body {
   /* color: aliceblue; */
   color: rgb(223, 185, 151);

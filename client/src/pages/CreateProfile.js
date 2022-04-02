@@ -108,7 +108,7 @@ const CreateProfile = () => {
             />
           </Col>
 
-          <Col xs={12} md={8}>
+          {/* <Col xs={12} md={8}>
             <Form.Control
               name='readingLevel'
               id='readingLevel'
@@ -178,7 +178,7 @@ const CreateProfile = () => {
               size='lg'
               placeholder={agePlaceholder}
             />
-          </Col>
+          </Col> */}
 
           <Col xs={12} md={8}>
             <Form.Control
@@ -216,7 +216,7 @@ const CreateProfile = () => {
             />
           </Col>
 
-          <Col xs={12} md={8}>
+          {/* <Col xs={12} md={8}>
             <Form.Control
               name='contactInfo'
               id='contactInfo'
@@ -226,7 +226,7 @@ const CreateProfile = () => {
               size='lg'
               placeholder={contactInfoPlaceholder}
             />
-          </Col>
+          </Col> */}
 
           <Col xs={12} md={4}>
             <Button type='submit' variant='success' size='lg'>

@@ -11,6 +11,16 @@ const typeDefs = gql`
     savedMessages: [Message]!
   }
 
+  input UserInput {
+    _id: ID
+    username: String!
+    email: String
+    isAdmin: Boolean
+    profile: ProfileInput
+    savedBuddies: [BuddyInput]!
+    savedMessages: [MessageInput]!
+  }
+
   type Buddy {
     buddyId: String!
   }
