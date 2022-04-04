@@ -5,7 +5,7 @@ function Footer() {
     <>
     <hr/>
     <footer id = "contact">
-      <h1>How to contact Coach Miriam:</h1>
+      <h3>How to contact Coach Miriam:</h3>
       <div>
         <a href="tel:706-254-4879"><h4>Text</h4></a>
         <a href="mailto:miriam.champness@gmail.com"><h4>Email</h4></a>

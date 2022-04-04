@@ -84,11 +84,11 @@ The purpose of conversation is to share ideas and experiences.  Let's focus on t
   }
 
   type Buddy {
-    buddyId: String
+    buddyName: String
   }
 
   input BuddyInput {
-    buddyId: String
+    buddyName: String
   }
 
   type Profile {
@@ -140,7 +140,7 @@ The purpose of conversation is to share ideas and experiences.  Let's focus on t
     saveBuddy(buddyData: BuddyInput!): User
     saveMessage(messageData: MessageInput!): User
     deleteMessage(messageData: MessageInput!): User
-    removeBuddy(buddyId: String!): User
+    removeBuddy(buddyName: String!): User
   }
 ```
 

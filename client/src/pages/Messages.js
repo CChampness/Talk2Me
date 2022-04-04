@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import { Container, Col, Form, Button } from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
-// import { GET_GROUPS } from '../utils/queries';
 import { GET_MY_GROUPS } from '../utils/queries';
 import { ADD_BUDDY } from '../utils/mutations';
 import { CREATE_GROUP } from '../utils/mutations';
@@ -15,7 +14,6 @@ import { useGlobalContext } from '../utils/GlobalContext';
 function Messages ({ currentPage, handleChange }) {
   const pageChange = (page) => handleChange(page);
   const meData = useQuery(GET_ME);
-  // const groupData = useQuery(GET_GROUPS);
   const myGroupData = useQuery(GET_MY_GROUPS);
   const [createGroup] = useMutation(CREATE_GROUP);
   const [addBuddy] = useMutation(ADD_BUDDY);
@@ -80,8 +78,8 @@ function Messages ({ currentPage, handleChange }) {
             <div key={ndx} className="mb-3">
               <Form.Check className="rads"
                 name="msgTarget"
-                id={buddy.buddyId}
-                label={buddy.buddyId}
+                id={buddy.buddyName}
+                label={buddy.buddyName}
                 onChange = {handleTgtChange}
                 type='radio'
                 value="buddy"
@@ -89,7 +87,7 @@ function Messages ({ currentPage, handleChange }) {
             </div>
           ))}
       <h4>Your groups</h4>
-          {myGroupData.data.groups.map((group, ndx) => (
+          {myGroupData.data.myGroups.map((group, ndx) => (
             <div key={ndx} className="mb-3">
               <Form.Check className="rads"
                 name="msgTarget"

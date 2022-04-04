@@ -55,14 +55,14 @@ export const SAVE_BUDDY = gql`
       username
       email
       savedBuddies {
-        buddyId
+        buddyName
       }
     }
   }
 `;
 
 export const ADD_BUDDY = gql`
-  mutation addBuddy($buddyData: ConversationBuddyInput) {
+  mutation addBuddy($buddyData: BuddyInput) {
     addBuddy(buddyData: $buddyData) {
       groupName
       buddyName
@@ -80,6 +80,7 @@ export const SAVE_MESSAGE = gql`
         messageText
         messageFrom
         createdAt
+        groupName
       }
     }
   }
@@ -118,8 +119,8 @@ export const SAVE_PROFILE = gql`
 `;
 
 export const REMOVE_BUDDY = gql`
-  mutation removeBuddy($buddyId: ID!) {
-    removeBuddy(buddyId: $buddyId) {
+  mutation removeBuddy($buddyName: ID!) {
+    removeBuddy(buddyName: $buddyName) {
       _id
     }
   }

@@ -24,7 +24,6 @@ import React, {useEffect, useState} from 'react';
 import { Container, Col, Form, Button } from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
-// import { GET_GROUPS } from '../utils/queries';
 import { GET_MY_GROUPS } from '../utils/queries';
 import { ADD_BUDDY } from '../utils/mutations';
 import { CREATE_GROUP } from '../utils/mutations';
@@ -35,7 +34,6 @@ import { useGlobalContext } from '../utils/GlobalContext';
 function BuildGroup ({ currentPage, handleChange }) {
   const pageChange = (page) => handleChange(page);
   const meData = useQuery(GET_ME);
-  // const groupData = useQuery(GET_GROUPS);
   const myGroupData = useQuery(GET_MY_GROUPS);
   const [createGroup] = useMutation(CREATE_GROUP);
   const [addBuddy] = useMutation(ADD_BUDDY);
@@ -150,19 +148,21 @@ function BuildGroup ({ currentPage, handleChange }) {
     // alert(`${selectedGroup}`)
   }
 
-  console.log("myGroupData.groups:",myGroupData.data.groups);
+  console.log("myGroupData:",myGroupData);
+  console.log("myGroupData.data:",myGroupData.data);
+  console.log("myGroupData.data.myGroups:",myGroupData.data.myGroups);
   console.log("meData:",meData.data);
 
   return (
     <Container>
       <h3>Select your conversation group</h3>
       <h5>(Need to add group members under each group)</h5>
-      {!myGroupData.data.groups.length ?
+      {(!myGroupData.data.myGroups || !myGroupData.data.myGroups.length) ?
         <h4>(You have not yet created any groups)</h4>
         :
       <Form onSubmit={handleSelectGroupSubmit}>
         <Form.Group controlId="selectedGroup">
-          {myGroupData.data.groups.map((group, ndx) => (
+          {myGroupData.data.myGroups.map((group, ndx) => (
             <div key={ndx} className="mb-3">
               <Form.Check
                 value={group.groupName}
@@ -213,11 +213,11 @@ function BuildGroup ({ currentPage, handleChange }) {
             <div key={ndx} className="mb-3">
               <Form.Check 
                 type='checkbox'
-                id={buddy.buddyId}
-                label={buddy.buddyId}
-                value={buddy.buddyId}
+                id={buddy.buddyName}
+                label={buddy.buddyName}
+                value={buddy.buddyName}
                 onChange = {handleBuddyChange}
-                checked={selectedBuddy === buddy.buddyId}
+                checked={selectedBuddy === buddy.buddyName}
               />
             </div>
           ))}

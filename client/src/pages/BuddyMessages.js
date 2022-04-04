@@ -9,6 +9,7 @@ import Auth from '../utils/auth';
 import { useGlobalContext } from '../utils/GlobalContext';
 
 const myName = Auth.loggedIn() ? Auth.getProfile().data.username : "not logged in";
+const groupName = "none";
 
 const pushUnique = (msgList, newMsg) => {
   let dup = false;
@@ -76,7 +77,8 @@ function BuddyMessages ({ currentPage, handleChange }) {
       const messageToSend = {
         messageFrom: myName,
         messageText: text,
-        messageTo: messageUser
+        messageTo: messageUser,
+        groupName: groupName
       };
 
       let result;

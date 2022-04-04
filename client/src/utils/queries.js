@@ -22,7 +22,7 @@ export const GET_ME = gql`
         contactInfo
       }
       savedBuddies {
-        buddyId
+        buddyName
       }
       savedMessages {
         _id
@@ -56,29 +56,34 @@ export const GET_USERS = gql`
         contactInfo
       }
       savedBuddies {
-        buddyId
+        buddyName
       }
       savedMessages {
         messageText
         messageFrom
         messageTo
         createdAt
+        groupName
       }
     }
   }
 `;
 
-export const GET_GROUPS = gql`
-{
-  groups {
-      groupName
+export const GET_GROUP = gql`
+query getGroup($groupName: String!) {
+  getGroup(groupName: $groupName) {
+    groupName
+    ownerName
+    buddyName
+    conversationBuddies {
+      buddyName
     }
   }
-`;
+}`;
 
 export const GET_MY_GROUPS = gql`
 {
-  groups {
+  myGroups {
       groupName
     }
   }

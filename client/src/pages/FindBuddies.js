@@ -32,7 +32,7 @@ function FindBuddies ({ currentPage, handleChange }) {
 // Line 27:5:   React Hook useEffect has missing dependencies: 'currentUser' and 'data'. Either include them or remove the dependency array
 
   const isAlreadyBuddy = (currentUser, user) => {
-    const found = currentUser.savedBuddies.find(element => element.buddyId === user.username);
+    const found = currentUser.savedBuddies.find(element => element.buddyName === user.username);
     return found;
   }
   
@@ -40,7 +40,7 @@ function FindBuddies ({ currentPage, handleChange }) {
   const handleSaveBuddy = async (username) => {
     try {
       const buddyToSave = {
-        buddyId: username
+        buddyName: username
       };
       console.log("handleSaveBuddy, buddyToSave: ",buddyToSave);
 

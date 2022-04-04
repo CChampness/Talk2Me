@@ -22,11 +22,13 @@ const typeDefs = gql`
   }
 
   type Buddy {
-    buddyId: String!
+    groupName: String
+    buddyName: String!
   }
 
   input BuddyInput {
-    buddyId: String
+    groupName: String
+    buddyName: String!
   }
 
   type ConversationGroup {
@@ -45,22 +47,13 @@ const typeDefs = gql`
     conversationBuddies: [BuddyInput]!
   }
 
-  type ConversationBuddy {
-    groupName: String!
-    buddyName: String!
-  }
-
-  input ConversationBuddyInput {
-    groupName: String!
-    buddyName: String!
-  }
-
   type Message {
     _id: ID
     messageTo: String
     messageText: String
     messageFrom: String
     createdAt: String
+    groupName: String
   }
 
   input MessageInput {
@@ -69,6 +62,7 @@ const typeDefs = gql`
     messageText: String
     messageFrom: String
     createdAt: String
+    groupName: String
   }
 
   type Profile {
@@ -111,7 +105,8 @@ const typeDefs = gql`
   type Query {
     me: User
     users: [User]!
-    groups: [ConversationGroup]
+    myGroups: [ConversationGroup]
+    getGroup(groupName: String!): ConversationGroup
   }
 
   type Mutation {
@@ -120,11 +115,11 @@ const typeDefs = gql`
     deleteUser(username: String!): User
     saveProfile(profileData: ProfileInput!): User
     saveBuddy(buddyData: BuddyInput!): User
-    addBuddy(buddyData: ConversationBuddyInput): ConversationGroup
+    addBuddy(buddyData: BuddyInput): ConversationGroup
     createGroup(groupName: String!, ownerName: String!): ConversationGroup
     saveMessage(messageData: MessageInput!): User
     deleteMessage(messageData: MessageInput!): User
-    removeBuddy(buddyId: String!): User
+    removeBuddy(buddyName: String!): User
   }
 `;
 

@@ -1,7 +1,6 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { User } = require('../models');
 const { ConversationGroup } = require('../models');
-const { ConversationBuddy } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -22,13 +21,25 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
 
-    groups: async (parent, args, context) => {
+    myGroups: async (parent, args, context) => {
       if (context.user) {
-        const groupsData = await ConversationGroup.find(
+        const myGroupsData = await ConversationGroup.find(
           { ownerName: context.user.username }
         );
-        console.log("groupsData:",groupsData);
-        return groupsData;
+        console.log("myGroupsData:",myGroupsData);
+        return myGroupsData;
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+
+    getGroup: async (parent, {groupName}, context) => {
+      if (context.user) {
+        console.log("getGroup resolver, groupName:",groupName);
+        const groupData = await ConversationGroup.findOne(
+          { groupName }
+        );
+        console.log("getGroup resolver, groupData:", groupData);
+        return groupData;
       }
       throw new AuthenticationError('You need to be logged in!');
     },
@@ -93,13 +104,12 @@ const resolvers = {
     addBuddy: async (parent, { buddyData }, context) => {
       const updatedCGroup = await ConversationGroup.findOneAndUpdate(
         { groupName: buddyData.groupName },
-        { $push: { conversationBuddies: buddyData.buddyName } },
+        { $push: { conversationBuddies: buddyData } },
         {new: true}
       );
 console.log("addBuddy:",buddyData);
 console.log("updatedCGroup:",updatedCGroup);
       return updatedCGroup;
-      throw new AuthenticationError('You need to be logged in!');
     },
     
     saveMessage: async (parent, { messageData }, context) => {
@@ -139,12 +149,12 @@ console.log("updatedCGroup:",updatedCGroup);
       throw new AuthenticationError('You need to be logged in!');
     },
     
-    removeBuddy: async (parent, { buddyId }, context) => {
+    removeBuddy: async (parent, { buddyName }, context) => {
       if (context.user) {
 
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $pull: { savedBuddies: {buddyId} } }
+          { $pull: { savedBuddies: {buddyName} } }
         );
         return updatedUser;
       }
