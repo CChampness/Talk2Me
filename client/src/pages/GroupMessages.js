@@ -67,7 +67,8 @@ function GroupMessages ({ currentPage, handleChange }) {
   const { messageUser, msgTgtType } = useGlobalContext();
   const [text, setText] = useState("");
   const [saveMessage] = useMutation(SAVE_MESSAGE);
-  const { loading, error, data, refetch } = useQuery(GET_USERS);
+  const { loading, error, data, refetch } = useQuery(GET_USERS,
+    {pollInterval: 1000});
   const groupData = useQuery(GET_GROUP,
       {variables: {groupName: messageUser}});
   const [needUpdate, setNeedUpdate] = useState(1);

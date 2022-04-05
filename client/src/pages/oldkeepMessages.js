@@ -1,7 +1,37 @@
+Skip to content
+Search or jump to…
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@CChampness 
+CChampness
+/
+Talk2Me
+Public
+Code
+Issues
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+Settings
+Talk2Me/client/src/pages/Messages.js /
+@CChampness
+CChampness Adding 2-way texting
+Latest commit 05d1850 3 days ago
+ History
+ 1 contributor
+118 lines (108 sloc)  3.75 KB
+   
 import React, {useEffect, useState} from 'react';
 import { Container, Col, Form, Button } from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
+// import { GET_GROUPS } from '../utils/queries';
 import { GET_MY_GROUPS } from '../utils/queries';
 import { ADD_BUDDY } from '../utils/mutations';
 import { CREATE_GROUP } from '../utils/mutations';
@@ -14,6 +44,7 @@ import { useGlobalContext } from '../utils/GlobalContext';
 function Messages ({ currentPage, handleChange }) {
   const pageChange = (page) => handleChange(page);
   const meData = useQuery(GET_ME);
+  // const groupData = useQuery(GET_GROUPS);
   const myGroupData = useQuery(GET_MY_GROUPS);
   const [createGroup] = useMutation(CREATE_GROUP);
   const [addBuddy] = useMutation(ADD_BUDDY);
@@ -63,20 +94,6 @@ function Messages ({ currentPage, handleChange }) {
     setCurrentUserName(Auth.getProfile().data.username);
   }
 
-  console.log("in Messages, meData.data.me.savedMessages:",meData.data.me.savedMessages);
-  let myGroups = myGroupData.data.myGroups;
-  console.log("1) in Messages, myGroups:",myGroups);
-  let savedMessages = [] = meData.data.me.savedMessages;
-  savedMessages.map((msg) => {
-    console.log("msg.groupName:",msg.groupName);
-    if (msg.groupName) {
-      if (myGroups.filter(grp => grp.groupName === msg.groupName).length == 0) {
-        myGroups = [...myGroups, {groupName: msg.groupName}];
-      }
-    }
-  });
-  console.log("2) in Messages, myGroups:",myGroups);
-
   return (
     <Container>
       <h3>Select the buddy or group that you want to message with</h3>
@@ -92,8 +109,8 @@ function Messages ({ currentPage, handleChange }) {
             <div key={ndx} className="mb-3">
               <Form.Check className="rads"
                 name="msgTarget"
-                id={buddy.buddyName}
-                label={buddy.buddyName}
+                id={buddy.buddyId}
+                label={buddy.buddyId}
                 onChange = {handleTgtChange}
                 type='radio'
                 value="buddy"
@@ -101,8 +118,7 @@ function Messages ({ currentPage, handleChange }) {
             </div>
           ))}
       <h4>Your groups</h4>
-          {/* {myGroupData.data.myGroups.map((group, ndx) => ( */}
-          {myGroups.map((group, ndx) => (
+          {myGroupData.data.groups.map((group, ndx) => (
             <div key={ndx} className="mb-3">
               <Form.Check className="rads"
                 name="msgTarget"
@@ -129,3 +145,16 @@ function Messages ({ currentPage, handleChange }) {
 }
 
 export default Messages
+© 2022 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+Loading complete

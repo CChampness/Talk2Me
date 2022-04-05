@@ -18,20 +18,30 @@ function About({ currentPage, handleChange }) {
           lovers of language learning who will be happy to share conversation practice with you.
         </p>
         <p>
+          <h3>Profile</h3>
           With the <b>Profile</b> option you can share any interesting information about yourself that will help 
           others who may have shared interests to find you for conversation practice.
         </p>
         <p>
+          <h3>Buddies</h3>
           With the <b>Buddies</b> option you can find others with whom you may have interests in common.
           You can select any one as a "buddy" and leave messages for them.  Use this feature to set up
           meeting times for conversation on your favorite video chat platform, such as Zoom.
         </p>
         <p>
+          <h3>Groups</h3>
+          With the <b>Groups</b> option you can select among your buddies to create a texting group.
+        </p>
+        <p>
+          <h3>Messages</h3>
           With the <b>Messages</b> option you can see all of the messages that others have left for you.
+          Please note that, to receive messages, you must have at least one conversation buddy.
+          Use this feature to set up
+          meeting times for conversation on your favorite video chat platform, such as Zoom.
         </p>
 
       </article>
-      <article>
+      {/* <article>
         <h4>What is a language-learning coach?</h4>
         <p>
           A language-learning coach is a conversation practice partner who can make interesting suggestions for improving
@@ -48,7 +58,7 @@ function About({ currentPage, handleChange }) {
                 }}>
             About Coach Miriam
           </Button>
-      </article>
+      </article> */}
     </div>
   );
 }
