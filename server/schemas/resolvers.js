@@ -114,6 +114,7 @@ console.log("updatedCGroup:",updatedCGroup);
     
     saveMessage: async (parent, { messageData }, context) => {
       if (context.user) {
+        console.log("in resolver saveMessage, messageData:",messageData);
         const updatedUser = await User.findOneAndUpdate(
           { username: messageData.messageTo },
           { $push: { savedMessages: messageData }},

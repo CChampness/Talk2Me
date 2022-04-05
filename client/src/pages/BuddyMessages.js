@@ -36,7 +36,8 @@ const loadMessageList_1 = (messageUser, usersData) => {
     for (let j=0; j < usrMsgs[i].savedMessages.length; j++) {
       if ((usrMsgs[i].savedMessages[j].messageTo === messageUser && usrMsgs[i].savedMessages[j].messageFrom === myName) ||
           (usrMsgs[i].savedMessages[j].messageTo === myName && usrMsgs[i].savedMessages[j].messageFrom === messageUser)) {
-        pushUnique(wkgMsgList2, usrMsgs[i].savedMessages[j]);
+        if (!usrMsgs[i].savedMessages[j].groupName || usrMsgs[i].savedMessages[j]==="none")
+          pushUnique(wkgMsgList2, usrMsgs[i].savedMessages[j]);
       }
     }
   }
@@ -93,7 +94,7 @@ function BuddyMessages ({ currentPage, handleChange }) {
         result.data.saveMessage) {
           messageList = loadMessageList_2(messageUser, result.data.saveMessage.savedMessages);
       }
-      console.log("messageList after loadMessageList_2:",messageList);
+      console.log("BuddyMessages messageList after loadMessageList_2:",messageList);
     } catch (err) {
       console.error(err);
     }
@@ -110,7 +111,7 @@ let allUsersData = data;
     messageList = loadMessageList_1(messageUser, allUsersData);
   }
 //  setMessageList(newMsgList);
-console.log("messageList after loadMessageList_1:",messageList);
+console.log("BuddyMessages messageList after loadMessageList_1:",messageList);
 
   return(
     <Container>

@@ -13,6 +13,9 @@ const messageSchema = new Schema({
   messageFrom: {
     type: String,
   },
+  groupName: {
+    type: String
+  },
   createdAt: {
     type: Date,
     default: Date.now,

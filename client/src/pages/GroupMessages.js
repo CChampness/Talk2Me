@@ -76,29 +76,33 @@ function GroupMessages ({ currentPage, handleChange }) {
   const groupName = messageUser;
 
   const sendChatMessage = async (e) => {
-    try {
-      const messageToSend = {
-        messageFrom: myName,
-        messageText: text,
-        messageTo: messageUser,
-        groupName: groupName
-      };
+    const recipientList = groupData.data.getGroup.conversationBuddies;
+    console.log("recipientList:", recipientList);
+    for (let i=0; i < recipientList.length; i++) {
+      try {
+        const messageToSend = {
+          messageFrom: myName,
+          messageText: text,
+          messageTo: recipientList[i].buddyName,
+          groupName: groupName
+        };
 
-      let result;
-      // console.log("In sendChatMessage, messageToSend: ",messageToSend);
-      result = await saveMessage({
-        variables: { messageData: messageToSend },
-        onCompleted: refetch
-      });
+        let result;
+        // console.log("In sendChatMessage, messageToSend: ",messageToSend);
+        result = await saveMessage({
+          variables: { messageData: messageToSend },
+          onCompleted: refetch
+        });
 // console.log("callin loadMessageList_2 AFTER saveMessage, result:",result);
-      if(result &&
-        result.data &&
-        result.data.saveMessage) {
-          messageList = loadMessageList_2(messageUser, result.data.saveMessage.savedMessages);
+        if(result &&
+          result.data &&
+          result.data.saveMessage) {
+            messageList = loadMessageList_2(messageUser, result.data.saveMessage.savedMessages);
+        }
+        console.log("messageList after loadMessageList_2:",messageList);
+      } catch (err) {
+        console.error(err);
       }
-      console.log("messageList after loadMessageList_2:",messageList);
-    } catch (err) {
-      console.error(err);
     }
     setNeedUpdate(needUpdate+1);
     setText("");
