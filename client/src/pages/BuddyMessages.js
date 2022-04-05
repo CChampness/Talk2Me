@@ -55,7 +55,9 @@ const loadMessageList_2 = (messageUser, usersData) => {
   for (let i=0; i < usrMsgs.length; i++) {
     if ((usrMsgs[i].messageTo === messageUser && usrMsgs[i].messageFrom === myName) ||
         (usrMsgs[i].messageTo === myName && usrMsgs[i].messageFrom === messageUser)) {
-      pushUnique(wkgMsgList2, usrMsgs[i]);
+      if (!usrMsgs[i].groupName || usrMsgs[i]==="none") {
+        pushUnique(wkgMsgList2, usrMsgs[i]);
+      }
     }
   }
   wkgMsgList2.sort((a, b) => (a.createdAt > b.createdAt) ? 1 : -1);
@@ -115,7 +117,7 @@ console.log("BuddyMessages messageList after loadMessageList_1:",messageList);
 
   return(
     <Container>
-      <h3>needUpdate: {needUpdate}</h3>
+      <h5>needUpdate: {needUpdate} Messaging with buddy {messageUser}</h5>
       <div style={{marginBottom:"5rem"}}>
         {messageList.map((msg, ndx)=> (
           <div key={ndx} style={{textAlign: msg.messageFrom===myName?"right":"left"}}>
