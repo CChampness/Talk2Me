@@ -36,7 +36,7 @@ const loadMessageList_1 = (messageUser, usersData) => {
     for (let j=0; j < usrMsgs[i].savedMessages.length; j++) {
       if ((usrMsgs[i].savedMessages[j].messageTo === messageUser && usrMsgs[i].savedMessages[j].messageFrom === myName) ||
           (usrMsgs[i].savedMessages[j].messageTo === myName && usrMsgs[i].savedMessages[j].messageFrom === messageUser)) {
-        if (!usrMsgs[i].savedMessages[j].groupName || usrMsgs[i].savedMessages[j]==="none")
+        if (!usrMsgs[i].savedMessages[j].groupName || usrMsgs[i].savedMessages[j].groupName==="none")
           pushUnique(wkgMsgList2, usrMsgs[i].savedMessages[j]);
       }
     }
@@ -55,7 +55,7 @@ const loadMessageList_2 = (messageUser, usersData) => {
   for (let i=0; i < usrMsgs.length; i++) {
     if ((usrMsgs[i].messageTo === messageUser && usrMsgs[i].messageFrom === myName) ||
         (usrMsgs[i].messageTo === myName && usrMsgs[i].messageFrom === messageUser)) {
-      if (!usrMsgs[i].groupName || usrMsgs[i]==="none") {
+      if (!usrMsgs[i].groupName || usrMsgs[i].groupName==="none") {
         pushUnique(wkgMsgList2, usrMsgs[i]);
       }
     }

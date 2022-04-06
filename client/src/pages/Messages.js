@@ -8,7 +8,11 @@ import { CREATE_GROUP } from '../utils/mutations';
 import Auth from '../utils/auth';
 import { useGlobalContext } from '../utils/GlobalContext';
 
-// let selectedTgtName;
+// TWO BUGS
+// 1. "none" is displayed as if it were an actual group
+// 2. Need to force refresh of buddy list whenever we come into this component.
+//    Currently, if you select a new buddy in FindBuddies, then come directly
+//    into this component, the new buddy is not displayed.
 
 // The state gets changed in the Nav component
 function Messages ({ currentPage, handleChange }) {
@@ -64,6 +68,7 @@ function Messages ({ currentPage, handleChange }) {
   }
 
   console.log("in Messages, meData.data.me.savedMessages:",meData.data.me.savedMessages);
+  console.log("in Messages, meData.data.me.savedBuddies:",meData.data.me.savedBuddies);
   let myGroups = myGroupData.data.myGroups;
   console.log("1) in Messages, myGroups:",myGroups);
   let savedMessages = [] = meData.data.me.savedMessages;
@@ -79,9 +84,9 @@ function Messages ({ currentPage, handleChange }) {
 
   return (
     <Container>
-      <h3>Select the buddy or group that you want to message with</h3>
+      <h4>Select the buddy or group that you want to message with</h4>
       <hr/>
-      <h4>Your buddies</h4>
+      <h5>Your buddies</h5>
       <>
         {!meData.data.me.savedBuddies.length ?
           <h3>No conversation buddies chosen yet!</h3>
@@ -100,10 +105,10 @@ function Messages ({ currentPage, handleChange }) {
               />
             </div>
           ))}
-      <h4>Your groups</h4>
-          {/* {myGroupData.data.myGroups.map((group, ndx) => ( */}
+      <h5>Your groups</h5>
           {myGroups.map((group, ndx) => (
-            <div key={ndx} className="mb-3">
+            (group.groupName && group.groupName !== "none") ?
+            (<div key={ndx} className="mb-3">
               <Form.Check className="rads"
                 name="msgTarget"
                 id={group.groupName}
@@ -112,8 +117,10 @@ function Messages ({ currentPage, handleChange }) {
                 type='radio'
                 value="group"
               />
-            </div>
-          ))}
+            </div>)
+            :
+            null)
+          )}
           </Form.Group>
           <Button
             type='submit'

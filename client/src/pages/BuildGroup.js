@@ -41,7 +41,7 @@ function BuildGroup ({ currentPage, handleChange }) {
   const { setMessageUser } = useGlobalContext();
   const [groupNameInp, setGroupNameInp] = useState('');
   const [ownerNameInp, setOwnerNameInp] = useState('');
-  const [groupItem, setGroupItem] = useState({ selectedGroup: ""});
+  const [groupItem, setGroupItem] = useState({ selectedGroup: "nada"});
   const [buddyItem, setBuddyItem] = useState({ selectedBuddy: ""});
 
   const { selectedBuddy } = buddyItem;
@@ -60,7 +60,7 @@ function BuildGroup ({ currentPage, handleChange }) {
     
   // let currentGroup = "TBD";
 
-  // create function to handle saving the profile to the database
+  // Handle saving the profile to the database
   const handleCreateGroup = async (e) => {
     e.preventDefault();
     setGroupItem({selectedGroup: groupNameInp});
@@ -203,8 +203,10 @@ function BuildGroup ({ currentPage, handleChange }) {
         </Form.Row>
       </Form>
       <br/><hr/><br/>
-      <h3>Add buddies to your selected conversation group: {selectedGroup}</h3>
+      {(selectedGroup === "nada") ? <h3>Please choose a group</h3> :
       <>
+        <h3>Add buddies to your selected conversation group: {selectedGroup}</h3>
+     
         {!meData.data.me.savedBuddies.length ?
           <h3>No conversaion buddies chosen yet!</h3>
         :
@@ -227,6 +229,7 @@ function BuildGroup ({ currentPage, handleChange }) {
         </Form>
         }
       </>
+      }
     </Container>
   );
 }

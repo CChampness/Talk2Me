@@ -104,7 +104,7 @@ const resolvers = {
     addBuddy: async (parent, { buddyData }, context) => {
       const updatedCGroup = await ConversationGroup.findOneAndUpdate(
         { groupName: buddyData.groupName },
-        { $push: { conversationBuddies: buddyData } },
+        { $addToSet: { conversationBuddies: buddyData } },
         {new: true}
       );
 console.log("addBuddy:",buddyData);
