@@ -156,7 +156,6 @@ function BuildGroup ({ currentPage, handleChange }) {
   return (
     <Container>
       <h3>Select your conversation group</h3>
-      <h5>(Need to add group members under each group)</h5>
       {(!myGroupData.data.myGroups || !myGroupData.data.myGroups.length) ?
         <h4>(You have not yet created any groups)</h4>
         :

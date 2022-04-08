@@ -117,7 +117,7 @@ console.log("BuddyMessages messageList after loadMessageList_1:",messageList);
 
   return(
     <Container>
-      <h5>needUpdate: {needUpdate} Messaging with buddy {messageUser}</h5>
+      <h5>Messaging with buddy {messageUser}</h5>
       <div style={{marginBottom:"5rem"}}>
         {messageList.map((msg, ndx)=> (
           <div key={ndx} style={{textAlign: msg.messageFrom===myName?"right":"left"}}>

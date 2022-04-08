@@ -56,94 +56,6 @@ The purpose of conversation is to share ideas and experiences.  Let's focus on t
 ## Home page appearance (while logged in)
 ![](./Assets/LoggedIn-page.png)
 
-## Mongodb Database under Apollo GraphQL
-```
-  type User {
-    _id: ID
-    username: String
-    email: String
-    profile: Profile
-    savedBuddies: [Buddy]!
-    savedMessages: [Message]!
-  }
-
-  type Message {
-    _id: ID
-    messageTo: String
-    messageText: String
-    messageFrom: String
-    createdAt: String
-  }
-
-  input MessageInput {
-    _id: ID
-    messageTo: String
-    messageText: String
-    messageFrom: String
-    createdAt: String
-  }
-
-  type Buddy {
-    buddyName: String
-  }
-
-  input BuddyInput {
-    buddyName: String
-  }
-
-  type Profile {
-    name: String
-    interests: String
-    language: String
-    readingLevel: String
-    writingLevel: String
-    grammarLevel: String
-    pronunciationLevel: String
-    sex: String
-    age: String
-    countryFrom: String
-    countryNow: String
-    contactInfo: String
-    resources: String
-  }
-
-  input ProfileInput {
-    name: String
-    interests: String
-    language: String
-    readingLevel: String
-    writingLevel: String
-    grammarLevel: String
-    pronunciationLevel: String
-    sex: String
-    age: String
-    countryFrom: String
-    countryNow: String
-    contactInfo: String
-    resources: String
-  }
-
-  type Auth {
-    token: ID!
-    user: User
-  }
-
-  type Query {
-    me: User
-    users: [User]!
-  }
-
-  type Mutation {
-    addUser(username: String!, email: String!, password: String!): Auth
-    loginUser(email: String!, password: String!): Auth
-    saveProfile(profileData: ProfileInput!): User
-    saveBuddy(buddyData: BuddyInput!): User
-    saveMessage(messageData: MessageInput!): User
-    deleteMessage(messageData: MessageInput!): User
-    removeBuddy(buddyName: String!): User
-  }
-```
-
 ## Technologies
 * MERN Stack
 * Single-Page
@@ -174,5 +86,5 @@ The purpose of conversation is to share ideas and experiences.  Let's focus on t
 
 ## [Repository](https://github.com/CChampness/Talk2Me)
 
-## [Deployment](https://lit-shelf-69294.herokuapp.com/)
+## [Deployment](https://moremessages.herokuapp.com/)
 
