@@ -19,7 +19,7 @@ const highLightSelected = (cardId) => {
 // The state gets changed in the Nav component
 function FindBuddies ({ currentPage, handleChange }) {
   const pageChange = (page) => handleChange(page);
-  const {loading, error, data } = useQuery(GET_USERS);
+  const {loading, error, data, refetch } = useQuery(GET_USERS);
   const [saveBuddy] = useMutation(SAVE_BUDDY);
   const [currentUserName, setCurrentUserName] = useState('');
   const { setMessageUser } = useGlobalContext();
@@ -46,6 +46,7 @@ function FindBuddies ({ currentPage, handleChange }) {
 
       await saveBuddy({
         variables: { buddyData: buddyToSave },
+        onCompleted: refetch
       });
 
       highLightSelected(username);
@@ -123,7 +124,7 @@ function FindBuddies ({ currentPage, handleChange }) {
               </tbody></table>
             </a>
           </span>
-          <Button
+          {/* <Button
             type='submit'
             variant='success'
               onClick={() => {
@@ -132,7 +133,7 @@ function FindBuddies ({ currentPage, handleChange }) {
                   pageChange('SaveMessage');
                 }}>
             LEAVE MESSAGE FOR {user.username}
-          </Button>
+          </Button> */}
         </figure>
       </div>
     )

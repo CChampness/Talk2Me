@@ -16,6 +16,7 @@ const resolvers = {
     users: async (parent, args, context) => {
       if (context.user) {
         const userData = await User.find();
+        console.log("Query for GET_USERS, returning:",userData);
         return userData;
       }
       throw new AuthenticationError('You need to be logged in!');
@@ -85,7 +86,7 @@ const resolvers = {
       console.log("createGroup with",groupName,"for",ownerName);
       const group = await ConversationGroup.create({ groupName, ownerName });
       console.log("group:",group);
-      return { group };
+      return group;
     },
 
     saveBuddy: async (parent, { buddyData }, context) => {

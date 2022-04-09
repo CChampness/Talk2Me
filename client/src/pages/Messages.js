@@ -19,16 +19,13 @@ function Messages ({ currentPage, handleChange }) {
   const pageChange = (page) => handleChange(page);
   const meData = useQuery(GET_ME);
   const myGroupData = useQuery(GET_MY_GROUPS);
-  const [createGroup] = useMutation(CREATE_GROUP);
-  const [addBuddy] = useMutation(ADD_BUDDY);
+  // const [createGroup] = useMutation(CREATE_GROUP);
+  // const [addBuddy] = useMutation(ADD_BUDDY);
   const [currentUserName, setCurrentUserName] = useState('');
   const [selectedTgtType, setSelectedTgtType] = useState([]);
   const { setMessageUser, messageUser, setMsgTgtType, msgTgtName, msgTgtType } = useGlobalContext();
   const [groupNameInp, setGroupNameInp] = useState('');
   const [ownerNameInp, setOwnerNameInp] = useState('');
-  // const [groupItem, setGroupItem] = useState({ selectedGroup: ""});
-  // const [buddyItem, setBuddyItem] = useState({ selectedBuddy: ""});
-  // const [buddyItem, setBuddyItem] = useState({ buddyItem: ""});
 
   // set initial form state
   const [groupInfo, setGroupInfo] = useState({

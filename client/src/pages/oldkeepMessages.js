@@ -44,7 +44,6 @@ import { useGlobalContext } from '../utils/GlobalContext';
 function Messages ({ currentPage, handleChange }) {
   const pageChange = (page) => handleChange(page);
   const meData = useQuery(GET_ME);
-  // const groupData = useQuery(GET_GROUPS);
   const myGroupData = useQuery(GET_MY_GROUPS);
   const [createGroup] = useMutation(CREATE_GROUP);
   const [addBuddy] = useMutation(ADD_BUDDY);

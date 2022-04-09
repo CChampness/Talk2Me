@@ -19,6 +19,8 @@
 // On the group page, if/when the currentUser pops into a group,
 // show a "join conversation" button if there is a chat in progress.
 // GET_ME, then get the array of currentUser's Buddies.  Display them.
+// Handle the group owner same as one of the buddies in the group,
+// but not actually one of the buddies contained in the group
 
 import React, {useEffect, useState} from 'react';
 import { Container, Col, Form, Button } from 'react-bootstrap';
@@ -35,12 +37,12 @@ function BuildGroup ({ currentPage, handleChange }) {
   const pageChange = (page) => handleChange(page);
   const meData = useQuery(GET_ME);
   const myGroupData = useQuery(GET_MY_GROUPS);
-  const [createGroup] = useMutation(CREATE_GROUP);
+  const [createGroup] = useMutation(CREATE_GROUP);  //<<<<<<<<<< refetch <<<<<<<<<<
   const [addBuddy] = useMutation(ADD_BUDDY);
   const [currentUserName, setCurrentUserName] = useState('');
-  const { setMessageUser } = useGlobalContext();
+  // const { setMessageUser } = useGlobalContext();
   const [groupNameInp, setGroupNameInp] = useState('');
-  const [ownerNameInp, setOwnerNameInp] = useState('');
+  // const [ownerNameInp, setOwnerNameInp] = useState('');
   const [groupItem, setGroupItem] = useState({ selectedGroup: "nada"});
   const [buddyItem, setBuddyItem] = useState({ selectedBuddy: ""});
 
@@ -78,10 +80,11 @@ function BuildGroup ({ currentPage, handleChange }) {
       };
   
       console.log("In handleCreateGroup, groupToCreate: ",groupToCreate);
-      const {result} = await createGroup({
-        variables: { ...groupToCreate }
+      const result = await createGroup({
+        variables: { ...groupToCreate },
+        onCompleted: myGroupData.refetch
       });
-      console.log(result);
+      console.log("result:",result);
   
     } catch (err) {
       console.error(err);

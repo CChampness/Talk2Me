@@ -68,7 +68,8 @@ function BuddyMessages ({ currentPage, handleChange }) {
   const pageChange = (page) => handleChange(page);
   const [text, setText] = useState("");
   const [saveMessage] = useMutation(SAVE_MESSAGE);
-  const { loading, error, data, refetch } = useQuery(GET_USERS);
+  const { loading, error, data, refetch } = useQuery(GET_USERS,
+    {pollInterval: 1000});
   const [needUpdate, setNeedUpdate] = useState(1);
 
   const [deleteMessage] = useMutation(DELETE_MESSAGE);
