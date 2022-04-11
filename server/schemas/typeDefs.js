@@ -107,6 +107,7 @@ const typeDefs = gql`
     users: [User]!
     myGroups: [ConversationGroup]
     getGroup(groupName: String!): ConversationGroup
+    getAllGroups: [ConversationGroup]
   }
 
   type Mutation {
@@ -117,6 +118,7 @@ const typeDefs = gql`
     saveBuddy(buddyData: BuddyInput!): User
     addBuddy(buddyData: BuddyInput): ConversationGroup
     createGroup(groupName: String!, ownerName: String!): ConversationGroup
+    deleteGroup(groupName: String!): ConversationGroup
     saveMessage(messageData: MessageInput!): User
     deleteMessage(messageData: MessageInput!): User
     removeBuddy(buddyName: String!): User

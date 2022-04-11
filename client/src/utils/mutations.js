@@ -24,14 +24,6 @@ export const ADD_USER = gql`
   }
 `;
 
-// export const DELETE_USER = gql`
-//   mutation deleteUser($userData: UserInput!) {
-//     deleteUser(userData: $userData) {
-//       _id
-//     }
-//   }
-// `;
-
 export const DELETE_USER = gql`
   mutation deleteUser($username: String!) {
     deleteUser(username: $username) {
@@ -45,6 +37,14 @@ export const CREATE_GROUP = gql`
     createGroup(groupName: $groupName, ownerName: $ownerName) {
       groupName
       ownerName
+    }
+  }
+`;
+
+export const DELETE_GROUP = gql`
+  mutation deleteGroup($groupName: String!) {
+    deleteGroup(groupName: $groupName) {
+      groupName
     }
   }
 `;

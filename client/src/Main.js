@@ -1,6 +1,8 @@
 import React from 'react';
 import About from './pages/About';
 import Admin from './pages/Admin';
+import UserMaint from './pages/UserMaint';
+import GroupMaint from './pages/GroupMaint';
 import Resume from './pages/Resume';
 import SignupForm from './components/SignupForm';
 import LoginForm from './components/LoginForm';
@@ -23,6 +25,10 @@ function Main({ currentPage, setCurrentPage}) {
         return <About currentPage={currentPage} handleChange={handleChange} />;
       case 'Admin':
         return <Admin currentPage={currentPage} handleChange={handleChange} />;
+      case 'UserMaint':
+        return <UserMaint currentPage={currentPage} handleChange={handleChange} />;
+      case 'GroupMaint':
+        return <GroupMaint currentPage={currentPage} handleChange={handleChange} />;
       case 'SignupForm':
         return <SignupForm currentPage={currentPage} handleChange={handleChange} />;
       case 'LoginForm':

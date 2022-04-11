@@ -3,8 +3,8 @@ import { Container, Col, Form, Button } from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
 import { GET_MY_GROUPS } from '../utils/queries';
-import { ADD_BUDDY } from '../utils/mutations';
-import { CREATE_GROUP } from '../utils/mutations';
+// import { ADD_BUDDY } from '../utils/mutations';
+// import { CREATE_GROUP } from '../utils/mutations';
 import Auth from '../utils/auth';
 import { useGlobalContext } from '../utils/GlobalContext';
 
@@ -27,6 +27,8 @@ function Messages ({ currentPage, handleChange }) {
   const [groupNameInp, setGroupNameInp] = useState('');
   const [ownerNameInp, setOwnerNameInp] = useState('');
 
+  // setMessageUser("(None selected)");
+
   // set initial form state
   const [groupInfo, setGroupInfo] = useState({
     groupName: '',
@@ -37,6 +39,7 @@ function Messages ({ currentPage, handleChange }) {
     e.preventDefault();
     // Go to a page for either buddy messages or group messages
     // and pass the target name via context
+    console.log("in Messages, selectedTgtType:",selectedTgtType);
     if (selectedTgtType === "buddy") {
       pageChange('BuddyMessages');
     } else {
@@ -50,7 +53,7 @@ function Messages ({ currentPage, handleChange }) {
     setMessageUser(e.target.id);
     setMsgTgtType(e.target.value);
     setSelectedTgtType(e.target.value);
-    // selectedTgtName = e.target.id;
+    console.log("in Messages handleTgtChange, selectedTgtType, messageUser:",selectedTgtType, messageUser);
   };
 
   if (meData.loading || myGroupData.loading) {

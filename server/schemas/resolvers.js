@@ -22,6 +22,15 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
 
+    getAllGroups: async (parent, args, context) => {
+      if (context.user) {
+        const allGroupsData = await ConversationGroup.find();
+        console.log("Query for GET_ALL_GROUPS, returning:",allGroupsData);
+        return allGroupsData;
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+
     myGroups: async (parent, args, context) => {
       if (context.user) {
         const myGroupsData = await ConversationGroup.find(
@@ -79,7 +88,7 @@ const resolvers = {
 
         return user;
       }
-      throw new AuthenticationError('No user found with this email address');
+      throw new AuthenticationError('You need to be logged in!');
     },
 
     createGroup: async (parent, {groupName, ownerName}) => {
@@ -87,6 +96,16 @@ const resolvers = {
       const group = await ConversationGroup.create({ groupName, ownerName });
       console.log("group:",group);
       return group;
+    },
+
+    deleteGroup: async (parent, { groupName }, context) => {
+      if (context.user) {
+        console.log("Deleting group: ",groupName);
+        const group = await ConversationGroup.findOneAndDelete({ groupName });
+
+        return group;
+      }
+      throw new AuthenticationError('You need to be logged in!');
     },
 
     saveBuddy: async (parent, { buddyData }, context) => {

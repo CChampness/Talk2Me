@@ -70,6 +70,17 @@ export const GET_USERS = gql`
   }
 `;
 
+export const GET_ALL_GROUPS = gql`
+{
+  getAllGroups {
+    groupName
+    ownerName
+    conversationBuddies {
+      buddyName
+    }
+  }
+}`;
+
 export const GET_GROUP = gql`
 query getGroup($groupName: String!) {
   getGroup(groupName: $groupName) {

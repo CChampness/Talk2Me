@@ -147,6 +147,8 @@ console.log("messageList after myGroupMsgs:",messageList);
 return(
     <Container>
       <h5>Messaging with group {messageUser}</h5>
+      {/* <h6>Need update {needUpdate}</h6> */}
+      {!messageList.length ? <h4>No messages</h4> : null}
       <div style={{marginBottom:"5rem"}}>
         {messageList.map((msg, ndx)=> (
           <div key={ndx} style={{textAlign: msg.messageFrom===myName?"right":"left"}}>
