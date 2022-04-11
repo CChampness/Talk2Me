@@ -9,7 +9,7 @@ function Admin({ currentPage, handleChange }) {
   const handleSelection = async (e) => {
     e.preventDefault();
     // Go to a page for either user collection maintenance or group maintenance
-    if (e.target.id === "User") {
+    if (selectedTgtType === "User") {
       pageChange('UserMaint');
     } else {
       pageChange('GroupMaint');

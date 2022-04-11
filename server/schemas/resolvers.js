@@ -16,7 +16,7 @@ const resolvers = {
     users: async (parent, args, context) => {
       if (context.user) {
         const userData = await User.find();
-        console.log("Query for GET_USERS, returning:",userData);
+        // console.log("Query for GET_USERS, returning:",userData);
         return userData;
       }
       throw new AuthenticationError('You need to be logged in!');
@@ -25,7 +25,7 @@ const resolvers = {
     getAllGroups: async (parent, args, context) => {
       if (context.user) {
         const allGroupsData = await ConversationGroup.find();
-        console.log("Query for GET_ALL_GROUPS, returning:",allGroupsData);
+        // console.log("Query for GET_ALL_GROUPS, returning:",allGroupsData);
         return allGroupsData;
       }
       throw new AuthenticationError('You need to be logged in!');
@@ -36,7 +36,7 @@ const resolvers = {
         const myGroupsData = await ConversationGroup.find(
           { ownerName: context.user.username }
         );
-        console.log("myGroupsData:",myGroupsData);
+        // console.log("myGroupsData:",myGroupsData);
         return myGroupsData;
       }
       throw new AuthenticationError('You need to be logged in!');
@@ -44,11 +44,11 @@ const resolvers = {
 
     getGroup: async (parent, {groupName}, context) => {
       if (context.user) {
-        console.log("getGroup resolver, groupName:",groupName);
+        // console.log("getGroup resolver, groupName:",groupName);
         const groupData = await ConversationGroup.findOne(
           { groupName }
         );
-        console.log("getGroup resolver, groupData:", groupData);
+        // console.log("getGroup resolver, groupData:", groupData);
         return groupData;
       }
       throw new AuthenticationError('You need to be logged in!');
@@ -83,7 +83,7 @@ const resolvers = {
 
     deleteUser: async (parent, { username }, context) => {
       if (context.user) {
-        console.log("Deleting user: ",username);
+        // console.log("Deleting user: ",username);
         const user = await User.findOneAndDelete({ username });
 
         return user;
@@ -92,15 +92,15 @@ const resolvers = {
     },
 
     createGroup: async (parent, {groupName, ownerName}) => {
-      console.log("createGroup with",groupName,"for",ownerName);
+      // console.log("createGroup with",groupName,"for",ownerName);
       const group = await ConversationGroup.create({ groupName, ownerName });
-      console.log("group:",group);
+      // console.log("group:",group);
       return group;
     },
 
     deleteGroup: async (parent, { groupName }, context) => {
       if (context.user) {
-        console.log("Deleting group: ",groupName);
+        // console.log("Deleting group: ",groupName);
         const group = await ConversationGroup.findOneAndDelete({ groupName });
 
         return group;
@@ -127,14 +127,14 @@ const resolvers = {
         { $addToSet: { conversationBuddies: buddyData } },
         {new: true}
       );
-console.log("addBuddy:",buddyData);
-console.log("updatedCGroup:",updatedCGroup);
+// console.log("addBuddy:",buddyData);
+// console.log("updatedCGroup:",updatedCGroup);
       return updatedCGroup;
     },
     
     saveMessage: async (parent, { messageData }, context) => {
       if (context.user) {
-        console.log("in resolver saveMessage, messageData:",messageData);
+        // console.log("in resolver saveMessage, messageData:",messageData);
         const updatedUser = await User.findOneAndUpdate(
           { username: messageData.messageTo },
           { $push: { savedMessages: messageData }},

@@ -37,7 +37,7 @@ function UserMaint({ currentPage, handleChange }) {
         
   return (
     <div className="Admindiv">
-      <h3>Admin Functions</h3>
+      <h3>Admin User Maintenance</h3>
       {
         data.users.map((user, ndx) => (user.username === currentUserName)?
         <div key={ndx}></div>

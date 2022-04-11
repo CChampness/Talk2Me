@@ -83,7 +83,7 @@ function GroupMessages ({ currentPage, handleChange }) {
       ...groupData.data.getGroup.conversationBuddies,
       // {buddyName: groupData.data.getGroup.ownerName}  // Sending to self!
     ];
-    console.log("recipientList:", recipientList);
+    // console.log("recipientList:", recipientList);
     for (let i=0; i < recipientList.length; i++) {
       try {
         const messageToSend = {
@@ -105,7 +105,7 @@ function GroupMessages ({ currentPage, handleChange }) {
           result.data.saveMessage) {
             messageList = loadMessageList_2(messageUser, result.data.saveMessage.savedMessages);
         }
-        console.log("messageList after loadMessageList_2:",messageList);
+        // console.log("messageList after loadMessageList_2:",messageList);
       } catch (err) {
         console.error(err);
       }
@@ -116,24 +116,22 @@ function GroupMessages ({ currentPage, handleChange }) {
 
   if (allUsersData.loading) return <h4>Loading...</h4>;
 // let allUsersData = data;
-let myUserMsgs;
 let myGroupMsgs = [];
-console.log("messageUser:",messageUser);
-console.log("allUsersData:",allUsersData.data);
-console.log("GroupMessages, groupData:",groupData);
+// console.log("messageUser:",messageUser);
+// console.log("allUsersData:",allUsersData.data);
+// console.log("GroupMessages, groupData:",groupData);
   allUsersData.data.users.map((user) => {
-    console.log("allUsersData.users.username:", user.username);
-    if(user.username === myName) {
-      myUserMsgs = user.savedMessages;
-      myUserMsgs.map((msg) => {
+    // console.log("allUsersData.users.username:", user.username);
+    // if(user.username === myName) {
+      user.savedMessages.map((msg) => {
         if (msg.groupName === messageUser) {
           myGroupMsgs = [...myGroupMsgs, msg];
         }
       })
-    }
+    // }
   });
-  console.log("myUserMsgs:", myUserMsgs);
-  console.log("myGroupMsgs:", myGroupMsgs);
+
+  // console.log("myGroupMsgs:", myGroupMsgs);
 
 // Get an array of all of the others in the group, without me.
 // myName may or may not be the owner of the group.
@@ -142,7 +140,7 @@ console.log("GroupMessages, groupData:",groupData);
   }
 //  setMessageList(newMsgList);
 messageList = myGroupMsgs;
-console.log("messageList after myGroupMsgs:",messageList);
+// console.log("messageList after myGroupMsgs:",messageList);
 
 return(
     <Container>
