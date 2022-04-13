@@ -23,6 +23,7 @@ export const GET_ME = gql`
       }
       savedBuddies {
         buddyName
+        status
       }
       savedMessages {
         _id
@@ -58,6 +59,7 @@ export const GET_USERS = gql`
       }
       savedBuddies {
         buddyName
+        status
       }
       savedMessages {
         messageText

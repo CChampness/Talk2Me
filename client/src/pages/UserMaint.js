@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ReactNbsp from 'react-nbsp';
 import { Button } from 'react-bootstrap';
 import Auth from '../utils/auth';
 import { useQuery, useMutation } from '@apollo/client';
@@ -46,24 +47,12 @@ function UserMaint({ currentPage, handleChange }) {
           <figure className="proj-card">
             <h4 className="card-title">{user.username}</h4>
             <table><tbody>
-              <tr>
-                <td>Interests</td><td><nbsp className="nbsp"/></td><td>{user.profile?user.profile.interests:""}</td>
-              </tr>
-              <tr>
-                <td>Language</td><td><nbsp className="nbsp"/></td><td>{user.profile?user.profile.language:""}</td>
-              </tr>
-              <tr>
-                <td>Country From</td><td><nbsp className="nbsp"/></td><td>{user.profile?user.profile.countryFrom:""}</td>
-              </tr>
-              <tr>
-                <td>Country Now</td><td><nbsp className="nbsp"/></td><td>{user.profile?user.profile.countryNow:""}</td>
-              </tr>
-              <tr>
-                <td>Contact Info</td><td><nbsp className="nbsp"/></td><td>{user.profile?user.profile.contactInfo:""}</td>
-              </tr>
-              <tr>
-                <td>email</td><td><nbsp className="nbsp"/></td><td>{user.profile?user.email:""}</td>
-              </tr>
+            {!user.savedBuddies.length ?
+              <h3>No conversaion buddies</h3>
+            :
+              user.savedBuddies.map((buddy, ndx) => (
+                <tr><td><ReactNbsp/></td><td>{buddy.buddyName}</td></tr>
+              ))}
             </tbody></table>
             <Button
               type='submit'
@@ -77,6 +66,14 @@ function UserMaint({ currentPage, handleChange }) {
           </figure>
         </div>
       )}
+      <Button
+        type='submit'
+        variant='success'
+          onClick={() => {
+            pageChange('Admin');
+          }}>
+        BACK TO ADMIN OPTIONS
+      </Button>
     </div>
   );
 }

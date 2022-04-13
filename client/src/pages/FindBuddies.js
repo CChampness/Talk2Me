@@ -91,36 +91,12 @@ function FindBuddies ({ currentPage, handleChange }) {
                 <tr>
                   <td>Language</td><td><nbsp className="nbsp"/></td><td>{user.profile?user.profile.language:""}</td>
                 </tr>
-                {/* <tr>
-                  <td>Reading Level</td><td><nbsp className="nbsp"/></td><td>{user.profile?user.profile.readingLevel:""}</td>
-                </tr>
-                <tr>
-                  <td>Writing Level</td><td><nbsp className="nbsp"/></td><td>{user.profile?user.profile.writingLevel:""}</td>
-                </tr>
-                <tr>
-                  <td>Grammar Level</td><td><nbsp className="nbsp"/></td><td>{user.profile?user.profile.grammarLevel:""}</td>
-                </tr>
-                <tr>
-                  <td>Pronunciation</td><td><nbsp className="nbsp"/></td><td>{user.profile?user.profile.pronunciationLevel:""}</td>
-                </tr>
-                <tr>
-                  <td>Sex</td><td><nbsp className="nbsp"/></td><td>{user.profile?user.profile.sex:""}</td>
-                </tr>
-                <tr>
-                  <td>Age</td><td><nbsp className="nbsp"/></td><td>{user.profile?user.profile.age:""}</td>
-                </tr> */}
                 <tr>
                   <td>Country From</td><td><nbsp className="nbsp"/></td><td>{user.profile?user.profile.countryFrom:""}</td>
                 </tr>
                 <tr>
                   <td>Country Now</td><td><nbsp className="nbsp"/></td><td>{user.profile?user.profile.countryNow:""}</td>
                 </tr>
-                {/* <tr>
-                  <td>Contact Info</td><td><nbsp className="nbsp"/></td><td>{user.profile?user.profile.contactInfo:""}</td>
-                </tr>
-                <tr>
-                  <td>email</td><td><nbsp className="nbsp"/></td><td>{user.profile?user.email:""}</td>
-                </tr> */}
               </tbody></table>
             </a>
           </span>

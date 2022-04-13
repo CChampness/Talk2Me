@@ -56,6 +56,7 @@ export const SAVE_BUDDY = gql`
       email
       savedBuddies {
         buddyName
+        status
       }
     }
   }
@@ -64,8 +65,8 @@ export const SAVE_BUDDY = gql`
 export const ADD_BUDDY = gql`
   mutation addBuddy($buddyData: BuddyInput) {
     addBuddy(buddyData: $buddyData) {
-      groupName
       buddyName
+      status
     }
   }
 `;

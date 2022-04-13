@@ -6,7 +6,7 @@ import GroupMaint from './pages/GroupMaint';
 import Resume from './pages/Resume';
 import SignupForm from './components/SignupForm';
 import LoginForm from './components/LoginForm';
-import FindBuddies from './pages/FindBuddies';
+import InviteBuddy from './pages/InviteBuddy';
 import BuildGroup from './pages/BuildGroup';
 import SaveMessage from './pages/SaveMessage';
 import Messages from './pages/Messages';
@@ -33,10 +33,10 @@ function Main({ currentPage, setCurrentPage}) {
         return <SignupForm currentPage={currentPage} handleChange={handleChange} />;
       case 'LoginForm':
         return <LoginForm currentPage={currentPage} handleChange={handleChange} />;
-      case 'FindBuddies':
+      case 'InviteBuddy':
         return (
           <section className="row justify-center">
-            <FindBuddies currentPage={currentPage} handleChange={handleChange}/>
+            <InviteBuddy currentPage={currentPage} handleChange={handleChange}/>
           </section>
         );
       case 'BuildGroup':

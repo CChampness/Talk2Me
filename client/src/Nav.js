@@ -8,7 +8,7 @@ function Nav({ currentPage, handlePageChange }) {
     <nav>
       <a onClick={() => handlePageChange('About')}>Home</a>
       <a onClick={() => handlePageChange('CreateProfile')}>Profile</a>
-      <a onClick={() => handlePageChange('FindBuddies')}>Buddies</a>
+      <a onClick={() => handlePageChange('InviteBuddy')}>Buddies</a>
       <a onClick={() => handlePageChange('BuildGroup')}>Groups</a>
       <a onClick={() => handlePageChange('Messages')}>Messages</a>
       <div>

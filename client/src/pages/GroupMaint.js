@@ -63,6 +63,14 @@ function GroupMaint({ currentPage, handleChange }) {
           </figure>
         </div>
       )}
+      <Button
+        type='submit'
+        variant='success'
+          onClick={() => {
+            pageChange('Admin');
+          }}>
+        BACK TO ADMIN OPTIONS
+      </Button>
     </div>
   );
 }

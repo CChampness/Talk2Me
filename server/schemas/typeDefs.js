@@ -22,13 +22,15 @@ const typeDefs = gql`
   }
 
   type Buddy {
-    groupName: String
     buddyName: String!
+    groupName: String
+    status: String
   }
 
   input BuddyInput {
-    groupName: String
     buddyName: String!
+    groupName: String
+    status: String
   }
 
   type ConversationGroup {
