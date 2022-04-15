@@ -50,8 +50,8 @@ export const DELETE_GROUP = gql`
 `;
 
 export const SAVE_BUDDY = gql`
-  mutation saveBuddy($buddyData: BuddyInput!) {
-    saveBuddy(buddyData: $buddyData) {
+  mutation saveBuddy($buddyData: BuddyInput!, $whoToLookUp: String!) {
+    saveBuddy(buddyData: $buddyData, whoToLookUp: $whoToLookUp) {
       username
       email
       savedBuddies {
@@ -120,9 +120,13 @@ export const SAVE_PROFILE = gql`
 `;
 
 export const REMOVE_BUDDY = gql`
-  mutation removeBuddy($buddyName: ID!) {
-    removeBuddy(buddyName: $buddyName) {
-      _id
+  mutation removeBuddy($buddyName: String!, $whoToLookUp: String!) {
+    removeBuddy(buddyName: $buddyName, whoToLookUp: $whoToLookUp) {
+      username
+      savedBuddies {
+        buddyName
+        status
+      }
     }
   }
 `;

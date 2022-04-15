@@ -7,6 +7,7 @@ function About({ currentPage, handleChange }) {
   return (
     <div className="Aboutdiv">
       <h3>About Talk2Me</h3>
+      <p><u>Please note, this app is in Alpha test. *</u></p>
       <article id="about" className="imageArticle">
         <h4>Welcome to Talk2Me,  {Auth.loggedIn() ? Auth.getProfile().data.username : "please join us ... you may log in or sign up"}</h4>
         <p>
@@ -41,24 +42,7 @@ function About({ currentPage, handleChange }) {
         </p>
 
       </article>
-      {/* <article>
-        <h4>What is a language-learning coach?</h4>
-        <p>
-          A language-learning coach is a conversation practice partner who can make interesting suggestions for improving
-          your grasp of everyday English.
-        </p>
-        <p>
-          She is a native speaker you can depend on for useful feedback.
-        </p>
-        <Button
-            type='submit'
-            variant='success'
-              onClick={() => {
-                  pageChange('Resume');
-                }}>
-            About Coach Miriam
-          </Button>
-      </article> */}
+      <p>* Alpha testing is currently underway, and some known bugs are actively being worked.</p>
     </div>
   );
 }

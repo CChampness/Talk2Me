@@ -117,13 +117,13 @@ const typeDefs = gql`
     loginUser(email: String!, password: String!): Auth
     deleteUser(username: String!): User
     saveProfile(profileData: ProfileInput!): User
-    saveBuddy(buddyData: BuddyInput!): User
+    saveBuddy(buddyData: BuddyInput!, whoToLookUp: String): User
     addBuddy(buddyData: BuddyInput): ConversationGroup
     createGroup(groupName: String!, ownerName: String!): ConversationGroup
     deleteGroup(groupName: String!): ConversationGroup
     saveMessage(messageData: MessageInput!): User
     deleteMessage(messageData: MessageInput!): User
-    removeBuddy(buddyName: String!): User
+    removeBuddy(buddyName: String!, whoToLookUp: String): User
   }
 `;
 

@@ -108,10 +108,11 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
 
-    saveBuddy: async (parent, { buddyData }, context) => {
+    // Add Buddy to User
+    saveBuddy: async (parent, { buddyData, whoToLookUp }, context) => {
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
-          { _id: context.user._id },
+          { username: whoToLookUp },
           { $addToSet: { savedBuddies: buddyData } },
           {new: true}
         );
@@ -120,7 +121,8 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-    
+
+    // Add Buddy to ConversationGroup
     addBuddy: async (parent, { buddyData }, context) => {
       const updatedCGroup = await ConversationGroup.findOneAndUpdate(
         { groupName: buddyData.groupName },
@@ -169,13 +171,14 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-    
-    removeBuddy: async (parent, { buddyName }, context) => {
-      if (context.user) {
 
+    // Remove Buddy from User
+    removeBuddy: async (parent, { buddyName, whoToLookUp }, context) => {
+      if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $pull: { savedBuddies: {buddyName} } }
+          { username: whoToLookUp },
+          { $pull: { savedBuddies: {buddyName: buddyName} } },
+          {new: true}
         );
         return updatedUser;
       }

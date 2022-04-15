@@ -10,7 +10,8 @@ const conversationBuddySchema = new Schema(
     },
     buddyName: {
       type: String,
-      required: true
+      required: true,
+      trim: true
     }
   }
 );

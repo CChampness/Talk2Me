@@ -11,7 +11,8 @@ const groupSchema = new Schema(
     },
     ownerName: {
       type: String,
-      required: true
+      required: true,
+      trim: true
     },
     // conversationBuddies: [Buddy],
     conversationBuddies: { type: Array },

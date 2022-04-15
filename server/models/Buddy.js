@@ -4,10 +4,12 @@ const buddySchema = new Schema(
   {
     buddyName: {
       type: String,
-      required: true
+      required: true,
+      trim: true
     },
     groupName: {
-      type: String
+      type: String,
+      trim: true
     },
     status: {
       type: String,
