@@ -13,24 +13,24 @@ let extraMsg;
 const highLightInvited = (cardId) => {
 console.log("highLightInvited: ",cardId);
   let element = document.getElementById(cardId);
-  console.log("highLightInvited element: ",element);
+  // console.log("highLightInvited element: ",element);
   if (element && element.childNodes[0]) {
-    element.childNodes[0].childNodes[0].classList.add("boxHLPending");
-    // console.log("text:",element.childNodes[0].childNodes[0].childNodes[0].childNodes[0].innerText);
+    element.childNodes[0].childNodes[0].classList.add("boxHLInvited");
     extraMsg = "(Invited, not yet accepted)";
     element.childNodes[0].childNodes[0].childNodes[0].childNodes[1].innerText = extraMsg;
     element.childNodes[0].childNodes[0].childNodes[0].childNodes[1].style.color = "black";
-    // element.childNodes[0].childNodes[0].childNodes[0].childNodes[1].style.fontSize = "50%";
   }
 }
 
 const highLightSelected = (cardId) => {
-  console.log("highLightSelected: ",cardId);
+  // console.log("highLightSelected: ",cardId);
   let element = document.getElementById(cardId);
-  console.log("highLightSelected element: ",element);
+  // console.log("highLightSelected element: ",element);
   if (element && element.childNodes[0]) {
+    element.childNodes[0].childNodes[0].classList.remove("boxHLInvited");
     element.childNodes[0].childNodes[0].classList.add("boxHighlight");
     extraMsg = "Current Buddy";
+    // console.log("extraMsg:", extraMsg);
     element.childNodes[0].childNodes[0].childNodes[0].childNodes[1].innerText = extraMsg;
     element.childNodes[0].childNodes[0].childNodes[0].childNodes[1].style.color = "black";
   }
@@ -49,30 +49,28 @@ function InviteBuddy ({ currentPage, handleChange }) {
   const { setMessageUser } = useGlobalContext();
 
   // Step through the list of users and see which ones are in the current user's buddy list.
-  // useEffect(() => { if (data)
-  //   data.users.map((user) => isInvitedBuddy(currentUser, user) ? highLightInvited(user.username):
-  //     (isAlreadyBuddy(currentUser, user) ? highLightSelected(user.username):null));
-  // },[currentUserName, data]);
-  useEffect(() => { if (data)
+  useEffect(() => { if (data) {
+    // console.log("from line 68, in useEffect, data:", data);
     data.users.map((user) =>
       (buddyStatus(currentUser, user) === "Invited") ? highLightInvited(user.username):
       ((buddyStatus(currentUser, user) === "Buddy") ? highLightSelected(user.username):null)
     );
+  }
   },[currentUserName, data]);
 
   const thisUserHasInvitedMe = (userName) => {
-    console.log("thisUserHasInvitedMe:", userName);
+    // console.log("thisUserHasInvitedMe:", userName);
     const user = data.users.find(element => element.username === userName);
-    console.log("thisUserHasInvitedMe:", user.username);
+    // console.log("thisUserHasInvitedMe:", user.username);
     if (user && user.username === userName) {
       const niceUser = user.savedBuddies.find(element => (
         (element.buddyName === currentUserName) &&
         (element.status === "Invited")
       ));
-      console.log("niceUser:", niceUser?niceUser.buddyName:"UNDEF");
+      // console.log("niceUser:", niceUser?niceUser.buddyName:"UNDEF");
       if (niceUser) {
         highLightInvited(userName);
-        console.log("Just now called highLightInvited(userName):",userName);
+        // console.log("Just now called highLightInvited(userName):",userName);
         return true;
       }
     }
@@ -96,7 +94,7 @@ function InviteBuddy ({ currentPage, handleChange }) {
         buddyName: userName,
         status: "Buddy"
       };
-      console.log("handleAccept, buddyToSave: ",buddyToSave);
+      // console.log("handleAccept, buddyToSave: ",buddyToSave);
 
       await saveBuddy({
         variables: { buddyData: buddyToSave,
@@ -108,7 +106,7 @@ function InviteBuddy ({ currentPage, handleChange }) {
         buddyName: currentUserName,
         status: "Buddy"
       };
-      console.log("handleAccept, iAmNowHisBuddy: ",iAmNowHisBuddy);
+      // console.log("handleAccept, iAmNowHisBuddy: ",iAmNowHisBuddy);
 
       await saveBuddy({
         variables: { buddyData: iAmNowHisBuddy,
@@ -121,29 +119,29 @@ function InviteBuddy ({ currentPage, handleChange }) {
     }
   }
   
-  // If the "user" is in my buddy list AND his status is "Buddy", then return true;
-  const buddyStatus = (currentUser, user) => {
-    const found = currentUser.savedBuddies.find(element => element.buddyName === user.username);
+    const buddyStatus = (currentUser, user) => {
+    // console.log("Checking buddyStatus for:", currentUser.username, user.username);
+    const found = user.savedBuddies.find(element => element.buddyName === currentUser.username);
     if (found) {
-      console.log("buddyStatus for:", user.username, found.status);
+      // console.log("buddyStatus for:", user.username, found.status);
       return found.status;
     }
-    console.log("buddyStatus for:", user.username, false);
+    // console.log("buddyStatus for:", user.username, false);
     return false;
   }
 
   // If the "user" is in my buddy list AND his status is "Invited", then return true;
   const isInvitedBuddy = (currentUser, user) => {
     let found = false;
-    console.log("currentUser:",currentUser);
+    // console.log("currentUser:",currentUser);
     if (currentUser.savedBuddies)
     found = currentUser.savedBuddies.find(element => element.buddyName === user.username);
     if (found && found.status === "Invited") {
-      console.log("isAlreadyBuddy:", "Invited");
+      // console.log("isAlreadyBuddy:", "Invited");
       return true;
 
     }
-    console.log("isInvitedBuddy:", false);
+    // console.log("isInvitedBuddy:", false);
     return found;
   }
  
@@ -153,7 +151,7 @@ function InviteBuddy ({ currentPage, handleChange }) {
         buddyName: username,
         status: "Invited"
       };
-      console.log("handleInviteBuddy, buddyToInvite: ",buddyToInvite);
+      // console.log("handleInviteBuddy, buddyToInvite: ",buddyToInvite);
 
       await saveBuddy({
         variables: { buddyData: buddyToInvite,
@@ -168,35 +166,13 @@ function InviteBuddy ({ currentPage, handleChange }) {
     }
   }
     
-  // This function saves selected buddies to the current user's buddy list
-  // BTW, make sure this is not already a Buddy
-  const handleSaveBuddy = async (username) => {
-    try {
-      const buddyToSave = {
-        buddyName: username,
-        status: "Buddy"
-      };
-      console.log("handleSaveBuddy, buddyToSave: ",buddyToSave);
-
-      await saveBuddy({
-        variables: { buddyData: buddyToSave },
-        // Add whoToLookUp
-        onCompleted: refetch
-      });
-
-      highLightSelected(username);
-
-    } catch (err) {
-      console.error(err);
-    }
-  }
-    
   if (loading) return <h4>Loading...</h4>;
   if (error) return <h4>Error! {error.message}</h4>;
   // data.users is the array of all users in the database
 
   let currentUser;
   if (currentUserName) {
+    console.log("from line 226");
     currentUser = data.users.find(element => element.username === currentUserName);
     data.users.map((user) =>
       (buddyStatus(currentUser, user) === "Invited") ? highLightInvited(user.username):
