@@ -151,8 +151,6 @@ function BuildGroup ({ currentPage, handleChange }) {
     // alert(`${selectedGroup}`)
   }
 
-  console.log("myGroupData:",myGroupData);
-  console.log("myGroupData.data:",myGroupData.data);
   console.log("myGroupData.data.myGroups:",myGroupData.data.myGroups);
   console.log("meData:",meData.data);
 

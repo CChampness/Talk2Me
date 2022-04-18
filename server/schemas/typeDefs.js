@@ -22,12 +22,14 @@ const typeDefs = gql`
   }
 
   type Buddy {
+    _id: ID
     buddyName: String!
     groupName: String
     status: String
   }
 
   input BuddyInput {
+    _id: ID
     buddyName: String!
     groupName: String
     status: String
@@ -38,6 +40,7 @@ const typeDefs = gql`
     groupName: String!
     ownerName: String!
     buddyName: String
+    status: String
     conversationBuddies: [Buddy]!
   }
 
@@ -46,6 +49,7 @@ const typeDefs = gql`
     groupName: String!
     ownerName: String!
     buddyName: String
+    status: String
     conversationBuddies: [BuddyInput]!
   }
 

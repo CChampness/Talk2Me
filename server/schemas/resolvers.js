@@ -123,14 +123,14 @@ const resolvers = {
     },
 
     // Add Buddy to ConversationGroup
-    addBuddy: async (parent, { buddyData }, context) => {
+    addBuddy: async (parent, {buddyData}, context) => {
       const updatedCGroup = await ConversationGroup.findOneAndUpdate(
         { groupName: buddyData.groupName },
         { $addToSet: { conversationBuddies: buddyData } },
         {new: true}
       );
-// console.log("addBuddy:",buddyData);
-// console.log("updatedCGroup:",updatedCGroup);
+console.log("addBuddy buddyData:",buddyData);
+console.log("updatedCGroup:",updatedCGroup);
       return updatedCGroup;
     },
     
