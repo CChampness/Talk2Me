@@ -13,7 +13,7 @@ let extraMsg;
 const highLightInvited = (cardId) => {
 console.log("highLightInvited: ",cardId);
   let element = document.getElementById(cardId);
-  // console.log("highLightInvited element: ",element);
+  console.log("highLightInvited element: ",element);
   if (element && element.childNodes[0]) {
     element.childNodes[0].childNodes[0].classList.add("boxHLInvited");
     extraMsg = "(Invited, not yet accepted)";
@@ -50,7 +50,7 @@ function InviteBuddy ({ currentPage, handleChange }) {
 
   // Step through the list of users and see which ones are in the current user's buddy list.
   useEffect(() => { if (data) {
-    // console.log("from line 68, in useEffect, data:", data);
+    console.log("from line 55, in useEffect, data:", data);
     data.users.map((user) =>
       (buddyStatus(currentUser, user) === "Invited") ? highLightInvited(user.username):
       ((buddyStatus(currentUser, user) === "Buddy") ? highLightSelected(user.username):null)
@@ -119,31 +119,32 @@ function InviteBuddy ({ currentPage, handleChange }) {
     }
   }
   
-    const buddyStatus = (currentUser, user) => {
-    // console.log("Checking buddyStatus for:", currentUser.username, user.username);
-    const found = user.savedBuddies.find(element => element.buddyName === currentUser.username);
-    if (found) {
-      // console.log("buddyStatus for:", user.username, found.status);
+  const buddyStatus = (currentUser, user) => {
+    console.log("Checking buddyStatus for:", currentUser.username, user.username);
+    const found = (user.savedBuddies.find(element => element.buddyName === currentUser.username)) ||
+                  (currentUser.savedBuddies.find(element => element.buddyName === user.username));
+    if (found && found.status) {
+      console.log("buddyStatus for:", user.username, found.status);
       return found.status;
     }
-    // console.log("buddyStatus for:", user.username, false);
+    console.log("buddyStatus for:", user.username, false);
     return false;
   }
 
-  // If the "user" is in my buddy list AND his status is "Invited", then return true;
-  const isInvitedBuddy = (currentUser, user) => {
-    let found = false;
-    // console.log("currentUser:",currentUser);
-    if (currentUser.savedBuddies)
-    found = currentUser.savedBuddies.find(element => element.buddyName === user.username);
-    if (found && found.status === "Invited") {
-      // console.log("isAlreadyBuddy:", "Invited");
-      return true;
+  // // If the "user" is in my buddy list AND his status is "Invited", then return true;
+  // const isInvitedBuddy = (currentUser, user) => {
+  //   let found = false;
+  //   console.log("isInvitedBuddy???, currentUser, user:",currentUser.username, user.username);
+  //   if (currentUser.savedBuddies)
+  //   found = currentUser.savedBuddies.find(element => element.buddyName === user.username);
+  //   if (found && found.status === "Invited") {
+  //     console.log("isInvitedBuddy: user is in currentUser's savedBuddies as 'Invited'");
+  //     return true;
 
-    }
-    // console.log("isInvitedBuddy:", false);
-    return found;
-  }
+  //   }
+  //   console.log("isInvitedBuddy: user is NOT in currentUser's savedBuddies");
+  //   return found;
+  // }
  
   const handleInviteBuddy = async (username) => {
     try {
@@ -172,7 +173,7 @@ function InviteBuddy ({ currentPage, handleChange }) {
 
   let currentUser;
   if (currentUserName) {
-    console.log("from line 226");
+    console.log("from line 178");
     currentUser = data.users.find(element => element.username === currentUserName);
     data.users.map((user) =>
       (buddyStatus(currentUser, user) === "Invited") ? highLightInvited(user.username):
@@ -181,7 +182,7 @@ function InviteBuddy ({ currentPage, handleChange }) {
     setCurrentUserName(Auth.getProfile().data.username);
   }
 
-  if (currentUser) data.users.map((user) => isInvitedBuddy(currentUser, user));
+  // if (currentUser) data.users.map((user) => isInvitedBuddy(currentUser, user));
 
   return (
     (data.users.length <= 1) ?
