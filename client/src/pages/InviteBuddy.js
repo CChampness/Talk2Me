@@ -36,6 +36,19 @@ const highLightSelected = (cardId) => {
   }
 }
 
+// SOMETHING TO CONSIDER:
+/////////////////////////
+// mutation ($id: Int, $is_completed: Boolean, $title: String) {
+//   update_todos(where: {id: {_eq: $id}}, _set: {is_completed: $is_completed, title: $title}) {
+//     affected_rows
+//     returning {
+//       id
+//       title
+//       is_completed
+//     }
+//   }
+// }
+
 // When the current user selects a Buddy, it means that that Buddy can
 // now invite the current user into a group that the Buddy has started.
 

@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react';
 // import ReactNbsp from 'react-nbsp';
-import {Container, Chip, Grid, TextField, Button} from '@material-ui/core';
+import {Container, Chip, Grid, TextField, Button} from '@mui/material';
+// import { createTheme } from '@mui/material/styles';
+
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_ME, GET_USERS } from '../utils/queries';
 import { GET_GROUP } from '../utils/queries';
@@ -158,6 +160,13 @@ return(
       <Grid container spacing={2}>
         <Grid item xs={11}>
           <TextField onChange={(e)=>{
+
+{/* <TextareaAutosize
+  aria-label="empty textarea"
+  placeholder="Empty"
+  style={{ width: 200 }}
+/> */}
+
             setText(e.target.value)}} value={text} size="small" fullWidth variant="outlined" required label="Required" label="Enter message here" />
         </Grid>
         <Grid item xs={1}>

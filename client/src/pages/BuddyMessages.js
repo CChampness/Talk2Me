@@ -1,6 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 // import ReactNbsp from 'react-nbsp';
-import {Container, Chip, Grid, TextField, Button} from '@material-ui/core';
+import {Container, Chip, Grid, TextField, Button, OutlinedInput} from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import blue from '@mui/material/colors/blue';
+import green from '@mui/material/colors/green';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_ME, GET_USERS } from '../utils/queries';
 import { DELETE_MESSAGE } from '../utils/mutations';
@@ -10,6 +13,12 @@ import { useGlobalContext } from '../utils/GlobalContext';
 
 const myName = Auth.loggedIn() ? Auth.getProfile().data.username : "not logged in";
 const groupName = "none";
+
+const theme = createTheme({
+  palette: {
+    primary: blue,
+    secondary: green  }
+});
 
 const pushUnique = (msgList, newMsg) => {
   let dup = false;
@@ -71,7 +80,6 @@ function BuddyMessages ({ currentPage, handleChange }) {
   const { loading, error, data, refetch } = useQuery(GET_USERS,
     {pollInterval: 1000});
   const [needUpdate, setNeedUpdate] = useState(1);
-
   const [deleteMessage] = useMutation(DELETE_MESSAGE);
   // const [messageList, setMessageList] = useState([]);
   const { messageUser, msgTgtType } = useGlobalContext();
@@ -91,7 +99,7 @@ function BuddyMessages ({ currentPage, handleChange }) {
         variables: { messageData: messageToSend },
         onCompleted: refetch
       });
-// console.log("callin loadMessageList_2 AFTER saveMessage, result:",result);
+
       if(result &&
         result.data &&
         result.data.saveMessage) {
@@ -118,6 +126,7 @@ console.log("BuddyMessages messageList after loadMessageList_1:",messageList);
 
   return(
     <Container>
+      <ThemeProvider theme={theme}>
       <h5>Messaging with buddy {messageUser}</h5>
       <div style={{marginBottom:"5rem"}}>
         {messageList.map((msg, ndx)=> (
@@ -129,13 +138,22 @@ console.log("BuddyMessages messageList after loadMessageList_1:",messageList);
       </div>
       <Grid container spacing={2}>
         <Grid item xs={11}>
-          <TextField onChange={(e)=>{
-            setText(e.target.value)}} value={text} size="small" fullWidth variant="outlined" required label="Required" label="Enter message here" />
+          <TextField
+            onChange={(e)=>{setText(e.target.value)}}
+            value={text}
+            error
+            multiline
+            size="small"
+            fullWidth
+            variant="outlined"
+            label="Enter message here"
+          />
         </Grid>
         <Grid item xs={1}>
           <Button onClick={sendChatMessage} fullWidth  variant="contained" style={{backgroundColor:"#60a820", color:"white"}}>Send</Button>
         </Grid>
       </Grid>
+      </ThemeProvider>
     </Container>
   )
 }
