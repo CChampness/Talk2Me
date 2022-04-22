@@ -1,10 +1,7 @@
 import React, {useState} from 'react';
 import Form from 'react-bootstrap/Button';
 // import ReactNbsp from 'react-nbsp';
-import {Container, Chip, Grid, TextField, Button, OutlinedInput} from '@mui/material';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import blue from '@mui/material/colors/blue';
-import green from '@mui/material/colors/green';
+import {Container, Chip, Grid, TextField, Button } from '@material-ui/core';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_ME, GET_USERS } from '../utils/queries';
 import { DELETE_MESSAGE } from '../utils/mutations';
@@ -144,7 +141,6 @@ console.log("BuddyMessages messageList after loadMessageList_1:",messageList);
             onChange={(e)=>{setText(e.target.value)}}
             value={text}
             multiline
-            focused
             size="small"
             fullWidth
             variant="outlined"
