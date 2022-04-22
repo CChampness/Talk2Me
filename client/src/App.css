@@ -345,6 +345,19 @@ footer h5:hover {
   z-index: -1;
 }
 
+.css-1d3z3hw-MuiOutlinedInput-notchedOutline {
+  border-color:#ffff00
+}
+
+.MuiOutlinedInput-notchedOutline {
+  border-color:#ffff00
+}
+
+fieldset {
+  border-color:#ffff00
+}
+/* <fieldset aria-hidden="true" class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"><legend class="css-1ftyaf0"><span>Enter message here</span></legend></fieldset> */
+
 /* Tooltip must have its position relative to its container */
 span[data-descr] {
   position: relative;

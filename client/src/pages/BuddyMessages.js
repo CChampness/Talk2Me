@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import Form from 'react-bootstrap/Button';
 // import ReactNbsp from 'react-nbsp';
 import {Container, Chip, Grid, TextField, Button, OutlinedInput} from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -14,11 +15,12 @@ import { useGlobalContext } from '../utils/GlobalContext';
 const myName = Auth.loggedIn() ? Auth.getProfile().data.username : "not logged in";
 const groupName = "none";
 
-const theme = createTheme({
-  palette: {
-    primary: blue,
-    secondary: green  }
-});
+// const theme = createTheme({
+//   palette: {
+//     primary: green,
+//     secondary: blue
+//   }
+// });
 
 const pushUnique = (msgList, newMsg) => {
   let dup = false;
@@ -126,7 +128,7 @@ console.log("BuddyMessages messageList after loadMessageList_1:",messageList);
 
   return(
     <Container>
-      <ThemeProvider theme={theme}>
+      {/* <ThemeProvider theme={theme}> */}
       <h5>Messaging with buddy {messageUser}</h5>
       <div style={{marginBottom:"5rem"}}>
         {messageList.map((msg, ndx)=> (
@@ -141,8 +143,8 @@ console.log("BuddyMessages messageList after loadMessageList_1:",messageList);
           <TextField
             onChange={(e)=>{setText(e.target.value)}}
             value={text}
-            error
             multiline
+            focused
             size="small"
             fullWidth
             variant="outlined"
@@ -153,7 +155,7 @@ console.log("BuddyMessages messageList after loadMessageList_1:",messageList);
           <Button onClick={sendChatMessage} fullWidth  variant="contained" style={{backgroundColor:"#60a820", color:"white"}}>Send</Button>
         </Grid>
       </Grid>
-      </ThemeProvider>
+      {/* </ThemeProvider> */}
     </Container>
   )
 }
