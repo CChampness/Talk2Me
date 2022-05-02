@@ -136,7 +136,12 @@ console.log("BuddyMessages messageList after loadMessageList_1:",messageList);
                   width: "50%",
                 }
 				      }
-			      />
+              InputProps={{
+                style: {
+                    color: "white"
+                }
+              }}
+            />
           </div>
         ))}
       </div>
