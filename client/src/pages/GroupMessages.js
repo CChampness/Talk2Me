@@ -163,6 +163,11 @@ return(
                   width: "50%",
                 }
 				      }
+              InputProps={{
+                style: {
+                    color: "white"
+                }
+              }}
 			      />
           </div>
         ))}
@@ -181,7 +186,13 @@ return(
           />
         </Grid>
         <Grid item xs={1}>
-          <Button onClick={sendChatMessage} fullWidth  variant="contained" style={{backgroundColor:"#60a820", color:"white"}}>Send</Button>
+          <Button
+            onClick={sendChatMessage}
+            fullWidth
+            variant="contained"
+            style={{backgroundColor:"#60a820", color:"white"}}
+          >Send
+          </Button>
         </Grid>
       </Grid>
     </Container>
