@@ -151,14 +151,34 @@ return(
         {messageList.map((msg, ndx)=> (
           <div key={ndx} style={{textAlign: msg.messageFrom===myName?"right":"left"}}>
             <p style={{marginBottom:"0.3rem"}}>{msg.messageFrom}</p>
-            <Chip style={{fontSize:"0.9rem"}} color={msg.messageFrom===myName?"primary": "secondary"} label={msg.messageText}/>
+            <TextField
+              className={msg.messageFrom===myName?"blueText": "redText"}
+              width 
+      				type='text' 
+			      	value={msg.messageText}
+              multiline
+		       		variant='outlined'
+			      	inputProps={
+					      { readOnly: true,
+                  width: "50%",
+                }
+				      }
+			      />
           </div>
         ))}
       </div>
       <Grid container spacing={2}>
         <Grid item xs={11}>
-          <TextField onChange={(e)=>{
-            setText(e.target.value)}} value={text} size="small" fullWidth variant="outlined" required label="Required" label="Enter message here" />
+          <TextField
+            className="whiteText"
+            onChange={(e)=>{setText(e.target.value)}}
+            value={text}
+            multiline
+            size="small"
+            fullWidth
+            variant="outlined"
+            label="Enter new message here"
+          />
         </Grid>
         <Grid item xs={1}>
           <Button onClick={sendChatMessage} fullWidth  variant="contained" style={{backgroundColor:"#60a820", color:"white"}}>Send</Button>

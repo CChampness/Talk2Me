@@ -12,13 +12,6 @@ import { useGlobalContext } from '../utils/GlobalContext';
 const myName = Auth.loggedIn() ? Auth.getProfile().data.username : "not logged in";
 const groupName = "none";
 
-// const theme = createTheme({
-//   palette: {
-//     primary: green,
-//     secondary: blue
-//   }
-// });
-
 const pushUnique = (msgList, newMsg) => {
   let dup = false;
   for (let i = 0; i < msgList.length; i++) {
@@ -129,26 +122,45 @@ console.log("BuddyMessages messageList after loadMessageList_1:",messageList);
       <h5>Messaging with buddy {messageUser}</h5>
       <div style={{marginBottom:"5rem"}}>
         {messageList.map((msg, ndx)=> (
-          <div key={ndx} style={{textAlign: msg.messageFrom===myName?"right":"left"}}>
+          <div key={ndx} style={{textAlign: msg.messageFrom===myName?"right":"left"}} >
             <p style={{marginBottom:"0.3rem"}}>{msg.messageFrom}</p>
-            <Chip style={{fontSize:"0.9rem"}} color={msg.messageFrom===myName?"primary": "secondary"} label={msg.messageText}/>
+       			<TextField
+              className={msg.messageFrom===myName?"blueText": "redText"}
+              width 
+      				type='text' 
+			      	value={msg.messageText}
+              multiline
+		       		variant='outlined'
+			      	inputProps={
+					      { readOnly: true,
+                  width: "50%",
+                }
+				      }
+			      />
           </div>
         ))}
       </div>
       <Grid container spacing={2}>
         <Grid item xs={11}>
           <TextField
+            className="whiteText"
             onChange={(e)=>{setText(e.target.value)}}
             value={text}
             multiline
             size="small"
             fullWidth
             variant="outlined"
-            label="Enter message here"
+            label="Enter new message here"
           />
         </Grid>
         <Grid item xs={1}>
-          <Button onClick={sendChatMessage} fullWidth  variant="contained" style={{backgroundColor:"#60a820", color:"white"}}>Send</Button>
+          <Button 
+            onClick={sendChatMessage}
+            fullWidth
+            variant="contained"
+            style={{backgroundColor:"#60a820", color:"white"}}
+          >Send
+          </Button>
         </Grid>
       </Grid>
       {/* </ThemeProvider> */}

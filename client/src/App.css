@@ -353,10 +353,22 @@ footer h5:hover {
   border-color:#ffff00
 }
 
-fieldset {
-  border-color:#ffff00
+.redText {
+  color: whitesmoke;
+  background-color: #f50057;
+  border-radius: 5px;
 }
-/* <fieldset aria-hidden="true" class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"><legend class="css-1ftyaf0"><span>Enter message here</span></legend></fieldset> */
+
+.blueText {
+  color: whitesmoke;
+  background-color: #3f51b5;
+  border-radius: 5px;
+}
+
+.whiteText {
+  background-color: whitesmoke;
+  border-radius: 5px;
+}
 
 /* Tooltip must have its position relative to its container */
 span[data-descr] {
