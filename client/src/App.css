@@ -370,6 +370,20 @@ footer h5:hover {
   border-radius: 5px;
 }
 
+.navButton {
+  box-sizing: border-box;
+  border-radius: 5px;
+  background-color: rgb(223, 185, 151);
+  color:darkslategray;
+  font-size: 1.5rem;
+}
+
+.navButton:hover {
+  color: rgb(223, 185, 151);
+  background-color: rgba(255, 8, 0, 0.4);
+  box-shadow: 0px 0px 20px 0px rgba(255,8,0,0.9);
+}
+
 /* Tooltip must have its position relative to its container */
 span[data-descr] {
   position: relative;

@@ -51,9 +51,9 @@ function Main({ currentPage, setCurrentPage}) {
         return <SaveMessage />;
       case 'BuddyMessages':
         return <BuddyMessages />;
-        case 'GroupMessages':
-          return <GroupMessages />;
-        case 'Messages':
+      case 'GroupMessages':
+        return <GroupMessages />;
+      case 'Messages':
         return (
           <section className="row justify-center">
             <Messages currentPage={currentPage} handleChange={handleChange} />

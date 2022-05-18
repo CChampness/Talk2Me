@@ -2,8 +2,19 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 import Auth from '../utils/auth';
 
+
+
 function About({ currentPage, handleChange }) {
   const pageChange = (page) => handleChange(page);
+  // function profilePage() {
+  //   pageChange('CreateProfile');
+  //   }
+
+  const profilePage = () => pageChange('CreateProfile');
+  const buddiesPage = () => pageChange('InviteBuddy');
+  const groupsPage = () => pageChange('BuildGroup');
+  const messagesPage = () => pageChange('Messages');
+
   return (
     <div className="Aboutdiv">
       <h3>About Talk2Me</h3>
@@ -19,22 +30,26 @@ function About({ currentPage, handleChange }) {
           lovers of language learning who will be happy to share conversation practice with you.
         </p>
         <p>
-          <h3>Profile</h3>
+          <button className="navButton" onClick={() => {profilePage();}}>Profile</button>
+          <br/>
           With the <b>Profile</b> option you can share any interesting information about yourself that will help 
           others who may have shared interests to find you for conversation practice.
         </p>
         <p>
-          <h3>Buddies</h3>
+          <button className="navButton" onClick={() => {buddiesPage();}}>Buddies</button>
+          <br/>
           With the <b>Buddies</b> option you can find others with whom you may have interests in common.
           You can select any one as a "buddy" and leave messages for them.  Use this feature to set up
           meeting times for conversation on your favorite video chat platform, such as Zoom.
         </p>
         <p>
-          <h3>Groups</h3>
+          <button className="navButton" onClick={() => {groupsPage();}}>Groups</button>
+          <br/>
           With the <b>Groups</b> option you can select among your buddies to create a texting group.
         </p>
         <p>
-          <h3>Messages</h3>
+          <button className="navButton" onClick={() => {messagesPage();}}>Messages</button>
+          <br/>
           With the <b>Messages</b> option you can see all of the messages that others have left for you.
           Please note that, to receive messages, you must have at least one conversation buddy.
           Use this feature to set up
