@@ -11,6 +11,12 @@ import { useGlobalContext } from '../utils/GlobalContext';
 
 const myName = Auth.loggedIn() ? Auth.getProfile().data.username : "not logged in";
 
+const niceDate = (uglyDate) => {
+  const time = new Date(parseInt(uglyDate)).toLocaleTimeString();
+  const date = new Date(parseInt(uglyDate)).toLocaleDateString();
+  return time +" on "+ date;
+}
+
 const pushUnique = (msgList, newMsg) => {
   let dup = false;
   for (let i = 0; i < msgList.length; i++) {
@@ -136,10 +142,11 @@ let myGroupMsgs = [];
 // Get an array of all of the others in the group, without me.
 // myName may or may not be the owner of the group.
   if (needUpdate == 1) {
-    messageList = loadMessageList_1(messageUser, allUsersData.data);
+    // messageList = loadMessageList_1(messageUser, allUsersData.data);
+    myGroupMsgs = loadMessageList_1(messageUser, allUsersData.data);
   }
 //  setMessageList(newMsgList);
-messageList = myGroupMsgs;
+messageList = myGroupMsgs.reverse();
 // console.log("messageList after myGroupMsgs:",messageList);
 
 return(
@@ -150,7 +157,7 @@ return(
       <div style={{marginBottom:"5rem"}}>
         {messageList.map((msg, ndx)=> (
           <div key={ndx} style={{textAlign: msg.messageFrom===myName?"right":"left"}}>
-            <p style={{marginBottom:"0.3rem"}}>{msg.messageFrom}</p>
+            <p style={{marginBottom:"0.3rem"}}>{msg.messageFrom} <span style={{fontSize:"0.8rem"}}>at {niceDate(msg.createdAt)}</span></p>
             <TextField
               className={msg.messageFrom===myName?"blueText": "redText"}
               width 

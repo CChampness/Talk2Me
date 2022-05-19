@@ -12,6 +12,12 @@ import { useGlobalContext } from '../utils/GlobalContext';
 const myName = Auth.loggedIn() ? Auth.getProfile().data.username : "not logged in";
 const groupName = "none";
 
+const niceDate = (uglyDate) => {
+  const time = new Date(parseInt(uglyDate)).toLocaleTimeString();
+  const date = new Date(parseInt(uglyDate)).toLocaleDateString();
+  return time +" on "+ date;
+}
+
 const pushUnique = (msgList, newMsg) => {
   let dup = false;
   for (let i = 0; i < msgList.length; i++) {
@@ -95,7 +101,7 @@ function BuddyMessages ({ currentPage, handleChange }) {
       if(result &&
         result.data &&
         result.data.saveMessage) {
-          messageList = loadMessageList_2(messageUser, result.data.saveMessage.savedMessages);
+          messageList = loadMessageList_2(messageUser, result.data.saveMessage.savedMessages).reverse();
       }
       console.log("BuddyMessages messageList after loadMessageList_2:",messageList);
     } catch (err) {
@@ -111,7 +117,7 @@ let allUsersData = data;
   // const currentTime = new Date().toLocaleDateString();
   // console.log("allUsersData:",allUsersData);
   if (needUpdate == 1) {
-    messageList = loadMessageList_1(messageUser, allUsersData);
+    messageList = loadMessageList_1(messageUser, allUsersData).reverse();
   }
 //  setMessageList(newMsgList);
 console.log("BuddyMessages messageList after loadMessageList_1:",messageList);
@@ -123,7 +129,7 @@ console.log("BuddyMessages messageList after loadMessageList_1:",messageList);
       <div style={{marginBottom:"5rem"}}>
         {messageList.map((msg, ndx)=> (
           <div key={ndx} style={{textAlign: msg.messageFrom===myName?"right":"left"}} >
-            <p style={{marginBottom:"0.3rem"}}>{msg.messageFrom}</p>
+            <p style={{marginBottom:"0.3rem"}}>{msg.messageFrom} <span style={{fontSize:"0.8rem"}}>at {niceDate(msg.createdAt)}</span></p>
        			<TextField
               className={msg.messageFrom===myName?"blueText": "redText"}
               width 
