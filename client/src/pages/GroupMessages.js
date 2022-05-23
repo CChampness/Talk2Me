@@ -33,27 +33,24 @@ const pushUnique = (msgList, newMsg) => {
 
 let messageList;
 // Pare down the total message list into just the ones we want
-const loadMessageList_1 = (messageUser, usersData) => {
-  const wkgMsgList = [];
-  // console.log("in loadMessageList_1, usersData:", usersData);
-  let usrMsgs = usersData.users;
-  const wkgMsgList2 = [...wkgMsgList];
-  for (let i=0; i < usrMsgs.length; i++) {
-    for (let j=0; j < usrMsgs[i].savedMessages.length; j++) {
-      if ((usrMsgs[i].savedMessages[j].messageTo === messageUser && usrMsgs[i].savedMessages[j].messageFrom === myName) ||
-          (usrMsgs[i].savedMessages[j].messageTo === myName && usrMsgs[i].savedMessages[j].messageFrom === messageUser)) {
-        pushUnique(wkgMsgList2, usrMsgs[i].savedMessages[j]);
-      }
-    }
-  }
-  wkgMsgList2.sort((a, b) => (a.createdAt > b.createdAt) ? 1 : -1);
-  return wkgMsgList2;
-} //////////// end loadMessageList_1
+// const loadMessageList_1 = (messageUser, usersData) => {
+//   const wkgMsgList = [];
+//   let usrMsgs = usersData.users;
+//   const wkgMsgList2 = [...wkgMsgList];
+//   for (let i=0; i < usrMsgs.length; i++) {
+//     for (let j=0; j < usrMsgs[i].savedMessages.length; j++) {
+//       if ((usrMsgs[i].savedMessages[j].messageTo === messageUser && usrMsgs[i].savedMessages[j].messageFrom === myName) ||
+//           (usrMsgs[i].savedMessages[j].messageTo === myName && usrMsgs[i].savedMessages[j].messageFrom === messageUser)) {
+//         pushUnique(wkgMsgList2, usrMsgs[i].savedMessages[j]);
+//       }
+//     }
+//   }
+//   wkgMsgList2.sort((a, b) => (a.createdAt > b.createdAt) ? 1 : -1);
+//   return wkgMsgList2;
+// } //////////// end loadMessageList_1
 
 const loadMessageList_2 = (messageUser, usersData) => {
-  const wkgMsgList = [];
-  // console.log("in loadMessageList_2, usersData:", usersData);
-    
+   
   let usrMsgs = usersData;
 //this kills our sort, should do usrMsgs = [...wkgMsgList]
   const wkgMsgList2 = [...messageList];
@@ -73,12 +70,10 @@ function GroupMessages ({ currentPage, handleChange }) {
   const { messageUser, msgTgtType } = useGlobalContext();
   const [text, setText] = useState("");
   const [saveMessage] = useMutation(SAVE_MESSAGE);
-  // const { loading, error, data, refetch } = useQuery(GET_USERS,
-    // {pollInterval: 1000});
-  const allUsersData = useQuery(GET_USERS,
-      {pollInterval: 1000});
-  const groupData = useQuery(GET_GROUP,
-      {variables: {groupName: messageUser}});
+  // const allUsersData = useQuery(GET_USERS,
+  //     {pollInterval: 1000});
+  const myUserData = useQuery(GET_ME, {pollInterval: 1000});
+  const groupData = useQuery(GET_GROUP, {variables: {groupName: messageUser}});
   const [needUpdate, setNeedUpdate] = useState(1);
   const [deleteMessage] = useMutation(DELETE_MESSAGE);
 
@@ -87,9 +82,9 @@ function GroupMessages ({ currentPage, handleChange }) {
   const sendChatMessage = async (e) => {
     const recipientList = [
       ...groupData.data.getGroup.conversationBuddies,
-      // {buddyName: groupData.data.getGroup.ownerName}  // Sending to self!
+      {buddyName: groupData.data.getGroup.ownerName}  // Sending to self
     ];
-    // console.log("recipientList:", recipientList);
+
     for (let i=0; i < recipientList.length; i++) {
       try {
         const messageToSend = {
@@ -99,19 +94,16 @@ function GroupMessages ({ currentPage, handleChange }) {
           groupName: groupName
         };
 
-        let result;
-        // console.log("In sendChatMessage, messageToSend: ",messageToSend);
-        result = await saveMessage({
+        let result = await saveMessage({
           variables: { messageData: messageToSend },
-          onCompleted: allUsersData.refetch
+          onCompleted: myUserData.refetch
         });
-// console.log("callin loadMessageList_2 AFTER saveMessage, result:",result);
+
         if(result &&
           result.data &&
           result.data.saveMessage) {
             messageList = loadMessageList_2(messageUser, result.data.saveMessage.savedMessages);
         }
-        // console.log("messageList after loadMessageList_2:",messageList);
       } catch (err) {
         console.error(err);
       }
@@ -120,36 +112,28 @@ function GroupMessages ({ currentPage, handleChange }) {
     setText("");
   }; ////////// end sendChatMessage
 
-  if (allUsersData.loading) return <h4>Loading...</h4>;
-// let allUsersData = data;
-let myGroupMsgs = [];
-// console.log("messageUser:",messageUser);
-// console.log("allUsersData:",allUsersData.data);
-// console.log("GroupMessages, groupData:",groupData);
-  allUsersData.data.users.map((user) => {
-    // console.log("allUsersData.users.username:", user.username);
-    // if(user.username === myName) {
-      user.savedMessages.map((msg) => {
-        if (msg.groupName === messageUser) {
-          myGroupMsgs = [...myGroupMsgs, msg];
-        }
-      })
-    // }
+  if (myUserData.loading) return <h4>Loading...</h4>;
+  console.log("myUserData:", myUserData);
+  let myGroupMsgs = [];
+  myUserData.data.me.savedMessages.map((msg) => {
+    if (msg.groupName === messageUser) {
+      myGroupMsgs = [...myGroupMsgs, msg];
+    }
   });
+  // When this loop finishes, it will contain the list of all of this user's messages
+  // withing the given group, bot sent and received
 
-  // console.log("myGroupMsgs:", myGroupMsgs);
+  console.log("myGroupMsgs:", myGroupMsgs);
 
 // Get an array of all of the others in the group, without me.
 // myName may or may not be the owner of the group.
   if (needUpdate == 1) {
-    // messageList = loadMessageList_1(messageUser, allUsersData.data);
-    myGroupMsgs = loadMessageList_1(messageUser, allUsersData.data);
+    // myGroupMsgs = loadMessageList_1(messageUser, myUserData.data);
   }
-//  setMessageList(newMsgList);
-messageList = myGroupMsgs.reverse();
-// console.log("messageList after myGroupMsgs:",messageList);
 
-return(
+  messageList = myGroupMsgs.reverse();
+
+  return(
     <Container>
       <h5>Messaging with group {messageUser}</h5>
       {/* <h6>Need update {needUpdate}</h6> */}
