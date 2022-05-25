@@ -132,7 +132,9 @@ function InviteBuddy ({ currentPage, handleChange }) {
     }
   }
   
+  // return true if 
   const buddyStatus = (currentUser, user) => {
+    if (currentUser.username === user.username) return false;
     console.log("Checking buddyStatus for:", currentUser.username, user.username);
     const found = (user.savedBuddies.find(element => element.buddyName === currentUser.username)) ||
                   (currentUser.savedBuddies.find(element => element.buddyName === user.username));

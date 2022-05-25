@@ -13,6 +13,16 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
 
+    getUser: async (parent, {username}, context) => {
+      if (context.user) {
+        const otherUserData = await User.findOne({username: username});
+        // console.log("Query for GET_USER for:",username);
+        // console.log("Query for GET_USER, returning:",otherUserData);
+        return otherUserData;
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+
     users: async (parent, args, context) => {
       if (context.user) {
         const userData = await User.find();
@@ -136,7 +146,8 @@ console.log("updatedCGroup:",updatedCGroup);
     
     saveMessage: async (parent, { messageData }, context) => {
       if (context.user) {
-        // console.log("in resolver saveMessage, messageData:",messageData);
+        console.log("in resolver saveMessage, context.user:",context.user);
+        console.log("in resolver saveMessage, messageData:",messageData);
         const updatedUser = await User.findOneAndUpdate(
           { username: messageData.messageTo },
           { $push: { savedMessages: messageData }},

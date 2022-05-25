@@ -1,16 +1,13 @@
 import React, {useState} from 'react';
-import Form from 'react-bootstrap/Button';
-// import ReactNbsp from 'react-nbsp';
-import {Container, Chip, Grid, TextField, Button } from '@material-ui/core';
+import {Container, Grid, TextField, Button} from '@material-ui/core';
 import { useQuery, useMutation } from '@apollo/client';
-import { GET_ME, GET_USERS } from '../utils/queries';
+import { GET_ME, GET_USER } from '../utils/queries';
 import { DELETE_MESSAGE } from '../utils/mutations';
 import { SAVE_MESSAGE } from '../utils/mutations';
 import Auth from '../utils/auth';
 import { useGlobalContext } from '../utils/GlobalContext';
 
 const myName = Auth.loggedIn() ? Auth.getProfile().data.username : "not logged in";
-const groupName = "none";
 
 const niceDate = (uglyDate) => {
   const time = new Date(parseInt(uglyDate)).toLocaleTimeString();
@@ -33,38 +30,14 @@ const pushUnique = (msgList, newMsg) => {
 }
 
 let messageList;
-// Pare down the total message list into just the ones we want
-const loadMessageList_1 = (messageUser, usersData) => {
-  const wkgMsgList = [];
-  // console.log("in loadMessageList_1, usersData:", usersData);
-  let usrMsgs = usersData.users;
-  const wkgMsgList2 = [...wkgMsgList];
-  for (let i=0; i < usrMsgs.length; i++) {
-    for (let j=0; j < usrMsgs[i].savedMessages.length; j++) {
-      if ((usrMsgs[i].savedMessages[j].messageTo === messageUser && usrMsgs[i].savedMessages[j].messageFrom === myName) ||
-          (usrMsgs[i].savedMessages[j].messageTo === myName && usrMsgs[i].savedMessages[j].messageFrom === messageUser)) {
-        if (!usrMsgs[i].savedMessages[j].groupName || usrMsgs[i].savedMessages[j].groupName==="none")
-          pushUnique(wkgMsgList2, usrMsgs[i].savedMessages[j]);
-      }
-    }
-  }
-  wkgMsgList2.sort((a, b) => (a.createdAt > b.createdAt) ? 1 : -1);
-  return wkgMsgList2;
-} //////////// end loadMessageList_1
 
 const loadMessageList_2 = (messageUser, usersData) => {
-  const wkgMsgList = [];
-  // console.log("in loadMessageList_2, usersData:", usersData);
-    
   let usrMsgs = usersData;
-//this kills our sort, should do usrMsgs = [...wkgMsgList]
   const wkgMsgList2 = [...messageList];
   for (let i=0; i < usrMsgs.length; i++) {
     if ((usrMsgs[i].messageTo === messageUser && usrMsgs[i].messageFrom === myName) ||
         (usrMsgs[i].messageTo === myName && usrMsgs[i].messageFrom === messageUser)) {
-      if (!usrMsgs[i].groupName || usrMsgs[i].groupName==="none") {
-        pushUnique(wkgMsgList2, usrMsgs[i]);
-      }
+      pushUnique(wkgMsgList2, usrMsgs[i]);
     }
   }
   wkgMsgList2.sort((a, b) => (a.createdAt > b.createdAt) ? 1 : -1);
@@ -73,64 +46,81 @@ const loadMessageList_2 = (messageUser, usersData) => {
 
 function BuddyMessages ({ currentPage, handleChange }) {
   const pageChange = (page) => handleChange(page);
+  const { messageUser, msgTgtType } = useGlobalContext();
   const [text, setText] = useState("");
   const [saveMessage] = useMutation(SAVE_MESSAGE);
-  const { loading, error, data, refetch } = useQuery(GET_USERS,
-    {pollInterval: 1000});
+  const myUserData = useQuery(GET_ME, {pollInterval: 1000});
+  const otherUserData = useQuery(
+    GET_USER,
+    {variables: {username: messageUser}},
+    {pollInterval: 1000}
+  );
   const [needUpdate, setNeedUpdate] = useState(1);
   const [deleteMessage] = useMutation(DELETE_MESSAGE);
-  // const [messageList, setMessageList] = useState([]);
-  const { messageUser, msgTgtType } = useGlobalContext();
 
   const sendChatMessage = async (e) => {
-    try {
-      const messageToSend = {
-        messageFrom: myName,
-        messageText: text,
-        messageTo: messageUser,
-        groupName: groupName
-      };
+      try {
+        const messageToSend = {
+          messageFrom: myName,
+          messageText: text,
+          messageTo: messageUser,
+          groupName: "none"
+        };
 
-      let result;
-      // console.log("In sendChatMessage, messageToSend: ",messageToSend);
-      result = await saveMessage({
-        variables: { messageData: messageToSend },
-        onCompleted: refetch
-      });
+        let result = await saveMessage({
+          variables: { messageData: messageToSend },
+          onCompleted: myUserData.refetch,
+          onCompleted: otherUserData.refetch
+        });
 
-      if(result &&
-        result.data &&
-        result.data.saveMessage) {
-          messageList = loadMessageList_2(messageUser, result.data.saveMessage.savedMessages).reverse();
+        if(result &&
+          result.data &&
+          result.data.saveMessage) {
+            messageList = loadMessageList_2(messageUser, result.data.saveMessage.savedMessages).reverse();
+          }
+      } catch (err) {
+        console.error(err);
       }
-      console.log("BuddyMessages messageList after loadMessageList_2:",messageList);
-    } catch (err) {
-      console.error(err);
-    }
+
     setNeedUpdate(needUpdate+1);
     setText("");
   }; ////////// end sendChatMessage
 
-  if (loading) return <h4>Loading...</h4>;
-let allUsersData = data;
-// console.log("data:",data);
-  // const currentTime = new Date().toLocaleDateString();
-  // console.log("allUsersData:",allUsersData);
-  if (needUpdate == 1) {
-    messageList = loadMessageList_1(messageUser, allUsersData).reverse();
+  if (myUserData.loading || otherUserData.loading) return <h4>Loading...</h4>;
+  console.log("myUserData:", myUserData);
+  let myBuddyMsgs = [];
+  // When this loop finishes, it will contain the list of all messages
+  // directly from messageUser to this user.
+  myUserData.data.me.savedMessages.map((msg) => {
+    if (msg.groupName === "none" && msg.messageFrom === messageUser) {
+      myBuddyMsgs = [...myBuddyMsgs, msg];
+    }
+  });
+
+  // When this next loop finishes, it will have to the list all messages
+  // directly from this user to messageUser.
+  if (otherUserData.data.getUser) {
+    otherUserData.data.getUser.savedMessages.map((msg) => {
+      if (msg.groupName === "none" && msg.messageFrom === myName) {
+        myBuddyMsgs = [...myBuddyMsgs, msg];
+      }
+    });
   }
-//  setMessageList(newMsgList);
-console.log("BuddyMessages messageList after loadMessageList_1:",messageList);
+
+  if (needUpdate == 1) {};
+
+  messageList = myBuddyMsgs.sort(
+    (a,b) => a.createdAt < b.createdAt ? 1 : -1);
 
   return(
     <Container>
-      {/* <ThemeProvider theme={theme}> */}
-      <h5>Messaging with buddy {messageUser}</h5>
+      <p style={{marginBottom:"0.3rem"}}>Messaging with user <span style={{fontSize:"1.3rem"}}>{messageUser}</span></p>
+      {!messageList.length ? <h4>No messages</h4> : null}
       <div style={{marginBottom:"5rem"}}>
         {messageList.map((msg, ndx)=> (
-          <div key={ndx} style={{textAlign: msg.messageFrom===myName?"right":"left"}} >
+          <div key={ndx} style={{textAlign: msg.messageFrom===myName?"right":"left"}}>
             <p style={{marginBottom:"0.3rem"}}>{msg.messageFrom} <span style={{fontSize:"0.8rem"}}>at {niceDate(msg.createdAt)}</span></p>
-       			<TextField
+            <TextField
               className={msg.messageFrom===myName?"blueText": "redText"}
               width 
       				type='text' 
@@ -147,7 +137,7 @@ console.log("BuddyMessages messageList after loadMessageList_1:",messageList);
                     color: "white"
                 }
               }}
-            />
+			      />
           </div>
         ))}
       </div>
@@ -165,7 +155,7 @@ console.log("BuddyMessages messageList after loadMessageList_1:",messageList);
           />
         </Grid>
         <Grid item xs={1}>
-          <Button 
+          <Button
             onClick={sendChatMessage}
             fullWidth
             variant="contained"
@@ -174,7 +164,6 @@ console.log("BuddyMessages messageList after loadMessageList_1:",messageList);
           </Button>
         </Grid>
       </Grid>
-      {/* </ThemeProvider> */}
     </Container>
   )
 }

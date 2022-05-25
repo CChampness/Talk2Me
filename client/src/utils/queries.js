@@ -37,6 +37,22 @@ export const GET_ME = gql`
   }
 `;
 
+export const GET_USER = gql`
+query getUser($username: String!) {
+  getUser(username: $username) {
+      _id
+      username
+      savedMessages {
+        messageText
+        messageFrom
+        messageTo
+        createdAt
+        groupName
+      }
+    }
+  }
+`;
+
 export const GET_USERS = gql`
 {
   users {

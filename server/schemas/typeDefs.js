@@ -110,6 +110,7 @@ const typeDefs = gql`
 
   type Query {
     me: User
+    getUser(username: String!): User
     users: [User]!
     myGroups: [ConversationGroup]
     getGroup(groupName: String!): ConversationGroup
