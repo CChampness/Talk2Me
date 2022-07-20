@@ -355,7 +355,7 @@ footer h5:hover {
 
 .redText {
   color: whitesmoke;
-  background-color: #f50057;
+  background-color: #b60000;
   border-radius: 5px;
 }
 
@@ -373,7 +373,7 @@ footer h5:hover {
 .navButton {
   box-sizing: border-box;
   border-radius: 5px;
-  background-color: rgb(223, 185, 151);
+  background-color: rgb(80,0,128);
   color:darkslategray;
   font-size: 1.5rem;
 }
