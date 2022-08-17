@@ -4,6 +4,7 @@ import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { useGlobalContext } from '../utils/GlobalContext';
+// import { ForgotPassword } from '../pages/ForgotPassword';
 import Auth from '../utils/auth';
 
 const LoginForm = ({ currentPage, handleChange }) => {
@@ -61,7 +62,6 @@ const LoginForm = ({ currentPage, handleChange }) => {
           Something went wrong with your login credentials!
         </Alert>
         <Form.Group>
-
           <Form.Label htmlFor='email'>Email</Form.Label>
           <Form.Control
             type='text'
@@ -72,6 +72,9 @@ const LoginForm = ({ currentPage, handleChange }) => {
             required
           />
           <Form.Control.Feedback type='invalid'>Email is required!</Form.Control.Feedback>
+          <Form.Text className="text-muted">
+            We'll never share your email with anyone else.
+        </Form.Text>
         </Form.Group>
 
         <Form.Group>
@@ -86,12 +89,23 @@ const LoginForm = ({ currentPage, handleChange }) => {
           />
           <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
         </Form.Group>
+        <span>
         <Button
           disabled={!(userFormData.email && userFormData.password)}
           type='submit'
           variant='success'>
           Submit
         </Button>
+        <Button
+          type='submit'
+          variant='outline-secondary'
+          size="sm"
+            onClick={() => {
+              pageChange('ForgotPassword');
+            }}>
+          Forgot password?
+        </Button>
+        </span>
       </Form>
     </div>
   );

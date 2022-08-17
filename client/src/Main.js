@@ -6,6 +6,8 @@ import GroupMaint from './pages/GroupMaint';
 import Resume from './pages/Resume';
 import SignupForm from './components/SignupForm';
 import LoginForm from './components/LoginForm';
+import ForgotPassword from './pages/ForgotPassword';
+import GetNewPassword from './pages/GetNewPassword';
 import InviteBuddy from './pages/InviteBuddy';
 import BuildGroup from './pages/BuildGroup';
 import SaveMessage from './pages/SaveMessage';
@@ -53,6 +55,10 @@ function Main({ currentPage, setCurrentPage}) {
         return <BuddyMessages />;
       case 'GroupMessages':
         return <GroupMessages />;
+      case 'ForgotPassword':
+        return <ForgotPassword  currentPage={currentPage} handleChange={handleChange} />;
+      case 'GetNewPassword':
+          return <GetNewPassword />;
       case 'Messages':
         return (
           <section className="row justify-center">

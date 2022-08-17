@@ -108,9 +108,22 @@ const typeDefs = gql`
     user: User
   }
 
+  type Email {
+    email: String!
+    name: String!
+    code: String!
+  }
+
+  input EmailInput {
+    email: String!
+    name: String!
+    code: String!
+  }
+
   type Query {
     me: User
     getUser(username: String!): User
+    emails: [User]!
     users: [User]!
     myGroups: [ConversationGroup]
     getGroup(groupName: String!): ConversationGroup
@@ -129,6 +142,8 @@ const typeDefs = gql`
     saveMessage(messageData: MessageInput!): User
     deleteMessage(messageData: MessageInput!): User
     removeBuddy(buddyName: String!, whoToLookUp: String): User
+    sendEmail(email: String!, name: String!, code: String!): Email
+    resetPassword(email: String!, password: String!): Auth
   }
 `;
 

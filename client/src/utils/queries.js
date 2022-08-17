@@ -53,6 +53,16 @@ query getUser($username: String!) {
   }
 `;
 
+export const GET_ALL_EMAILS = gql`
+{
+  emails {
+      _id
+      username
+      email
+    }
+  }
+`;
+
 export const GET_USERS = gql`
 {
   users {

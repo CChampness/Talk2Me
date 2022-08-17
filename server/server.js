@@ -14,6 +14,7 @@ const server = new ApolloServer({
   context: authMiddleware,
 });
 
+// console.log("process:",process);
 server.applyMiddleware({ app });
 
 app.use(express.urlencoded({ extended: false }));  // true for qs; false for querystring
@@ -29,10 +30,11 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
 
+// console.log("app:",app);
+
 db.once('open', () => {
   app.listen(PORT, () => {
     console.log(`🌍 Now listening on localhost:${PORT}`)
     console.log(`http://localhost:${PORT}${server.graphqlPath}`)
-  }
-    );
+  });
 });

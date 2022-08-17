@@ -1,7 +1,6 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
 import Auth from '../utils/auth';
-
+import MsgToAdmin from "../components/MsgToAdmin";
 
 
 function About({ currentPage, handleChange }) {
@@ -55,9 +54,11 @@ function About({ currentPage, handleChange }) {
           Use this feature to set up
           meeting times for conversation on your favorite video chat platform, such as Zoom.
         </p>
-
       </article>
       <p>* Alpha testing is currently underway, and some known bugs are actively being worked.</p>
+      {/* <article>
+        <MsgToAdmin/>
+      </article> */}
     </div>
   );
 }

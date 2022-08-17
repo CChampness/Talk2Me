@@ -131,3 +131,25 @@ export const REMOVE_BUDDY = gql`
     }
   }
 `;
+
+export const SEND_EMAIL = gql`
+  mutation sendEmail($email: String!, $name: String!, $code: String!) {
+    sendEmail(email: $email, name: $name, code: $code) {
+      email
+      name
+      code
+    }
+  }
+`;
+
+export const RESET_PASSWORD = gql`
+  mutation resetPassword($email: String!, $password: String!) {
+    resetPassword(email: $email, password: $password) {
+      token
+      user {
+        _id
+        username
+      }
+    }
+  }
+`;

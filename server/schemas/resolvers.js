@@ -2,6 +2,7 @@ const { AuthenticationError } = require('apollo-server-express');
 const { User } = require('../models');
 const { ConversationGroup } = require('../models');
 const { signToken } = require('../utils/auth');
+const { sendPWResetEmail } = require("../utils/sendPWResetEmail");
 
 const resolvers = {
   Query: {
@@ -21,6 +22,15 @@ const resolvers = {
         return otherUserData;
       }
       throw new AuthenticationError('You need to be logged in!');
+    },
+
+    emails: async (parent, args, context) => {
+      // if (context.user) {
+        const emailData = await User.find();
+        console.log("Query for GET_ALL_EMAILS, returning:",emailData);
+        return emailData;
+      // }
+      // throw new AuthenticationError('You need to be logged in!');
     },
 
     users: async (parent, args, context) => {
@@ -194,6 +204,28 @@ console.log("updatedCGroup:",updatedCGroup);
         return updatedUser;
       }
       throw new AuthenticationError('You need to be logged in!');
+    },
+
+    sendEmail: async (parent, {email, name, code}, context ) => {
+      console.log("sendEmail:",email, name, code);
+      // console.log("context", context);
+      // console.log("origin", context.IncomingMessage.origin);
+      sendPWResetEmail({email, name, code});
+    },
+
+    resetPassword: async (parent, {email, password}, context ) => {
+      console.log("resetPassword:",email, password);
+      const user = await User.findOneAndUpdate(
+        { email: email },
+        { password: password },
+        {new: true}
+      );
+      if (!user) {
+        throw new AuthenticationError('No user found with this email address');
+      }
+      const token = signToken(user);
+console.log("resetPassword resolver, user:",user);
+      return { token, user };
     },
   },
 };
