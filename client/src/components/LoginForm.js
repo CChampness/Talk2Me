@@ -1,16 +1,14 @@
-// see SignupForm.js for comments
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { useGlobalContext } from '../utils/GlobalContext';
-// import { ForgotPassword } from '../pages/ForgotPassword';
 import Auth from '../utils/auth';
 
 const LoginForm = ({ currentPage, handleChange }) => {
   const pageChange = (page) => handleChange(page);
   const [userFormData, setUserFormData] = useState({ email: '', password: '' });
-  const [validated] = useState(false);
+  const [validated, setValidated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [loginUser] = useMutation(LOGIN_USER);
   const { setLoggedInUser } = useGlobalContext();

@@ -11,7 +11,6 @@
 import React, { useState} from 'react';
 import { useMutation } from '@apollo/client';
 import { RESET_PASSWORD } from '../utils/mutations';
-import { HIT_PASSWORD } from '../utils/mutations';
 import { Form, Button, Alert, Container } from 'react-bootstrap';
 import { useGlobalContext } from '../utils/GlobalContext';
 import Auth from '../utils/auth';
@@ -22,29 +21,26 @@ const GetNewPassword = ({ currentPage, handleChange }) => {
     password: '',
     code: '',
   });
-  // const [form, setForm] = useState({});
   const [errors, setErrors] = useState({});
-  const { forgotUser, forgotEmail, forgotCode, setLoggedInUser } = useGlobalContext();
+  const {forgotEmail, forgotCode, setLoggedInUser } = useGlobalContext();
   const [status, setStatus] = useState("");
   const [validated, setValidated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [resetPassword] = useMutation(RESET_PASSWORD);
 
   console.log("In GetNewPassword, userFormData:",userFormData);
-  console.log("In GetNewPassword, forgotUser, forgotEmail, forgotCode:",forgotUser, forgotEmail, forgotCode);
-  console.log("start--userFormData:",userFormData);
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    console.log("userFormData before:", userFormData);
-    setUserFormData({ ...userFormData, [name]: value });
-      if (userFormData.code === forgotCode) {
-        setValidated(true);
-      } else {
-        setValidated(false);
-      }
-      console.log("userFormData after:", userFormData);
-  };
+  // const handleInputChange = (event) => {
+  //   const { name, value } = event.target;
+  //   console.log("userFormData before:", userFormData);
+  //   setUserFormData({ ...userFormData, [name]: value });
+  //     if (userFormData.code === forgotCode) {
+  //       setValidated(true);
+  //     } else {
+  //       setValidated(false);
+  //     }
+  //     console.log("userFormData after:", userFormData);
+  // };
 
   const setField = (field, value) => { //called from onChange setField('dob', e.target.value)
     setUserFormData({
@@ -58,10 +54,17 @@ const GetNewPassword = ({ currentPage, handleChange }) => {
         [field]: null
       })
     }
+    if (userFormData.code === forgotCode) {
+      setValidated(true);
+    } else {
+      setValidated(false);
+    }
+    console.log("validated:",validated);
   }
   
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+    event.stopPropagation();
     // // Validate everything (as per react-bootstrap docs)
     // const form = event.currentTarget;
     // if (form.checkValidity() === false) {
@@ -81,14 +84,21 @@ const GetNewPassword = ({ currentPage, handleChange }) => {
       if(!code || code === '') {
         newErrors.code = 'Please enter your security code';
       }
+
+      console.log("code, forgotCode:",code, forgotCode);
+      setValidated(code === forgotCode);
+      if(code !== forgotCode) {
+        console.log("code mismatch");
+        newErrors.code = 'Incorrect security code!';
+        // setValidated(false);
+      }
     }
-    
+
     const formErrors = validateForm();
     if(formErrors && Object.keys(formErrors).length > 0){
       setErrors(formErrors);
     } else {
-      console.log('form submitted');
-      console.log(userFormData);
+      console.log('form submitted:',userFormData);
     }
   
     const newPassword = userFormData.password;
@@ -99,10 +109,9 @@ const GetNewPassword = ({ currentPage, handleChange }) => {
     }
     console.log("Ready to try resetPassword, resetFormData:",resetFormData);
 
+    if(validated) {
     try {
-      console.log("resetFormData:",resetFormData);
       const {data} = await resetPassword({variables: { ...resetFormData}});
-console.log("data returned from resetPassword:",data);
       Auth.login(data.resetPassword.token, data.resetPassword.user.username);
       setLoggedInUser(data.resetPassword.user.username);
 
@@ -114,12 +123,17 @@ console.log("data returned from resetPassword:",data);
     } catch (err) {
       console.error(err);
     };
+  };
     setStatus("Submitted");
   }
 
   return (
     <div className="logDiv">
       <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
+        <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
+          Something went wrong with your password reset!
+        </Alert>
+
         <h1>Password Reset</h1>
         <Form.Group controlId='code'>
           <Form.Label>Security code</Form.Label>
@@ -145,11 +159,16 @@ console.log("data returned from resetPassword:",data);
           />
           {/* <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback> */}
           <Form.Control.Feedback type='invalid'>{errors.password}</Form.Control.Feedback>
-
         </Form.Group>
 
         <Form.Group controlId='submit'>
-          <Button type='submit' onClick={handleFormSubmit} className='my-2' variant='primary'>
+          <Button 
+            disabled={!(userFormData.code &&
+                        userFormData.password) &&
+                      !validated}
+            type='submit'
+            onClick={handleFormSubmit}
+            className='my-2' variant='primary'>
             Continue
           </Button>
         </Form.Group>

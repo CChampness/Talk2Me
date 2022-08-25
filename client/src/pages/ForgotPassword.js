@@ -3,9 +3,10 @@
 //+ForgotPassword component prompts for user's email and
 //+verifies that it is in the database.
 //+Email is sent to user's address with a hash code.
-// GetNewPassword component prompts user to put in the code,
-// as well for new password and confirmation.
-// New password is hashed and inserted into the database.
+//+GetNewPassword component prompts user to put in the code,
+//+as well for new password.
+// User puts in code, component verifies it.
+//+New password is hashed and inserted into the database.
 
 import React, { useState} from 'react';
 import { useQuery, useMutation } from '@apollo/client';
@@ -46,7 +47,11 @@ const ForgotPassword = ({ currentPage, handleChange }) => {
 
     validUser = data.emails.find(element => element.email === userFormData.email);
     console.log("validUser?", validUser);
-    if (!validUser) return;
+    if (!validUser) {
+      setShowAlert(true);
+      setUserFormData({ email: '' });
+      return;
+    };
 
     const code = generator.generate({
       length: 6,
@@ -83,6 +88,10 @@ const ForgotPassword = ({ currentPage, handleChange }) => {
   return (
     <div className="logDiv">
       <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
+       <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
+          Incorrect email!
+        </Alert>
+
         <h1>Password Reset</h1>
         <Form.Group>
           <Form.Label htmlFor='email'>Email</Form.Label>

@@ -208,8 +208,6 @@ console.log("updatedCGroup:",updatedCGroup);
 
     sendEmail: async (parent, {email, name, code}, context ) => {
       console.log("sendEmail:",email, name, code);
-      // console.log("context", context);
-      // console.log("origin", context.IncomingMessage.origin);
       sendPWResetEmail({email, name, code});
     },
 
