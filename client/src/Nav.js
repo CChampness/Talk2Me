@@ -7,10 +7,10 @@ function Nav({ currentPage, handlePageChange }) {
   return (
     <nav>
       <a onClick={() => handlePageChange('About')}>Home</a>
-      <a onClick={() => handlePageChange('CreateProfile')}>Profile</a>
-      <a onClick={() => handlePageChange('InviteBuddy')}>Buddies</a>
-      <a onClick={() => handlePageChange('BuildGroup')}>Groups</a>
-      <a onClick={() => handlePageChange('Messages')}>Messages</a>
+      <a className="responsive" onClick={() => handlePageChange('CreateProfile')}>Profile</a>
+      <a className="responsive" onClick={() => handlePageChange('InviteBuddy')}>Buddies</a>
+      <a className="responsive" onClick={() => handlePageChange('BuildGroup')}>Groups</a>
+      <a className="responsive" onClick={() => handlePageChange('Messages')}>Messages</a>
       <div>
         {Auth.loggedIn() ? (
           <a onClick={() => Auth.logout()}>Logout</a>

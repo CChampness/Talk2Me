@@ -97,6 +97,7 @@ const LoginForm = ({ currentPage, handleChange }) => {
         <Button
           type='submit'
           variant='outline-secondary'
+          horizontal="true"
           size="sm"
             onClick={() => {
               pageChange('ForgotPassword');

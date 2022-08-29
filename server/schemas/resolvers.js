@@ -207,12 +207,12 @@ console.log("updatedCGroup:",updatedCGroup);
     },
 
     sendEmail: async (parent, {email, name, code}, context ) => {
-      console.log("sendEmail:",email, name, code);
+      // console.log("sendEmail:",email, name, code);
       sendPWResetEmail({email, name, code});
     },
 
     resetPassword: async (parent, {email, password}, context ) => {
-      console.log("resetPassword:",email, password);
+      // console.log("resetPassword:",email, password);
       const user = await User.findOneAndUpdate(
         { email: email },
         { password: password },
@@ -222,7 +222,7 @@ console.log("updatedCGroup:",updatedCGroup);
         throw new AuthenticationError('No user found with this email address');
       }
       const token = signToken(user);
-console.log("resetPassword resolver, user:",user);
+// console.log("resetPassword resolver, user:",user);
       return { token, user };
     },
   },

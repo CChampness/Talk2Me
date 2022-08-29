@@ -30,19 +30,7 @@ const GetNewPassword = ({ currentPage, handleChange }) => {
 
   console.log("In GetNewPassword, userFormData:",userFormData);
 
-  // const handleInputChange = (event) => {
-  //   const { name, value } = event.target;
-  //   console.log("userFormData before:", userFormData);
-  //   setUserFormData({ ...userFormData, [name]: value });
-  //     if (userFormData.code === forgotCode) {
-  //       setValidated(true);
-  //     } else {
-  //       setValidated(false);
-  //     }
-  //     console.log("userFormData after:", userFormData);
-  // };
-
-  const setField = (field, value) => { //called from onChange setField('dob', e.target.value)
+  const setField = (field, value) => {
     setUserFormData({
       ...userFormData,
       [field]: value
@@ -65,14 +53,6 @@ const GetNewPassword = ({ currentPage, handleChange }) => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     event.stopPropagation();
-    // // Validate everything (as per react-bootstrap docs)
-    // const form = event.currentTarget;
-    // if (form.checkValidity() === false) {
-    //   event.preventDefault();
-    //   event.stopPropagation();
-    // }
-
-    // setValidated(true);
 
     const validateForm = () => {
       const {password, code} = userFormData;
@@ -90,7 +70,11 @@ const GetNewPassword = ({ currentPage, handleChange }) => {
       if(code !== forgotCode) {
         console.log("code mismatch");
         newErrors.code = 'Incorrect security code!';
-        // setValidated(false);
+        setValidated(false);
+        setUserFormData({
+          password: '',
+          code: 'Incorrect Security Code',
+        });
       }
     }
 
@@ -129,7 +113,7 @@ const GetNewPassword = ({ currentPage, handleChange }) => {
 
   return (
     <div className="logDiv">
-      <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
+      <Form noValidate validated={validated} style={{ width: '25rem' }} onSubmit={handleFormSubmit}>
         <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
           Something went wrong with your password reset!
         </Alert>
@@ -151,7 +135,7 @@ const GetNewPassword = ({ currentPage, handleChange }) => {
           <Form.Label>Password</Form.Label>
           <Form.Control
             type='password'
-            placeholder='Your password'
+            placeholder='Enter your new password'
             onChange={(e) => setField('password', e.target.value)}
             value={userFormData.password}
             isInvalid={!!errors.password}
@@ -172,79 +156,9 @@ const GetNewPassword = ({ currentPage, handleChange }) => {
             Continue
           </Button>
         </Form.Group>
-
-        {/* <Button
-          disabled={!(userFormData.code &&
-                      userFormData.password)}
-          type='submit'
-          variant='success'>
-          Submit
-        </Button> */}
       </Form>
     </div>
   );
 };
 
 export default GetNewPassword;
-
-// https://www.youtube.com/watch?v=PCZ-ByiRxT8
-
-// step 1.
-// const [form, setForm] = useState({});
-// const [errors, setErrors] = useState({});
-
-// step 2.
-// const setField = (field, value) => { //called from onChange setField('dob', e.target.value)
-//   setForm({
-//     ...form,
-//     [field]: value
-//   })
-
-//   if (!!errors[field]){
-//     setErrors({
-//       ...errors,
-//       [field]: null
-//     })
-//   }
-// }
-
-// step 3.
-
-// const validateForm = () => {
-//   const {dob, etc} = form;
-//   const newErrors = {};
-
-//   if(!dob || dob === '') newErrors.dob = 'Please enter your date of birth';
-//   etc..
-// }
-
-// const handleSubmit = e => {
-//   e.preventDefault();
-
-//   const formErrors = validateForm();
-//   if(Object.keys(formErrors).length > 0){
-//     setErrors(formErrors);
-//   } else {
-//     console.log('form submitted');
-//     console.log(form);
-//   }
-// }
-
-{/* <Form.Group controlId='submit'>
-  <Button type='submit' onClick={handleSubmit} className='my-2' variant='primary'>
-    Continue
-  </Button>
-</Form.Group> */}
-
-// {Container, Row, Col} from 'react-bootstrap';
-// const FormContainer = ({ children }) => {
-//   return (
-//     <Container>
-//       <Row className='justify-content-md-center'>
-//         <Col xs={12} md={6}>
-//           {children}
-//         </Col>
-//       </Row>
-//     </Container>
-//   )
-// }
