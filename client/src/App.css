@@ -460,9 +460,9 @@ span[data-descr]:focus::after {
     float: none;
   }
 
-  .responsive {
+  /* .responsive {
     display: none;
-  }
+  } */
 
   main {
     padding-top: 25px;
