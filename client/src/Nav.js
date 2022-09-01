@@ -44,6 +44,7 @@ function Nav({ currentPage, handlePageChange }) {
         </div>
       </nav>
     </label>
+    <div class="overlay"></div>
     </>
   )
 }

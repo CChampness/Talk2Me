@@ -445,7 +445,7 @@ span[data-descr]:focus::after {
 }
 
 /* Mobile-first: for narrow window */
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 500px) {
   header {
     display: block;
   }
