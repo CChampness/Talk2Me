@@ -90,8 +90,8 @@
     position: fixed;
     top: 0;
     left: -250px;
-    width: 100px;
-    /* height: 100%; */
+    width: 150px;
+    height: 50%;
     background-color: #3D0E61;
     transition: 0.3s;
     padding: 0px 10px;
