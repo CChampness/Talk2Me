@@ -57,7 +57,7 @@ const resolvers = {
         const myGroupsData = await ConversationGroup.find(
           { ownerName: context.user.username }
         );
-        // console.log("myGroupsData:",myGroupsData);
+        console.log("myGroups; myGroupsData:",myGroupsData);
         return myGroupsData;
       }
       throw new AuthenticationError('!You need to be logged in to access this feature');
@@ -151,7 +151,7 @@ const resolvers = {
         {new: true}
       );
 console.log("addBuddy buddyData:",buddyData);
-console.log("updatedCGroup:",updatedCGroup);
+console.log("addBuddy; updatedCGroup:",updatedCGroup);
       return updatedCGroup;
     },
     

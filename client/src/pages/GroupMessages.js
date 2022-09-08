@@ -115,7 +115,7 @@ function GroupMessages ({ currentPage, handleChange }) {
             <p style={{marginBottom:"0.3rem"}}>{msg.messageFrom} <span style={{fontSize:"0.8rem"}}>at {niceDate(msg.createdAt)}</span></p>
             <TextField
               className={msg.messageFrom===myName?"blueText": "redText"}
-              width 
+              width="50%"
       				type='text' 
 			      	value={msg.messageText}
               multiline

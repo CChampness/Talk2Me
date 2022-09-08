@@ -3,6 +3,7 @@ import { Container, Col, Form, Button } from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
 import { GET_MY_GROUPS } from '../utils/queries';
+// import { GET_ALL_GROUPS } from '../utils/queries';
 // import { ADD_BUDDY } from '../utils/mutations';
 // import { CREATE_GROUP } from '../utils/mutations';
 import Auth from '../utils/auth';
@@ -19,6 +20,7 @@ function Messages ({ currentPage, handleChange }) {
   const pageChange = (page) => handleChange(page);
   const meData = useQuery(GET_ME);
   const myGroupData = useQuery(GET_MY_GROUPS);
+  // const allGroupData = useQuery(GET_ALL_GROUPS);
   // const [createGroup] = useMutation(CREATE_GROUP);
   // const [addBuddy] = useMutation(ADD_BUDDY);
   const [currentUserName, setCurrentUserName] = useState('');
@@ -26,8 +28,6 @@ function Messages ({ currentPage, handleChange }) {
   const { setMessageUser, messageUser, setMsgTgtType, msgTgtName, msgTgtType } = useGlobalContext();
   const [groupNameInp, setGroupNameInp] = useState('');
   const [ownerNameInp, setOwnerNameInp] = useState('');
-
-  // setMessageUser("(None selected)");
 
   // set initial form state
   const [groupInfo, setGroupInfo] = useState({
@@ -62,6 +62,7 @@ function Messages ({ currentPage, handleChange }) {
 
   if (meData.error) return <h4>{meData.error.message}</h4>;
   if (myGroupData.error) return <h4>{myGroupData.error.message}</h4>;
+  // if (allGroupData.error) return <h4>{allGroupData.error.message}</h4>;
 
   if (!currentUserName) {
     setCurrentUserName(Auth.getProfile().data.username);
@@ -81,6 +82,8 @@ function Messages ({ currentPage, handleChange }) {
     }
   });
   console.log("2) in Messages, myGroups:",myGroups);
+
+  // let groupsImIn = [];
 
   return (
     <Container>
@@ -105,7 +108,7 @@ function Messages ({ currentPage, handleChange }) {
               />
             </div>
           ))}
-      <h5>Your groups</h5>
+          <h5>Your groups</h5>
           {myGroups.map((group, ndx) => (
             (group.groupName && group.groupName !== "none") ?
             (<div key={ndx} className="mb-3">
@@ -121,6 +124,22 @@ function Messages ({ currentPage, handleChange }) {
             :
             null)
           )}
+          {/* <h5>Other groups you are in</h5>
+          {groupsImIn.map((group, ndx) => (
+            (group.groupName && group.groupName !== "none") ?
+            (<div key={ndx} className="mb-3">
+              <Form.Check className="rads"
+                name="msgTarget"
+                id={group.groupName}
+                label={group.groupName}
+                onChange={handleTgtChange}
+                type='radio'
+                value="otherGroups"
+              />
+            </div>)
+            :
+            null)
+          )} */}
           </Form.Group>
           <Button
             type='submit'
