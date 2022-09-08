@@ -38,8 +38,8 @@ class AuthService {
     console.log("login username: ", username);
     
     if (username !== 'ADMIN') {
-      const doc = document.getElementById("headerMsg");
-      doc.textContent="Welcome "+username;
+      // const doc = document.getElementById("headerMsg");
+      // doc.textContent="Welcome "+username;
       window.location.assign('/');
     }
   }

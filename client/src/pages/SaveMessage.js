@@ -4,12 +4,12 @@ import { Container, Col, Form, Button } from 'react-bootstrap';
 import { SAVE_MESSAGE } from '../utils/mutations';
 import Auth from '../utils/auth';
 import { useGlobalContext } from '../utils/GlobalContext';
-import { GET_USERS } from '../utils/queries';
+// import { GET_USERS } from '../utils/queries';
 
 const SaveMessage = () => {
   const [messageInp, setMessageInp] = useState('');
   const [saveMessage] = useMutation(SAVE_MESSAGE);
-  const {loading, error, data } = useQuery(GET_USERS);
+  // const {loading, error, data } = useQuery(GET_USERS);
   const { messageUser } = useGlobalContext();
   
 
@@ -33,8 +33,8 @@ const SaveMessage = () => {
       };
 
       console.log("In handleSaveMessage, messageToSend: ",messageToSend);
-      // await saveMessage({
-      const {result} = await saveMessage({
+      // const {result} = await saveMessage({
+        await saveMessage({
         variables: { messageData: messageToSend }
       });
 
@@ -43,8 +43,8 @@ const SaveMessage = () => {
     }
   };
 
-  if (loading) return <h4>Loading...</h4>;
-  if (error) return <h4>Error! {error.message}</h4>;
+  // if (loading) return <h4>Loading...</h4>;
+  // if (error) return <h4>{error.message}</h4>;
   // data.users is the array of all users in the database
   currentUserName = Auth.getProfile().data.username;
 

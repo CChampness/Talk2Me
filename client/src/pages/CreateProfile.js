@@ -9,22 +9,24 @@ const CreateProfile = () => {
   // create states for holding our search field data
   const [interestsInp, setInterestsInp] = useState('');
   const [languageInp, setLanguageInp] = useState('');
-  const [readingLevelInp, setReadingLevelInp] = useState('');
-  const [writingLevelInp, setWritingLevelInp] = useState('');
-  const [grammarLevelInp, setGrammarLevelInp] = useState('');
-  const [pronunciationLevelInp, setPronunciationLevelInp] = useState('');
-  const [sexInp, setSexInp] = useState('');
-  const [ageInp, setAgeInp] = useState('');
+  // const [readingLevelInp, setReadingLevelInp] = useState('');
+  // const [writingLevelInp, setWritingLevelInp] = useState('');
+  // const [grammarLevelInp, setGrammarLevelInp] = useState('');
+  // const [pronunciationLevelInp, setPronunciationLevelInp] = useState('');
+  // const [sexInp, setSexInp] = useState('');
+  // const [ageInp, setAgeInp] = useState('');
   const [countryFromInp, setCountryFromInp] = useState('');
   const [countryNowInp, setCountryNowInp] = useState('');
   const [resourcesInp, setResourcesInp] = useState('');
-  const [contactInfoInp, setContactInfoInp] = useState('');
+  // const [contactInfoInp, setContactInfoInp] = useState('');
   const {loading, error, data } = useQuery(GET_ME);
 
   const [saveProfile] = useMutation(SAVE_PROFILE);
 
   // create function to handle saving the profile to the database
-  const handleSaveProfile = async () => {
+  const handleSaveProfile = async (event) => {
+    event.preventDefault();
+    event.stopPropagation();
 
     // get token
     const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -37,21 +39,21 @@ const CreateProfile = () => {
       const profileToSave = {
         interests: interestsInp,
         language: languageInp,
-        readingLevel: readingLevelInp,
-        writingLevel: writingLevelInp,
-        grammarLevel: grammarLevelInp,
-        pronunciationLevel: pronunciationLevelInp,
-        sex: sexInp,
-        age: ageInp,
+        readingLevel: "",
+        writingLevel: "",
+        grammarLevel: "",
+        pronunciationLevel: "",
+        sex: "",
+        age: "",
         countryFrom: countryFromInp,
         countryNow: countryNowInp,
         resources: resourcesInp,
-        contactInfo: contactInfoInp
+        contactInfo: ""
       };
 
-      console.log("In handleSaveProfile, profileToSave: ",profileToSave);
+      console.log("In handleSaveProfile, profileToSave: ", profileToSave);
+      const {result} = await saveProfile({
       // await saveProfile({
-        const {result} = await saveProfile({
         variables: { profileData: profileToSave },
       });
 
@@ -61,23 +63,23 @@ const CreateProfile = () => {
   };
 
   if (loading) return <h4>Loading...</h4>;
-  if (error) return <h4>Error! {error.message}</h4>;
+  if (error) return <h4>{error.message}</h4>;
 
   // set the placeholders to be the values from the query (if any)
   const prof = data.me.profile;
     
   const interestsPlaceholder = (prof&&prof.interests)?prof.interests:'What are your main interests?'
   const languagePlaceholder = (prof&&prof.language)?prof.language:'What langage are you practicing?'
-  const readingLevelPlaceholder = (prof&&prof.readingLevel)?prof.readingLevel:'What is your reading level?'
-  const writingLevelPlaceholder = (prof&&prof.writingLevel)?prof.writingLevel:'What is your writing level?'
-  const grammarLevelPlaceholder = (prof&&prof.grammarLevel)?prof.grammarLevel:'What is your grammar level?'
-  const pronunciationLevelPlaceholder = (prof&&prof.pronunciationLevel)?prof.pronunciationLevel:'What is your pronunciation level?'
-  const sexPlaceholder = (prof&&prof.sex)?prof.sex:'What is your sex?'
-  const agePlaceholder = (prof&&prof.age)?prof.age:'What is your age?'
+  // const readingLevelPlaceholder = (prof&&prof.readingLevel)?prof.readingLevel:'What is your reading level?'
+  // const writingLevelPlaceholder = (prof&&prof.writingLevel)?prof.writingLevel:'What is your writing level?'
+  // const grammarLevelPlaceholder = (prof&&prof.grammarLevel)?prof.grammarLevel:'What is your grammar level?'
+  // const pronunciationLevelPlaceholder = (prof&&prof.pronunciationLevel)?prof.pronunciationLevel:'What is your pronunciation level?'
+  // const sexPlaceholder = (prof&&prof.sex)?prof.sex:'What is your sex?'
+  // const agePlaceholder = (prof&&prof.age)?prof.age:'What is your age?'
   const countryFromPlaceholder = (prof&&prof.countryFrom)?prof.countryFrom:'What country are you from?'
   const countryNowPlaceholder = (prof&&prof.countryNow)?prof.countryNow:'What country do you live in now?'
   const resourcesPlaceholder = (prof&&prof.resources)?prof.resources:'Do you have some links or resources that you would like to share?'
-  const contactInfoPlaceholder = (prof&&prof.contactInfo)?prof.contactInfo:'What is your contact information?'
+  // const contactInfoPlaceholder = (prof&&prof.contactInfo)?prof.contactInfo:'What is your contact information?'
 
   return (
     <Container>

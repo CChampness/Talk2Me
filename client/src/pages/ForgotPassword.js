@@ -83,7 +83,7 @@ const ForgotPassword = ({ currentPage, handleChange }) => {
   }
 
   if (loading) return <h4>Loading...</h4>;
-  if (error) return <h4>Error! {error.message}</h4>;
+  if (error) return <h4>{error.message}</h4>;
 
   return (
     <div className="logDiv">

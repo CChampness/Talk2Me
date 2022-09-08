@@ -1,6 +1,6 @@
 import React from 'react';
 import Auth from '../utils/auth';
-import MsgToAdmin from "../components/MsgToAdmin";
+// import MsgToAdmin from "../components/MsgToAdmin";
 
 
 function About({ currentPage, handleChange }) {

@@ -126,9 +126,9 @@ function BuildGroup ({ currentPage, handleChange }) {
     return <h4>Loading...</h4>;
   }
 
-  if (meData.error) return <h4>Error! {meData.error.message}</h4>;
+  if (meData.error) return <h4>{meData.error.message}</h4>;
   // if (groupData.error) return <h4>Error! {groupData.error.message}</h4>;
-  if (myGroupData.error) return <h4>Error! {myGroupData.error.message}</h4>;
+  if (myGroupData.error) return <h4>{myGroupData.error.message}</h4>;
 
   if (!currentUserName) {
     setCurrentUserName(Auth.getProfile().data.username);

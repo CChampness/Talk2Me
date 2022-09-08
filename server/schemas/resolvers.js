@@ -3,6 +3,7 @@ const { User } = require('../models');
 const { ConversationGroup } = require('../models');
 const { signToken } = require('../utils/auth');
 const { sendPWResetEmail } = require("../utils/sendPWResetEmail");
+const auth = require('../utils/auth');
 
 const resolvers = {
   Query: {
@@ -11,7 +12,7 @@ const resolvers = {
         const userData = await User.findOne({ _id: context.user._id });
         return userData;
       }
-      throw new AuthenticationError('You need to be logged in!');
+      throw new AuthenticationError('You need to be logged in to access this feature!');
     },
 
     getUser: async (parent, {username}, context) => {
@@ -21,7 +22,7 @@ const resolvers = {
         // console.log("Query for GET_USER, returning:",otherUserData);
         return otherUserData;
       }
-      throw new AuthenticationError('You need to be logged in!');
+      throw new AuthenticationError('You need to be logged in to access this feature!');
     },
 
     emails: async (parent, args, context) => {
@@ -30,7 +31,7 @@ const resolvers = {
         console.log("Query for GET_ALL_EMAILS, returning:",emailData);
         return emailData;
       // }
-      // throw new AuthenticationError('You need to be logged in!');
+      // throw new AuthenticationError('You need to be logged in to access this feature!');
     },
 
     users: async (parent, args, context) => {
@@ -39,7 +40,7 @@ const resolvers = {
         // console.log("Query for GET_USERS, returning:",userData);
         return userData;
       }
-      throw new AuthenticationError('You need to be logged in!');
+      throw new AuthenticationError('You need to be logged in to access this feature!');
     },
 
     getAllGroups: async (parent, args, context) => {
@@ -48,7 +49,7 @@ const resolvers = {
         // console.log("Query for GET_ALL_GROUPS, returning:",allGroupsData);
         return allGroupsData;
       }
-      throw new AuthenticationError('You need to be logged in!');
+      throw new AuthenticationError('You need to be logged in to access this feature!');
     },
 
     myGroups: async (parent, args, context) => {
@@ -59,7 +60,7 @@ const resolvers = {
         // console.log("myGroupsData:",myGroupsData);
         return myGroupsData;
       }
-      throw new AuthenticationError('You need to be logged in!');
+      throw new AuthenticationError('!You need to be logged in to access this feature');
     },
 
     getGroup: async (parent, {groupName}, context) => {
@@ -71,7 +72,7 @@ const resolvers = {
         // console.log("getGroup resolver, groupData:", groupData);
         return groupData;
       }
-      throw new AuthenticationError('You need to be logged in!');
+      throw new AuthenticationError('You need to be logged in to access this feature!');
     },
   },
 
@@ -108,7 +109,7 @@ const resolvers = {
 
         return user;
       }
-      throw new AuthenticationError('You need to be logged in!');
+      throw new AuthenticationError('You need to be logged in to access this feature!');
     },
 
     createGroup: async (parent, {groupName, ownerName}) => {
@@ -125,7 +126,7 @@ const resolvers = {
 
         return group;
       }
-      throw new AuthenticationError('You need to be logged in!');
+      throw new AuthenticationError('You need to be logged in to access this feature!');
     },
 
     // Add Buddy to User
@@ -139,7 +140,7 @@ const resolvers = {
 
         return updatedUser;
       }
-      throw new AuthenticationError('You need to be logged in!');
+      throw new AuthenticationError('You need to be logged in to access this feature!');
     },
 
     // Add Buddy to ConversationGroup
@@ -166,7 +167,7 @@ console.log("updatedCGroup:",updatedCGroup);
 
         return updatedUser;
       }
-      throw new AuthenticationError('You need to be logged in!');
+      throw new AuthenticationError('You need to be logged in to access this feature!');
     },
 
     deleteMessage: async (parent, { messageData }, context) => {
@@ -177,20 +178,23 @@ console.log("updatedCGroup:",updatedCGroup);
         );
         return updatedUser;
       }
-      throw new AuthenticationError('You need to be logged in!');
+      throw new AuthenticationError('You need to be logged in to access this feature!');
     },
     
     saveProfile: async (parent, { profileData }, context) => {
+      // console.log("SAVEpROFILE: profileData, context.user:", profileData, context.user);
       if (context.user) {
+        // console.log("saveProfile going for it; user:", context.user);
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
           { profile: profileData },
           {new: true}
         );
 
+        // console.log("saveProfile, updatedUser:", updatedUser);
         return updatedUser;
       }
-      throw new AuthenticationError('You need to be logged in!');
+      throw new AuthenticationError('You need to be logged in to access this feature!');
     },
 
     // Remove Buddy from User
@@ -203,7 +207,7 @@ console.log("updatedCGroup:",updatedCGroup);
         );
         return updatedUser;
       }
-      throw new AuthenticationError('You need to be logged in!');
+      throw new AuthenticationError('You need to be logged in to access this feature!');
     },
 
     sendEmail: async (parent, {email, name, code}, context ) => {
@@ -212,10 +216,10 @@ console.log("updatedCGroup:",updatedCGroup);
     },
 
     resetPassword: async (parent, {email, password}, context ) => {
-      // console.log("resetPassword:",email, password);
+      console.log("resetPassword:",email, password);
       const user = await User.findOneAndUpdate(
         { email: email },
-        { password: password },
+        { password: await auth.hash(password)},
         {new: true}
       );
       if (!user) {

@@ -69,7 +69,8 @@ function InviteBuddy ({ currentPage, handleChange }) {
       ((buddyStatus(currentUser, user) === "Buddy") ? highLightSelected(user.username):null)
     );
   }
-  },[currentUserName, data]);
+  // },[currentUser, data]);
+},[currentUserName, data]);
 
   const thisUserHasInvitedMe = (userName) => {
     // console.log("thisUserHasInvitedMe:", userName);
@@ -167,7 +168,7 @@ function InviteBuddy ({ currentPage, handleChange }) {
         buddyName: username,
         status: "Invited"
       };
-      // console.log("handleInviteBuddy, buddyToInvite: ",buddyToInvite);
+      console.log("handleInviteBuddy, buddyToInvite: ",buddyToInvite);
 
       await saveBuddy({
         variables: { buddyData: buddyToInvite,
@@ -183,7 +184,7 @@ function InviteBuddy ({ currentPage, handleChange }) {
   }
     
   if (loading) return <h4>Loading...</h4>;
-  if (error) return <h4>Error! {error.message}</h4>;
+  if (error) return <h4>{error.message}</h4>;
   // data.users is the array of all users in the database
 
   let currentUser;

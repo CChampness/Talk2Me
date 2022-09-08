@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const Buddy = require('./Buddy');
 const Message = require('./Message');
 const Profile = require('./Profile');
+const auth = require('../utils/auth');
 
 const userSchema = new Schema(
   {
@@ -45,20 +46,23 @@ const userSchema = new Schema(
 // hash user password
 userSchema.pre('save', async function (next) {
   if (this.isNew || this.isModified('password')) {
-    const saltRounds = 10;
-    this.password = await bcrypt.hash(this.password, saltRounds);
+    // const saltRounds = 10;
+    // this.password = await bcrypt.hash(this.password, saltRounds);
+    this.password = await auth.hash(this.password);
   }
-
   next();
 });
 
-// hash user password
-userSchema.pre('findOneAndUpdate', async function (next) {
-  const saltRounds = 10;
-  this._update.password = await bcrypt.hash(this._update.password, saltRounds);
-
-  next();
-});
+// This was going to be for resetting password, but it messed up other calls
+// that used findOneAndUpdate.  The workaround was to do the bcrypt in a util
+// in auth.js
+// 
+// userSchema.pre('findOneAndUpdate', async function (next) {
+// console.log("this.password:",this.password);
+//   const saltRounds = 10;
+//   this._update.password = await bcrypt.hash(this._update.password, saltRounds);
+//   next();
+// });
 
 // custom method to compare and validate password for logging in
 userSchema.methods.isCorrectPassword = async function (password) {

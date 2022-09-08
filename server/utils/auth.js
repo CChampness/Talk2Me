@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 
 // set token secret and expiration date
 const secret = 'mysecretsshhhhh';
@@ -23,6 +24,7 @@ module.exports = {
     try {
       const { data } = jwt.verify(token, secret, { maxAge: expiration });
       req.user = data;
+      // console.log("authMiddleware; req", req);
     } catch {
       console.log('Invalid token');
     }
@@ -32,6 +34,16 @@ module.exports = {
   
   signToken: function ({ username, email, _id }) {
     const payload = { username, email, _id };
-    return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
+    const retVal = jwt.sign({ data: payload }, secret, { expiresIn: expiration });
+    // console.log("signToken, retVal:", retVal);
+    return retVal;
   },
+
+  hash: function (data)
+  {
+    console.log("auth.hash; data:", data);
+    const saltRounds = 10;
+    hashResult = bcrypt.hash(data, saltRounds);
+    return hashResult;
+  }
 };

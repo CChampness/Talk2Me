@@ -47,7 +47,7 @@ const MsgToAdmin = () => {
   };
 
   if (loading) return <h4>Loading...</h4>;
-  if (error) return <h4>Error! {error.message}</h4>;
+  if (error) return <h4>{error.message}</h4>;
   // data.users is the array of all users in the database
   if (Auth.loggedIn()) {
     currentUserName = Auth.getProfile().data.username;

@@ -27,7 +27,7 @@ function GroupMaint({ currentPage, handleChange }) {
   }
 
   if (loading) return <h4>Loading...</h4>;
-  if (error) return <h4>Error! {error.message}</h4>;
+  if (error) return <h4>{error.message}</h4>;
         
   const currentUserName = Auth.getProfile().data.username;
   console.log("currentUserName should be ADMIN: ",currentUserName);

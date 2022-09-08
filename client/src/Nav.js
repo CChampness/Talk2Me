@@ -8,43 +8,43 @@ function Nav({ currentPage, handlePageChange }) {
   return (
     <>
       <nav id="main-menu">
-        <a onClick={() => handlePageChange('About')}>Home</a>
-        <a onClick={() => handlePageChange('CreateProfile')}>Profile</a>
-        <a onClick={() => handlePageChange('InviteBuddy')}>Buddies</a>
-        <a onClick={() => handlePageChange('BuildGroup')}>Groups</a>
-        <a onClick={() => handlePageChange('Messages')}>Messages</a>
+        <div role="menuitem" className="menuitem" onClick={() => handlePageChange('About')}>Home</div>
+        <div role="menuitem" className="menuitem" onClick={() => handlePageChange('CreateProfile')}>Profile</div>
+        <div role="menuitem" className="menuitem" onClick={() => handlePageChange('InviteBuddy')}>Buddies</div>
+        <div role="menuitem" className="menuitem" onClick={() => handlePageChange('BuildGroup')}>Groups</div>
+        <div role="menuitem" className="menuitem" onClick={() => handlePageChange('Messages')}>Messages</div>
         <div>
           {Auth.loggedIn() ? (
-            <a onClick={() => Auth.logout()}>Logout</a>
+            <div role="menuitem" className="menuitem" onClick={() => Auth.logout()}>Logout</div>
           ) : (
           <>
-            <a onClick={() => handlePageChange('LoginForm')}>Login</a>
-            <a onClick={() => handlePageChange('SignupForm')}>Signup</a>
+            <div role="menuitem" className="menuitem" onClick={() => handlePageChange('LoginForm')}>Login</div>
+            <div role="menuitem" className="menuitem" onClick={() => handlePageChange('SignupForm')}>Signup</div>
           </>
           )}
         </div>
       </nav>
-    <input type="checkbox" id="hamburger-input" class="burger-shower" />
-    <label id="hamburger-menu" for="hamburger-input">
+    <input type="checkbox" id="hamburger-input" className="burger-show" />
+    <label id="hamburger-menu" htmlFor="hamburger-input">
       <nav id="sidebar-menu">
-        <a onClick={() => handlePageChange('About')}>Home</a>
-        <a onClick={() => handlePageChange('CreateProfile')}>Profile</a>
-        <a onClick={() => handlePageChange('InviteBuddy')}>Buddies</a>
-        <a onClick={() => handlePageChange('BuildGroup')}>Groups</a>
-        <a onClick={() => handlePageChange('Messages')}>Messages</a>
+        <div role="menuitem" className="menuitem" onClick={() => handlePageChange('About')}>Home</div>
+        <div role="menuitem" className="menuitem" onClick={() => handlePageChange('CreateProfile')}>Profile</div>
+        <div role="menuitem" className="menuitem" onClick={() => handlePageChange('InviteBuddy')}>Buddies</div>
+        <div role="menuitem" className="menuitem" onClick={() => handlePageChange('BuildGroup')}>Groups</div>
+        <div role="menuitem" className="menuitem" onClick={() => handlePageChange('Messages')}>Messages</div>
         <div>
           {Auth.loggedIn() ? (
-            <a onClick={() => Auth.logout()}>Logout</a>
+            <div role="menuitem" className="menuitem" onClick={() => Auth.logout()}>Logout</div>
           ) : (
           <>
-            <a onClick={() => handlePageChange('LoginForm')}>Login</a>
-            <a onClick={() => handlePageChange('SignupForm')}>Signup</a>
+            <div role="menuitem" className="menuitem" onClick={() => handlePageChange('LoginForm')}>Login</div>
+            <div role="menuitem" className="menuitem" onClick={() => handlePageChange('SignupForm')}>Signup</div>
           </>
           )}
         </div>
       </nav>
     </label>
-    <div class="overlay"></div>
+    <div className="overlay"></div>
     </>
   )
 }
