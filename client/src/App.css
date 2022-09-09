@@ -21,7 +21,6 @@
 }
 
 body {
-  /* color: aliceblue; */
   color: rgb(223, 185, 151);
   background-color: var(--dark-blue-green);
 }

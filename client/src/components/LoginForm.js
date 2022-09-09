@@ -96,7 +96,7 @@ const LoginForm = ({ currentPage, handleChange }) => {
         </Button>
         <Button
           type='submit'
-          variant='outline-secondary'
+          variant='outline-light'
           horizontal="true"
           size="sm"
             onClick={() => {
