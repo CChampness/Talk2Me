@@ -87,7 +87,7 @@ const ForgotPassword = ({ currentPage, handleChange }) => {
 
   return (
     <div className="logDiv">
-      <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
+      <Form id="forgotPasswordForm" noValidate validated={validated} onSubmit={handleFormSubmit}>
        <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
           Incorrect email!
         </Alert>

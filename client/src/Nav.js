@@ -18,8 +18,8 @@ function Nav({ currentPage, handlePageChange }) {
             <div role="menuitem" className="menuitem" onClick={() => Auth.logout()}>Logout</div>
           ) : (
           <>
-            <div role="menuitem" className="menuitem" onClick={() => handlePageChange('LoginForm')}>Login</div>
-            <div role="menuitem" className="menuitem" onClick={() => handlePageChange('SignupForm')}>Signup</div>
+            <div role="menuitem" className="menuitem" onClick={() => handlePageChange('LoginForm')}>Log in</div>
+            <div role="menuitem" className="menuitem" onClick={() => handlePageChange('SignupForm')}>Sign up</div>
           </>
           )}
         </div>
@@ -37,8 +37,8 @@ function Nav({ currentPage, handlePageChange }) {
             <div role="menuitem" className="menuitem" onClick={() => Auth.logout()}>Logout</div>
           ) : (
           <>
-            <div role="menuitem" className="menuitem" onClick={() => handlePageChange('LoginForm')}>Login</div>
-            <div role="menuitem" className="menuitem" onClick={() => handlePageChange('SignupForm')}>Signup</div>
+            <div role="menuitem" className="menuitem" onClick={() => handlePageChange('LoginForm')}>Log in</div>
+            <div role="menuitem" className="menuitem" onClick={() => handlePageChange('SignupForm')}>Sign up</div>
           </>
           )}
         </div>

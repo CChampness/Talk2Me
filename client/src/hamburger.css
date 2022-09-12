@@ -92,7 +92,8 @@
     left: -250px;
     width: 150px;
     height: 50%;
-    background-color: #3D0E61;
+    background-color: #544a5c;
+    transition: opacity .35s, visibility .35s;
     transition: 0.3s;
     padding: 0px 10px;
     text-align: left;
