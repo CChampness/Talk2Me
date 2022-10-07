@@ -2,7 +2,7 @@ import React from 'react';
 
 function Footer() {
   return (
-    <>
+    <div className="fixed-bottom">
     <hr/>
     <footer>
       <p id="cr">&copy; 2022 Champness LLC</p>
@@ -13,10 +13,7 @@ function Footer() {
         <a href="https://github.com/CChampness"><h5>GitHub</h5></a>
         <a href="https://www.linkedin.com/in/chris-champness-4a71775"><h5>LinkedIn</h5></a>
     </footer>
-
-
-
-    </>
+    </div>
   );
 }
 

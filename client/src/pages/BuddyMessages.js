@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import {Container, Grid, TextField, Button} from '@material-ui/core';
+import {Container, Grid, TextField} from '@material-ui/core';
+import {Form, Button} from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_ME, GET_USER } from '../utils/queries';
 import { DELETE_MESSAGE } from '../utils/mutations';
@@ -115,7 +116,32 @@ function BuddyMessages ({ currentPage, handleChange }) {
   return(
     <Container>
       <p style={{marginBottom:"0.3rem"}}>Messaging with user <span style={{fontSize:"1.3rem"}}>{messageUser}</span></p>
-      {!messageList.length ? <h4>No messages</h4> : null}
+
+      <Grid container spacing={2} classNme="messageInput">
+        <Grid item xs={11}>
+          <TextField
+            className="whiteText"
+            onChange={(e)=>{setText(e.target.value)}}
+            value={text}
+            multiline
+            size="small"
+            fullWidth
+            variant="outlined"
+            label="Enter new message here"
+          />
+        </Grid>
+        <Grid item xs={1}>
+          <Button
+            onClick={sendChatMessage}
+            fullWidth
+            variant="contained"
+            style={{backgroundColor:"#60a820", color:"white"}}
+          >Send
+          </Button>
+        </Grid>
+      </Grid>
+
+      {!messageList.length ? <h4>No messages yet</h4> : null}
       <div style={{marginBottom:"5rem"}}>
         {messageList.map((msg, ndx)=> (
           <div key={ndx} style={{textAlign: msg.messageFrom===myName?"right":"left"}}>
@@ -141,29 +167,6 @@ function BuddyMessages ({ currentPage, handleChange }) {
           </div>
         ))}
       </div>
-      <Grid container spacing={2}>
-        <Grid item xs={11}>
-          <TextField
-            className="whiteText"
-            onChange={(e)=>{setText(e.target.value)}}
-            value={text}
-            multiline
-            size="small"
-            fullWidth
-            variant="outlined"
-            label="Enter new message here"
-          />
-        </Grid>
-        <Grid item xs={1}>
-          <Button
-            onClick={sendChatMessage}
-            fullWidth
-            variant="contained"
-            style={{backgroundColor:"#60a820", color:"white"}}
-          >Send
-          </Button>
-        </Grid>
-      </Grid>
     </Container>
   )
 }
