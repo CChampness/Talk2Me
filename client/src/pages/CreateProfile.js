@@ -86,7 +86,10 @@ const CreateProfile = () => {
       <h2>Profile for {Auth.getProfile().data.username}</h2>
       <Form onSubmit={handleSaveProfile}>
         <Form.Row>
-          <Col xs={12} md={8}>
+          <Col xs={2}>
+            Interests:
+          </Col>
+          <Col xs={10}>
             <Form.Control
               name='interests'
               id='interests'
@@ -98,7 +101,10 @@ const CreateProfile = () => {
             />
           </Col>
 
-          <Col xs={12} md={8}>
+          <Col xs={2}>
+            Language:
+          </Col>
+          <Col xs={10}>
             <Form.Control
               name='language'
               id='language'
@@ -110,79 +116,10 @@ const CreateProfile = () => {
             />
           </Col>
 
-          {/* <Col xs={12} md={8}>
-            <Form.Control
-              name='readingLevel'
-              id='readingLevel'
-              value={readingLevelInp}
-              onChange={(e) => setReadingLevelInp(e.target.value)}
-              type='text'
-              size='lg'
-              placeholder={readingLevelPlaceholder}
-            />
+          <Col xs={2}>
+            Country from:
           </Col>
-
-          <Col xs={12} md={8}>
-            <Form.Control
-              name='writingLevel'
-              id='writingLevel'
-              value={writingLevelInp}
-              onChange={(e) => setWritingLevelInp(e.target.value)}
-              type='text'
-              size='lg'
-              placeholder={writingLevelPlaceholder}
-            />
-          </Col>
-
-          <Col xs={12} md={8}>
-            <Form.Control
-              name='grammarLevel'
-              id='grammarLevel'
-              value={grammarLevelInp}
-              onChange={(e) => setGrammarLevelInp(e.target.value)}
-              type='text'
-              size='lg'
-              placeholder={grammarLevelPlaceholder}
-            />
-          </Col>
-
-          <Col xs={12} md={8}>
-            <Form.Control
-              name='pronunciationLevel'
-              id='pronunciationLevel'
-              value={pronunciationLevelInp}
-              onChange={(e) => setPronunciationLevelInp(e.target.value)}
-              type='text'
-              size='lg'
-              placeholder={pronunciationLevelPlaceholder}
-            />
-          </Col>
-
-          <Col xs={12} md={8}>
-            <Form.Control
-              name='sex'
-              id='sex'
-              value={sexInp}
-              onChange={(e) => setSexInp(e.target.value)}
-              type='text'
-              size='lg'
-              placeholder={sexPlaceholder}
-            />
-          </Col>
-
-          <Col xs={12} md={8}>
-            <Form.Control
-              name='age'
-              id='age'
-              value={ageInp}
-              onChange={(e) => setAgeInp(e.target.value)}
-              type='text'
-              size='lg'
-              placeholder={agePlaceholder}
-            />
-          </Col> */}
-
-          <Col xs={12} md={8}>
+          <Col xs={10}>
             <Form.Control
               name='countryFrom'
               id='countryFrom'
@@ -194,7 +131,10 @@ const CreateProfile = () => {
             />
           </Col>
 
-          <Col xs={12} md={8}>
+          <Col xs={2}>
+            Country now:
+          </Col>
+          <Col xs={10}>
             <Form.Control
               name='countryNow'
               id='countryNow'
@@ -206,7 +146,10 @@ const CreateProfile = () => {
             />
           </Col>
 
-          <Col xs={12} md={8}>
+          <Col xs={2}>
+            Resources:
+          </Col>
+          <Col xs={10}>
             <Form.Control
               name='resources'
               id='resources'
@@ -218,23 +161,13 @@ const CreateProfile = () => {
             />
           </Col>
 
-          {/* <Col xs={12} md={8}>
-            <Form.Control
-              name='contactInfo'
-              id='contactInfo'
-              value={contactInfoInp}
-              onChange={(e) => setContactInfoInp(e.target.value)}
-              type='text'
-              size='lg'
-              placeholder={contactInfoPlaceholder}
-            />
-          </Col> */}
-
-          <Col xs={12} md={4}>
+          <Col xs={4}></Col>
+          <Col xs={4}>
             <Button type='submit' variant='success' size='lg'>
               Create Profile
             </Button>
           </Col>
+          <Col xs={4}></Col>
         </Form.Row>
       </Form>
     </Container>

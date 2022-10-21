@@ -27,11 +27,12 @@ body {
 
 header {
   width: 100%;
-  height: 150px;
+  height: 85px;
   display: flex;
   justify-content: space-between;
   padding: 15px;
-  font-size: 14px;
+  /* font-size: 14px; */
+  font-size: 20px;
   line-height: 1.5;
   background-color: var(--dark-blue-green);
   align-items: center;
@@ -82,11 +83,13 @@ nav a:hover {
 
 .menuitem:hover {
   color: rgba(255,165,0);
-  text-decoration: underline;
+  /* text-decoration: underline; */
   /* border-radius: 5px;
   background-color: rgba(255, 8, 0, 0.4);
   box-shadow: 0px 0px 20px 0px rgba(255,8,0,0.9);
   text-decoration: none; */
+  box-shadow: 0px 0px 20px 0px rgba(1, 141, 36, 0.9);
+  background-color: rgba(1, 141, 36, 0.4);
 }
 
 .page-title {
@@ -130,6 +133,14 @@ ul {
   margin-left: -150px;
 }
 
+.Aboutdiv {
+  margin-top: 15px;
+}
+
+.container {
+  margin-top: 15px;
+}
+
 textarea {
   width: 70%;
 }
@@ -151,8 +162,8 @@ article {
   width: 96%;
   margin: 1rem auto;
   padding-left: 20px;
-  border: 1px solid var(--light-border);
-  border-radius: 5px;
+  /* border: 1px solid var(--light-border);
+  border-radius: 5px; */
   transition: all 0.5s ease-in-out;
 }
 
@@ -208,6 +219,7 @@ img {
 .card-column {
   flex: 1 0 100%;
   padding: 8px;
+  margin: 0px 5px 0px 5px;
   /*Resize columns smoothly */
   transition: flex-basis 500ms linear;
 }
@@ -302,10 +314,10 @@ h4 {
 }
 
 hr {
-  margin: 0px 50px 3px 50px;
-  border: 3px solid rgb(81, 0, 128);
+  margin: 0px 50px 0px 50px;
+  border: 3px solid #544a5c;
   border-radius: 5px;
-  box-shadow: 0px 0px 10px 1px rgba(80,0,128,1.0);
+  box-shadow: 0px 0px 10px 1px #544a5c;
 }
 
 footer {
@@ -396,19 +408,19 @@ footer h5:hover {
   background-color: darkslategray;
   color: inherit;
   /* background-color: rgb(80,0,128);
-  color: rgb(223, 185, 151);
-  border-color:  whitesmoke; */
-  border-color: --var(light-border);
+  color: rgb(223, 185, 151);*/
+  border-color:  darkslategray;
+  /* border-color: --var(light-border); */
   font-size: 1.5rem;
   cursor: pointer;
 }
 
 .navButton:hover {
   color: rgba(255,165,0);
-  text-decoration: underline;
+  /* text-decoration: underline; */
   /* color: rgb(223, 185, 151);
-  background-color: rgba(255, 8, 0, 0.4);
-  box-shadow: 0px 0px 20px 0px rgba(255,8,0,0.9); */
+  background-color: rgba(255, 8, 0, 0.4); */
+  box-shadow: 0px 0px 20px 0px rgba(1, 141, 36, 0.9);
 }
 
 /* Tooltip must have its position relative to its container */
@@ -456,6 +468,18 @@ span[data-descr]:focus::after {
   }
 }
 
+@media screen and (max-width: 880px) {
+  header {
+      font-size: 14px;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  hr {
+    margin-top: -25px;
+  }
+}
+
 /* For tablet size window */
 @media screen and (max-width: 768px) {
   header {
@@ -473,6 +497,7 @@ span[data-descr]:focus::after {
 @media screen and (max-width: 500px) {
   header {
     display: block;
+    height: 50px;
   }
 
   header h1 a {
@@ -489,9 +514,9 @@ span[data-descr]:focus::after {
     display: none;
   } */
 
-  main {
+  /* main {
     padding-top: 25px;
-  }
+  } */
   
   .card-column {
     /* Put just one card per row */

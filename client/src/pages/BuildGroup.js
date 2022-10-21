@@ -62,6 +62,10 @@ function BuildGroup ({ currentPage, handleChange }) {
     
   // let currentGroup = "TBD";
 
+  const buddyInGroup = (buddy, group) => {
+// return true if buddy is in the group
+  }
+
   // Handle saving the profile to the database
   const handleCreateGroup = async (e) => {
     e.preventDefault();
@@ -175,9 +179,14 @@ function BuildGroup ({ currentPage, handleChange }) {
             </div>
           ))}
           </Form.Group>
-          {/* <Button variant="primary" type="submit">
-            Submit selected group
-          </Button> */}
+          {/* <p>Buddies in the group:</p>
+          {meData.data.me.savedBuddies.length ?
+            meData.data.me.savedBuddies.map((buddy, ndx) => (
+            <p>{buddy.buddyName}</p>
+          ))
+          :
+          <p>No buddies selected yet</p>
+          } */}
         </Form>
       }
       <br/>

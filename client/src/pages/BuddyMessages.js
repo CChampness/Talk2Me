@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Container, Grid, TextField} from '@material-ui/core';
-import {Form, Button} from 'react-bootstrap';
+import {Button} from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_ME, GET_USER } from '../utils/queries';
 import { DELETE_MESSAGE } from '../utils/mutations';
