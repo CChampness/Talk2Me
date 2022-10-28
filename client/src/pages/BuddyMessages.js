@@ -108,7 +108,7 @@ function BuddyMessages ({ currentPage, handleChange }) {
     });
   }
 
-  if (needUpdate == 1) {};
+  if (needUpdate === 1) {};
 
   messageList = myBuddyMsgs.sort(
     (a,b) => a.createdAt < b.createdAt ? 1 : -1);
