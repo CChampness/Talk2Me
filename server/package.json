@@ -1,6 +1,9 @@
 {
   "name": "server",
   "version": "1.0.0",
+  "engine": {
+    "node": "16.18.0"
+  },
   "description": "Server for talk2me",
   "main": "server.js",
   "scripts": {

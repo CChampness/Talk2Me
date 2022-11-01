@@ -478,6 +478,10 @@ span[data-descr]:focus::after {
   hr {
     margin-top: -25px;
   }
+
+  .secondaryHr {
+    margin-top: 0px;
+  }
 }
 
 /* For tablet size window */

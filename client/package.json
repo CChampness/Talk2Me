@@ -1,9 +1,6 @@
 {
   "name": "client",
   "version": "0.1.0",
-  "engine": {
-    "node": "16.18.0"
-  },
   "private": true,
   "proxy": "http://localhost:3001",
   "dependencies": {
@@ -25,7 +22,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "export NODE_OPTIONS=--openssl-legacy-provider; react-scripts build",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

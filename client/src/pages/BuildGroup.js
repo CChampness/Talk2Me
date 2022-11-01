@@ -211,7 +211,7 @@ function BuildGroup ({ currentPage, handleChange }) {
           </Col>
         </Form.Row>
       </Form>
-      <br/><hr/><br/>
+      <br/><hr className="secondaryHr" /><br/>
       {(selectedGroup === "nada") ? <h3>Please choose a group</h3> :
       <>
         <h3>Add buddies to your selected conversation group: {selectedGroup}</h3>
@@ -239,6 +239,7 @@ function BuildGroup ({ currentPage, handleChange }) {
         }
       </>
       }
+      <br/><br/><br/>
     </Container>
   );
 }

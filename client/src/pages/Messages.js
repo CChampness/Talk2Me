@@ -88,7 +88,7 @@ function Messages ({ currentPage, handleChange }) {
   return (
     <Container>
       <h4>Select the buddy or group that you want to message with</h4>
-      <hr/>
+      <hr className="secondaryHr" />
       <h5>Your buddies</h5>
       <>
         {!meData.data.me.savedBuddies.length ?
