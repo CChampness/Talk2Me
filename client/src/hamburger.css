@@ -89,8 +89,8 @@
     position: fixed;
     top: 0;
     left: -250px;
-    width: 150px;
-    height: 50%;
+    width: 100px;
+    height:15%;
     background-color: #544a5c;
     transition: opacity .35s, visibility .35s;
     transition: 0.3s;
@@ -137,7 +137,8 @@
 
 #hamburger-input:checked ~ .overlay{
   visibility: visible;
-  opacity: 0.4;
+  /* opacity: 0.4; */
+  /* z-index: 9; */
 }
 
 @media screen and (max-width: 500px) {
